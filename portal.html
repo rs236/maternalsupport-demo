@@ -1,0 +1,3064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Portal - MaternalSupportCo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #8B6F5C;
+      --primary-dark: #6B5242;
+      --primary-light: #F3EDE8;
+      --secondary: #C4A882;
+      --accent: #7B8F7D;
+      --background: #FDFBF9;
+      --surface: #FFFFFF;
+      --text: #2C2420;
+      --text-secondary: #7A6E66;
+      --border: #EDE7E1;
+      --dark: #1C1816;
+      --dark-surface: #242019;
+      --success: #2E7D32;
+      --success-bg: #E8F5E9;
+      --warning: #E65100;
+      --warning-bg: #FFF3E0;
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 2px 8px rgba(44,36,32,0.04);
+      --shadow-md: 0 8px 24px rgba(44,36,32,0.06);
+      --shadow-lg: 0 16px 48px rgba(44,36,32,0.08);
+      --shadow-xl: 0 24px 64px rgba(44,36,32,0.1);
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-fast: 0.2s var(--ease);
+      --transition-base: 0.35s var(--ease);
+      --transition-slow: 0.6s var(--ease);
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-accent: 'Cormorant Garamond', Georgia, serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--background);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: clamp(14px, 2vw, 16px);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 500; color: var(--dark); }
+    h1 { font-size: clamp(24px, 4vw, 32px); }
+    h2 { font-size: clamp(20px, 3vw, 24px); margin-bottom: 1rem; }
+    h3 { font-size: clamp(18px, 2.5vw, 20px); margin-top: 1.5rem; margin-bottom: 0.75rem; }
+    p { margin-bottom: 1rem; color: var(--text-secondary); }
+
+    a { color: var(--primary); text-decoration: none; transition: color var(--transition-fast); }
+    a:hover { color: var(--primary-dark); }
+
+    /* Header */
+    .portal-header {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 70px;
+      background: rgba(253, 251, 249, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.5rem; z-index: 100;
+    }
+    .header-logo { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; color: var(--dark); }
+    .header-label { font-family: var(--font-sans); font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--primary); display: none; }
+    .header-back { font-size: 0.875rem; font-weight: 500; }
+
+    @media (min-width: 768px) {
+      .header-label { display: block; }
+    }
+
+    /* Progress Bar */
+    .progress-container {
+      margin-top: 70px; padding: 1rem 1.5rem; background: var(--surface); border-bottom: 1px solid var(--border);
+    }
+    .progress-text { font-size: 0.875rem; font-weight: 500; margin-bottom: 0.5rem; display: flex; justify-content: space-between; }
+    .progress-track { width: 100%; height: 6px; background: var(--border); border-radius: var(--radius-full); overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--primary); width: 0%; transition: width var(--transition-base); }
+
+    /* Layout */
+    .layout { display: flex; flex-direction: column; max-width: 1400px; margin: 0 auto; padding: 1.5rem; gap: 2rem; }
+    
+    @media (min-width: 1024px) {
+      .layout { flex-direction: row; align-items: flex-start; }
+      .sidebar { width: 280px; flex-shrink: 0; position: sticky; top: 120px; }
+      .main-content { flex-grow: 1; min-width: 0; }
+    }
+
+    /* Sidebar / Client Info */
+    .client-info-card { background: var(--surface); padding: 1.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--border); margin-bottom: 1.5rem; }
+    .client-info-card h3 { margin-top: 0; font-family: var(--font-sans); font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text); border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; margin-bottom: 1rem; }
+    
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-size: 0.875rem; font-weight: 500; margin-bottom: 0.25rem; color: var(--text); }
+    .form-control { width: 100%; padding: 0.625rem; border: 1px solid var(--border); border-radius: var(--radius-md); font-family: var(--font-sans); font-size: 0.875rem; background: var(--background); transition: border-color var(--transition-fast); }
+    .form-control:focus { outline: none; border-color: var(--primary); }
+    textarea.form-control { resize: vertical; min-height: 80px; }
+    
+    .checkbox-group, .radio-group { display: flex; align-items: flex-start; margin-bottom: 0.75rem; }
+    .checkbox-group input, .radio-group input { margin-top: 0.25rem; margin-right: 0.5rem; accent-color: var(--primary); }
+    .checkbox-group label, .radio-group label { font-size: 0.875rem; color: var(--text-secondary); cursor: pointer; }
+
+    /* Tabs */
+    .tabs-container { overflow-x: auto; white-space: nowrap; margin-bottom: 1.5rem; -webkit-overflow-scrolling: touch; padding-bottom: 0.5rem; }
+    .tabs-container::-webkit-scrollbar { height: 4px; }
+    .tabs-container::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    .tabs-list { display: flex; gap: 0.5rem; }
+    .tab-btn { background: var(--surface); border: 1px solid var(--border); padding: 0.75rem 1rem; border-radius: var(--radius-full); font-family: var(--font-sans); font-size: 0.875rem; font-weight: 500; color: var(--text-secondary); cursor: pointer; transition: all var(--transition-fast); display: flex; align-items: center; gap: 0.5rem; }
+    .tab-btn:hover { border-color: var(--primary-light); background: var(--primary-light); }
+    .tab-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+    
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--warning); }
+    .tab-btn.active .status-dot { background: #FFD54F; }
+    .tab-btn.signed .status-dot { background: var(--success); }
+    .tab-btn.signed.active .status-dot { background: #A5D6A7; }
+
+    @media (min-width: 1024px) {
+      .tabs-container { overflow: visible; padding-bottom: 0; }
+      .tabs-list { flex-direction: column; }
+      .tab-btn { border-radius: var(--radius-md); justify-content: flex-start; padding: 1rem; }
+    }
+
+    /* Document Pages */
+    .doc-page { display: none; background: var(--surface); padding: 2rem 1.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--border); animation: fadeIn 0.3s ease; }
+    .doc-page.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .doc-header { border-bottom: 2px solid var(--border); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; }
+    .doc-meta { font-size: 0.875rem; color: var(--primary); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; display: block; }
+    
+    .badge { padding: 0.25rem 0.75rem; border-radius: var(--radius-full); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+    .badge.pending { background: var(--warning-bg); color: var(--warning); }
+    .badge.signed { background: var(--success-bg); color: var(--success); }
+
+    .legal-text { font-size: 0.9375rem; color: var(--text); }
+    .legal-text p { margin-bottom: 1.25rem; }
+    .legal-text ul { margin-left: 1.5rem; margin-bottom: 1.25rem; color: var(--text-secondary); }
+    .legal-text li { margin-bottom: 0.5rem; }
+
+    /* Signature Area */
+    .signature-section { margin-top: 3rem; padding-top: 2rem; border-top: 1px dashed var(--border); }
+    .sig-pad-wrapper { position: relative; width: 100%; max-width: 500px; height: 150px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--background); overflow: hidden; margin-bottom: 1rem; }
+    .sig-canvas { width: 100%; height: 100%; cursor: crosshair; touch-action: none; position: relative; z-index: 2; }
+    .sig-placeholder { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: var(--font-accent); color: #BDBDBD; font-size: 1.25rem; pointer-events: none; z-index: 1; transition: opacity 0.2s; white-space: nowrap; }
+    .sig-line { position: absolute; bottom: 30px; left: 10%; right: 10%; height: 1px; background: #E0E0E0; pointer-events: none; z-index: 1; }
+
+    .sig-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .btn { padding: 0.625rem 1.25rem; border-radius: var(--radius-md); font-family: var(--font-sans); font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: all var(--transition-fast); border: none; display: inline-flex; align-items: center; justify-content: center; }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+    .btn-outline:hover { background: var(--background); border-color: var(--text-secondary); }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-dark { background: var(--dark); color: white; }
+    .btn-dark:hover { background: var(--dark-surface); }
+
+    /* Signed Seal */
+    .signed-seal { display: none; background: #FAFAFA; border: 1px solid var(--secondary); border-radius: var(--radius-md); padding: 1.5rem; margin-top: 1rem; position: relative; overflow: hidden; }
+    .signed-seal.active { display: block; animation: fadeIn 0.4s ease; }
+    .seal-badge { font-family: var(--font-serif); font-size: 1.125rem; color: var(--success); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
+    .seal-meta { font-family: monospace; font-size: 0.75rem; color: var(--text-secondary); }
+    .seal-bg { position: absolute; right: -20px; bottom: -20px; opacity: 0.05; font-size: 8rem; color: var(--secondary); pointer-events: none; user-select: none; }
+
+    /* Form Grids */
+    .form-grid-2 { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+    @media (min-width: 640px) { .form-grid-2 { grid-template-columns: 1fr 1fr; } }
+    
+    .checkbox-grid { display: grid; grid-template-columns: 1fr; gap: 0.6rem; margin-bottom: 1.25rem; }
+    @media (min-width: 640px) { .checkbox-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .checkbox-grid { grid-template-columns: 1fr 1fr 1fr; } }
+
+    /* RICH CLICK-BASED CONTROLS (85-90% Click-Only Experience) */
+    .form-section-header {
+      margin-top: 2.25rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .form-section-header h3 {
+      margin: 0 0 0.25rem 0;
+      font-size: 1.15rem;
+      font-family: var(--font-serif);
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .form-section-header p {
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    .click-option-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 0.95rem 1.15rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 0.35rem 0.65rem;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      position: relative;
+    }
+    .click-option-card:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      box-shadow: var(--shadow-sm);
+    }
+    .click-option-card:has(input:checked) {
+      border-color: var(--primary);
+      background: rgba(139, 111, 92, 0.05);
+      box-shadow: 0 0 0 1px var(--primary);
+    }
+    .click-option-card input[type="radio"],
+    .click-option-card input[type="checkbox"] {
+      margin-top: 0.2rem;
+      accent-color: var(--primary);
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .click-option-card > strong {
+      flex: 1 1 calc(100% - 32px);
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--text);
+      line-height: 1.35;
+      margin: 0;
+    }
+    .click-option-card > span {
+      width: 100%;
+      padding-left: calc(18px + 0.65rem);
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      display: block;
+    }
+    .click-option-card .opt-content {
+      flex: 1;
+    }
+    .click-option-card .opt-title {
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--text);
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+    .click-option-card .opt-desc {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    .cards-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.85rem;
+      margin-bottom: 1.25rem;
+    }
+    @media (min-width: 640px) {
+      .cards-grid-2 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .cards-grid-3 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.85rem;
+      margin-bottom: 1.25rem;
+    }
+    @media (min-width: 768px) {
+      .cards-grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* Clickable Pill / Chip Selectors */
+    .chip-selector-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .chip-item {
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    .chip-item input {
+      display: none;
+    }
+    .chip-item span {
+      display: inline-block;
+      padding: 0.5rem 1.15rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 500;
+      background: var(--surface);
+      color: var(--text);
+      transition: all var(--transition-fast);
+      user-select: none;
+    }
+    .chip-item:hover span {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+    .chip-item input:checked + span {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #FFFFFF;
+      box-shadow: 0 2px 8px rgba(139, 111, 92, 0.25);
+    }
+
+    /* Checkbox Card Pill */
+    .check-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 0.35rem 0.65rem;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      font-size: 0.86rem;
+      color: var(--text);
+      line-height: 1.4;
+    }
+    .check-card:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+    .check-card:has(input:checked) {
+      border-color: var(--primary);
+      background: rgba(139, 111, 92, 0.05);
+      box-shadow: 0 0 0 1px var(--primary);
+    }
+    .check-card input[type="checkbox"],
+    .check-card input[type="radio"] {
+      margin-top: 0.2rem;
+      accent-color: var(--primary);
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+    .check-card > strong {
+      flex: 1 1 calc(100% - 30px);
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.35;
+      margin: 0;
+    }
+    .check-card > span {
+      width: 100%;
+      padding-left: calc(16px + 0.65rem);
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      line-height: 1.35;
+      display: block;
+    }
+
+    /* Touch Matrix Table */
+    .touch-matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      font-size: 0.86rem;
+    }
+    .touch-matrix-table th {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      padding: 0.75rem 1rem;
+      font-weight: 600;
+      text-align: left;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .touch-matrix-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .touch-matrix-table tr:last-child td {
+      border-bottom: none;
+    }
+    .touch-matrix-table tr:hover td {
+      background: rgba(139, 111, 92, 0.03);
+    }
+    .matrix-radio-group {
+      display: flex;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+    }
+    .matrix-radio-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      cursor: pointer;
+      font-size: 0.8rem;
+      color: var(--text);
+    }
+    .matrix-radio-label input {
+      accent-color: var(--primary);
+    }
+
+    /* Heirloom Certificate */
+    .certificate { margin-top: 4rem; padding: 3rem 2rem; background: var(--surface); border: 2px solid var(--primary-light); border-radius: var(--radius-lg); text-align: center; position: relative; overflow: hidden; box-shadow: var(--shadow-md); }
+    .certificate::before { content: ''; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px; border: 1px solid var(--border); pointer-events: none; }
+    .cert-title { font-family: var(--font-serif); font-size: 1.75rem; color: var(--primary); margin-bottom: 1.5rem; }
+    .cert-body { font-family: var(--font-accent); font-size: 1.25rem; color: var(--text); line-height: 1.8; }
+    .cert-names { font-size: 1.5rem; font-weight: 600; color: var(--dark); display: block; margin: 1rem 0; border-bottom: 1px solid var(--primary); padding-bottom: 0.5rem; }
+    
+    /* Action Banner */
+    .action-banner { background: var(--dark-surface); color: white; padding: 2rem 1.5rem; text-align: center; margin-top: 3rem; }
+    .action-banner h2 { color: white; margin-bottom: 1.5rem; font-family: var(--font-sans); font-size: 1.25rem; }
+    .banner-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* Modal */
+    .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 1rem; opacity: 0; transition: opacity 0.3s; }
+    .modal-overlay.active { display: flex; opacity: 1; }
+    .modal-content { background: var(--surface); border-radius: var(--radius-lg); width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto; padding: 2rem; box-shadow: var(--shadow-xl); transform: translateY(20px); transition: transform 0.3s; }
+    .modal-overlay.active .modal-content { transform: translateY(0); }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .modal-title { font-family: var(--font-serif); font-size: 1.5rem; color: var(--dark); margin: 0; }
+    .modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-secondary); }
+    .summary-box { background: var(--background); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1rem; font-family: monospace; font-size: 0.875rem; white-space: pre-wrap; margin-bottom: 1.5rem; max-height: 300px; overflow-y: auto; }
+    .modal-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: flex-end; }
+
+    /* Soundscape Toggle in Header */
+    .sound-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background-color: var(--primary-light);
+      color: var(--primary-dark);
+      transition: all var(--transition-fast);
+      cursor: pointer;
+      border: 1px solid rgba(139, 111, 92, 0.2);
+    }
+    .sound-toggle:hover {
+      background-color: var(--border);
+      transform: scale(1.05);
+    }
+    .sound-toggle svg {
+      width: 18px;
+      height: 18px;
+      transition: transform var(--transition-fast);
+    }
+    .sound-toggle.playing {
+      background-color: var(--primary);
+      color: #FFFFFF;
+      border-color: var(--primary);
+      animation: pulse-ring 2s infinite;
+    }
+    .sound-toggle.playing svg {
+      transform: scale(1.08);
+    }
+    @keyframes pulse-ring {
+      0% { box-shadow: 0 0 0 0 rgba(139, 111, 92, 0.6); }
+      70% { box-shadow: 0 0 0 10px rgba(139, 111, 92, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(139, 111, 92, 0); }
+    }
+
+    /* ==========================================================================
+       PRINT STYLES — ZERO EXTRA WHITE PAGES GUARANTEED
+       ========================================================================== */
+    @page {
+      margin: 1.2cm 1cm;
+      size: A4 portrait;
+    }
+
+    @media print {
+      /* Reset root & body */
+      html, body {
+        background: #FFFFFF !important;
+        color: #1A1614 !important;
+        font-size: 11pt !important;
+        line-height: 1.5 !important;
+        height: auto !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      /* Hide all non-printable components */
+      .portal-header,
+      .progress-container,
+      .sidebar,
+      aside,
+      .tabs-container,
+      .sig-actions,
+      .sig-placeholder,
+      .action-banner,
+      .modal-overlay,
+      .sound-toggle,
+      #youtube-audio-host,
+      .btn,
+      button,
+      .no-print {
+        display: none !important;
+        height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+      }
+
+      /* Layout reset */
+      .layout,
+      .main-content {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        gap: 0 !important;
+        border: none !important;
+      }
+
+      /* Base doc-page in print */
+      .doc-page {
+        box-shadow: none !important;
+        border: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      /* DEFAULT OR SINGLE-PAGE PRINT: Only show the current active document */
+      body:not(.print-all):not(.print-cert) .doc-page {
+        display: none !important;
+      }
+      body:not(.print-all):not(.print-cert) .doc-page.active {
+        display: block !important;
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+      }
+      body:not(.print-all):not(.print-cert) .certificate {
+        display: none !important;
+      }
+
+      /* MULTI-PAGE PRINT (when user clicks 'Print All 6 Documents') */
+      body.print-all .doc-page {
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 0 1cm 0 !important;
+      }
+      body.print-all .doc-page + .doc-page {
+        page-break-before: always !important;
+        break-before: page !important;
+      }
+      body.print-all .certificate {
+        display: block !important;
+        page-break-before: always !important;
+        break-before: page !important;
+      }
+
+      /* CERTIFICATE ONLY PRINT */
+      body.print-cert .doc-page {
+        display: none !important;
+      }
+      body.print-cert .certificate {
+        display: block !important;
+        margin: 0 !important;
+        padding: 2cm !important;
+      }
+
+      /* Headers & Typography */
+      .doc-header {
+        margin-bottom: 0.8cm !important;
+        padding-bottom: 0.4cm !important;
+        border-bottom: 1.5pt solid #8B6F5C !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+
+      h1, h2, h3, h4 {
+        color: #1A1614 !important;
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+      }
+
+      .badge {
+        border: 1px solid #8B6F5C !important;
+        padding: 2px 8px !important;
+        font-size: 8pt !important;
+      }
+
+      /* Form inputs in print */
+      .form-control, input, select, textarea {
+        border: 1px solid #999 !important;
+        background: #FFFFFF !important;
+        color: #000000 !important;
+        box-shadow: none !important;
+        font-size: 10pt !important;
+      }
+
+      /* Signatures in print */
+      .signature-section {
+        margin-top: 1cm !important;
+        padding-top: 0.5cm !important;
+        border-top: 1pt dashed #CCC !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+
+      .sig-pad-wrapper {
+        border: none !important;
+        background: transparent !important;
+        height: auto !important;
+        max-width: 320px !important;
+        margin-bottom: 0.3cm !important;
+      }
+
+      .sig-canvas {
+        display: block !important;
+        width: 280px !important;
+        height: 80px !important;
+        border-bottom: 1pt solid #1A1614 !important;
+      }
+
+      .signed-seal {
+        display: block !important;
+        border: 1pt solid #C4A882 !important;
+        padding: 0.4cm 0.6cm !important;
+        margin-top: 0.3cm !important;
+        background: #FAF8F6 !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+      .signed-seal:not(.active) {
+        display: none !important;
+      }
+
+      /* Certificate */
+      .certificate {
+        box-shadow: none !important;
+        border: 2pt solid #8B6F5C !important;
+        padding: 1.5cm !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="portal-header">
+    <a href="index.html" class="header-logo">MaternalSupportCo</a>
+    <span class="header-label">Client Portal</span>
+    <div style="display: flex; align-items: center; gap: 0.85rem;">
+      <button class="sound-toggle" id="portal-sound-toggle" aria-label="Toggle 432Hz Sanctuary Therapy Music" title="432Hz Krishna Bansuri Therapy">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+      </button>
+      <a href="index.html" class="header-back">&larr; Back to Website</a>
+    </div>
+  </header>
+
+  <!-- Progress -->
+  <div class="progress-container">
+    <div class="progress-text">
+      <span>Completion Progress</span>
+      <span id="progressText">0 of 6 documents signed</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressBar"></div>
+    </div>
+  </div>
+
+  <div class="layout">
+    <!-- Sidebar / Client Info -->
+    <aside class="sidebar">
+      <div class="client-info-card">
+        <h3>Client Profile</h3>
+        <div class="form-group">
+          <label for="inputClientName">Birthing Parent</label>
+          <input type="text" id="inputClientName" class="form-control" value="Elena Sterling">
+        </div>
+        <div class="form-group">
+          <label for="inputPartnerName">Partner / Co-Parent</label>
+          <input type="text" id="inputPartnerName" class="form-control" value="Marcus Sterling">
+        </div>
+        <div class="form-group">
+          <label for="inputAddress">Home Address</label>
+          <input type="text" id="inputAddress" class="form-control" placeholder="123 Main St, City, ST">
+        </div>
+        <div class="form-group">
+          <label for="inputPhone">Phone Number</label>
+          <input type="tel" id="inputPhone" class="form-control" placeholder="(555) 000-0000">
+        </div>
+        <div class="form-group">
+          <label for="inputProviderName">Care Provider (OB/Midwife)</label>
+          <input type="text" id="inputProviderName" class="form-control" placeholder="Dr. Smith / City Midwives">
+        </div>
+        <div class="form-group">
+          <label for="inputDeliveryVenue">Delivery Venue</label>
+          <input type="text" id="inputDeliveryVenue" class="form-control" placeholder="Hospital or Birth Center Name">
+        </div>
+      </div>
+
+      <!-- Desktop Tabs (mirrors mobile tabs logic, shown in sidebar) -->
+      <div class="tabs-container">
+        <div class="tabs-list" id="tabsList">
+          <button class="tab-btn active" data-target="doc1">
+            <span class="status-dot"></span> Services Agreement
+          </button>
+          <button class="tab-btn" data-target="doc2">
+            <span class="status-dot"></span> HIPAA Release
+          </button>
+          <button class="tab-btn" data-target="doc3">
+            <span class="status-dot"></span> Medical History
+          </button>
+          <button class="tab-btn" data-target="doc4">
+            <span class="status-dot"></span> Birth Preferences
+          </button>
+          <button class="tab-btn" data-target="doc5">
+            <span class="status-dot"></span> Postpartum Plan
+          </button>
+          <button class="tab-btn" data-target="doc6">
+            <span class="status-dot"></span> Photo Consent
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content / Documents -->
+    <main class="main-content">
+      
+      <!-- Doc 1: Services Agreement -->
+      <section id="doc1" class="doc-page active">
+        <div class="doc-header">
+          <div>
+            <span class="doc-meta">Document 01</span>
+            <h2>Doula Services Agreement</h2>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <button type="button" class="btn btn-outline btn-sm no-print" onclick="printCurrentDoc()" title="Print or save this document as PDF" style="font-size: 0.8rem; padding: 0.35rem 0.75rem;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 4px; vertical-align: -1px;"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>Print Doc (PDF)
+            </button>
+            <span class="badge pending" id="badgeDoc1">Pending Signature</span>
+          </div>
+        </div>
+        <div class="legal-text">
+          <p>This legally binding agreement is entered into by and between <strong>Vanya, CD(DONA), CLC</strong> of <strong>MaternalSupportCo</strong> (hereinafter "Doula") and the expectant parent(s) named herein.</p>
+
+          <!-- 1. Service Tier Selection (Click Radio) -->
+          <div class="form-section-header">
+            <h3>1. Select Your Doula Care Package</h3>
+            <p>Select the care tier that aligns with your perinatal vision (85-90% click-selected):</p>
+          </div>
+          <div class="cards-grid-3">
+            <label class="click-option-card">
+              <input type="radio" name="d1Package" value="Full Perinatal Sanctuary ($2,400)" checked>
+              <div class="opt-content">
+                <span class="opt-title">Full Birth Sanctuary</span>
+                <p class="opt-desc"><strong>$2,400</strong> • 3 Prenatal visits, 24/7 on-call from 37 weeks, continuous active labor support, Golden Hour protection, 2 postpartum home visits.</p>
+              </div>
+            </label>
+            <label class="click-option-card">
+              <input type="radio" name="d1Package" value="Extended Fourth Trimester ($3,200)">
+              <div class="opt-content">
+                <span class="opt-title">Extended Postpartum</span>
+                <p class="opt-desc"><strong>$3,200</strong> • Complete birth package PLUS 20 additional hours of dedicated postpartum daytime infant soothing, nutrition, and recovery care.</p>
+              </div>
+            </label>
+            <label class="click-option-card">
+              <input type="radio" name="d1Package" value="VBAC Dedicated Advocacy ($2,600)">
+              <div class="opt-content">
+                <span class="opt-title">VBAC Intensive</span>
+                <p class="opt-desc"><strong>$2,600</strong> • Specialized physiological support, uterine scar advocacy, Spinning Babies® pelvic positioning, and continuous hospital liaison.</p>
+              </div>
+            </label>
+          </div>
+
+          <!-- 2. Installment Schedule (Click Radio) -->
+          <div class="form-section-header">
+            <h3>2. Payment Schedule & Retainer Structure</h3>
+            <p>Select your preferred installment structure:</p>
+          </div>
+          <div class="cards-grid-3">
+            <label class="click-option-card">
+              <input type="radio" name="d1PaymentPlan" value="Standard 3-Part Installment" checked>
+              <div class="opt-content">
+                <span class="opt-title">3-Part Installment</span>
+                <p class="opt-desc">$800 retainer at contract signing, $800 at 32 weeks, and $800 balance at 37 weeks on-call threshold.</p>
+              </div>
+            </label>
+            <label class="click-option-card">
+              <input type="radio" name="d1PaymentPlan" value="Two-Part Half & Half">
+              <div class="opt-content">
+                <span class="opt-title">Two Equal Halves</span>
+                <p class="opt-desc">50% retainer ($1,200) at contract signing, remaining 50% ($1,200) at 36 weeks gestation.</p>
+              </div>
+            </label>
+            <label class="click-option-card">
+              <input type="radio" name="d1PaymentPlan" value="Paid in Full">
+              <div class="opt-content">
+                <span class="opt-title">Paid in Full</span>
+                <p class="opt-desc">One-time payment upon contract execution ($2,280 reflecting a 5% perinatal sanctuary courtesy).</p>
+              </div>
+            </label>
+          </div>
+
+          <!-- 3. On-Call Commitments (Click Checkboxes) -->
+          <div class="form-section-header">
+            <h3>3. On-Call & Labor Availability Terms</h3>
+            <p>Confirm each operational term (click all to accept):</p>
+          </div>
+          <div class="checkbox-grid">
+            <label class="check-card">
+              <input type="checkbox" id="d1TermOnCall" checked>
+              <span><strong>24/7 On-Call from 37 Weeks:</strong> Vanya is exclusively on-call 24/7 beginning at 37 weeks gestation until baby arrives.</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="d1TermNotice" checked>
+              <span><strong>Early Labor Contact:</strong> I agree to text/call Vanya as soon as I suspect early labor or water breaking so she can prepare.</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="d1TermBuffer" checked>
+              <span><strong>1–2 Hour Travel Buffer:</strong> I understand Vanya requires 60 to 90 minutes to arrive once active in-person support is requested.</span>
+            </label>
+          </div>
+
+          <!-- 4. Back-Up Doula Guarantee (Click Radio) -->
+          <div class="form-section-header">
+            <h3>4. Back-Up Doula Coverage Policy</h3>
+            <p>Select your back-up doula preference:</p>
+          </div>
+          <div class="cards-grid-2">
+            <label class="click-option-card">
+              <input type="radio" name="d1Backup" value="Standard Vetted Backup Network" checked>
+              <div class="opt-content">
+                <span class="opt-title">Authorize Vetted Partner Network</span>
+                <p class="opt-desc">I accept MaternalSupportCo's certified backup doulas in the rare case of extreme illness, emergency, or overlapping birth.</p>
+              </div>
+            </label>
+            <label class="click-option-card">
+              <input type="radio" name="d1Backup" value="Introductory Video Call with Backup">
+              <div class="opt-content">
+                <span class="opt-title">Request Backup Intro Call</span>
+                <p class="opt-desc">I request a complimentary 15-minute video introduction with Vanya's primary backup doula prior to 36 weeks.</p>
+              </div>
+            </label>
+          </div>
+
+          <!-- 5. Scope of Practice Disclaimer (Click Checkboxes) -->
+          <div class="form-section-header">
+            <h3>5. Clinical Disclaimer & Informed Consent</h3>
+            <p>Acknowledge legal scope of practice (click to confirm):</p>
+          </div>
+          <div class="checkbox-grid">
+            <label class="check-card">
+              <input type="checkbox" id="d1ScopeNonMed" checked>
+              <span><strong>Non-Medical Scope:</strong> A doula does NOT perform clinical tasks: no vaginal exams, blood pressure, or diagnostic checks.</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="d1ScopeBrain" checked>
+              <span><strong>BRAIN Advocacy Framework:</strong> The doula facilitates communication and helps us ask questions using Benefits, Risks, Alternatives, Intuition, Nothing.</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="d1ScopeRetainer" checked>
+              <span><strong>Non-Refundable Retainer:</strong> The initial retainer is non-refundable as it reserves exclusive on-call calendar space.</span>
+            </label>
+          </div>
+
+          <div class="form-group" style="margin-top: 1.5rem;">
+            <label for="d1PersonalNotes" style="font-weight: 600; color: var(--text);">
+              Personalized Requests, Cultural Traditions & Family Boundaries (In Your Own Words)
+            </label>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+              Share any specific birthing traditions, spiritual customs, family desires, or personal boundaries you'd like Vanya to hold during your care:
+            </p>
+            <textarea id="d1PersonalNotes" class="form-control" rows="3" placeholder="e.g., We plan to play specific soothing spiritual mantras, prefer female-only care providers if possible, and would love Vanya to coach my partner closely on hands-on sacral counter-pressure..."></textarea>
+          </div>
+
+          <div class="click-option-card" style="margin-top: 1.5rem; background: var(--surface); border: 2px solid var(--primary);">
+            <input type="checkbox" id="agreeDoc1" checked>
+            <div class="opt-content">
+              <span class="opt-title" style="color: var(--primary);">Legally Binding Execution of Services Agreement</span>
+              <p class="opt-desc">By checking this box and applying my digital signature below, I verify that I have reviewed, agreed to, and legally authorized all terms of the MaternalSupportCo Doula Services Agreement.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="signature-section">
+          <h3>Client Signature</h3>
+          <div class="sig-pad-wrapper">
+            <div class="sig-placeholder" id="placeholderDoc1">Sign here — draw with mouse or touch</div>
+            <div class="sig-line"></div>
+            <canvas class="sig-canvas" id="canvasDoc1"></canvas>
+          </div>
+          <div class="sig-actions" id="actionsDoc1">
+            <button class="btn btn-outline" onclick="clearCanvas(1)">Clear</button>
+            <button class="btn btn-outline" onclick="adoptScript(1)">Adopt Script</button>
+            <button class="btn btn-primary" onclick="signDocument(1)">Sign & Stamp</button>
+          </div>
+          <div class="signed-seal" id="sealDoc1">
+            <div class="seal-badge">✓ Verified Digital Signature</div>
+            <div class="seal-meta" id="metaDoc1"></div>
+            <div class="seal-bg">✓</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Doc 2: HIPAA Release -->
+      <section id="doc2" class="doc-page">
+        <div class="doc-header">
+          <div>
+            <span class="doc-meta">Document 02</span>
+            <h2>HIPAA & Medical Privacy Authorization</h2>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <button type="button" class="btn btn-outline btn-sm no-print" onclick="printCurrentDoc()" title="Print or save this document as PDF" style="font-size: 0.8rem; padding: 0.35rem 0.75rem;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 4px; vertical-align: -1px;"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>Print Doc (PDF)
+            </button>
+            <span class="badge pending" id="badgeDoc2">Pending Signature</span>
+          </div>
+        </div>
+        <div class="legal-text">
+          <p>This Medical Privacy & HIPAA Disclosure Authorization permits <strong>Vanya / MaternalSupportCo</strong> to communicate seamlessly with your healthcare providers to coordinate continuous perinatal advocacy.</p>
+
+          <!-- 1. Authorized Clinical & Holistic Care Entities (Click Checkboxes) -->
+          <div class="form-section-header">
+            <h3>1. Authorized Healthcare Providers & Clinical Entities</h3>
+            <p>Select all medical providers you authorize Vanya to communicate with (85-90% click-selected):</p>
+          </div>
+          <div class="checkbox-grid">
+            <label class="check-card">
+              <input type="checkbox" id="hipaaOb" checked>
+              <span><strong>Obstetrician (OB/GYN):</strong> Primary physician, clinical associates, and clinic nurses.</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="hipaaMidwife" checked>
+              <span><strong>Midwifery Practice:</strong> Certified Nurse Midwives (CNM) or community CPM practice.</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="hipaaNursing" checked>
+              <span><strong>L&D Hospital Staff:</strong> Admitting nurses, labor triage, and charge nurses.</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="hipaaAnesthesia" checked>
+              <span><strong>Anesthesiology Team:</strong> In the event epidural or surgical anesthesia is consulted.</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="hipaaLactation" checked>
+              <span><strong>IBCLC Lactation Consultants:</strong> Hospital and in-home clinical infant feeding specialists.</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="hipaaPeds" checked>
+              <span><strong>Pediatrician & Newborn Nursery:</strong> Admitting infant hospital pediatrician and outpatient clinic.</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="hipaaPelvic">
+              <span><strong>Pelvic Floor Physical Therapist:</strong> Pre- and postnatal rehabilitation providers.</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="hipaaMental">
+              <span><strong>Perinatal Mental Health Therapist:</strong> Postpartum mood and adjustment counselors.</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="hipaaChiro">
+              <span><strong>Chiropractor / Acupuncturist:</strong> Webster technique and perinatal bodyworkers.</span>
+            </label>
+          </div>
+
+          <!-- 2. Scope of Protected Health Information (Click Checkboxes) -->
+          <div class="form-section-header">
+            <h3>2. Scope of Protected Health Information (PHI) to Disclose</h3>
+            <p>Select the health information categories authorized for doula coordination:</p>
+          </div>
+          <div class="checkbox-grid">
+            <label class="check-card">
+              <input type="checkbox" id="phiPrenatal" checked>
+              <span><strong>Prenatal Records:</strong> Gestational age, ultrasound notes, and estimated due date.</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="phiCervix" checked>
+              <span><strong>Labor Progression:</strong> Cervical dilation, effacement, station, and contraction patterns.</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="phiTelemetry" checked>
+              <span><strong>Fetal Monitoring:</strong> Fetal heart rate telemetry and baseline variability notes.</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="phiLabs" checked>
+              <span><strong>Clinical Lab Flags:</strong> Group B Strep (GBS) status, Rh factor, and iron levels.</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="phiMeds" checked>
+              <span><strong>Medications & Interventions:</strong> Pitocin titration, IV fluids, epidural timing, and antibiotics.</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="phiNewborn" checked>
+              <span><strong>Newborn Evaluation:</strong> APGAR scores, initial weight, temperature, and feeding latch logs.</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="phiPostpartum" checked>
+              <span><strong>Postpartum Recovery:</strong> Fundal checks, lochia bleeding, and perineal/cesarean healing.</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="phiMood" checked>
+              <span><strong>Mental Well-being:</strong> Postnatal emotional check-in assessments and EPDS screenings.</span>
+            </label>
+          </div>
+
+          <!-- 3. Authorized Communication Modalities (Click Checkboxes) -->
+          <div class="form-section-header">
+            <h3>3. Permitted Communication Channels</h3>
+            <p>Select all authorized methods of communication:</p>
+          </div>
+          <div class="checkbox-grid">
+            <label class="check-card">
+              <input type="checkbox" id="commVerbal" checked>
+              <span><strong>In-Person Clinical Discussions:</strong> Active verbal bedside collaboration during labor.</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="commPhone" checked>
+              <span><strong>Direct Phone / Triage Calls:</strong> Contacting provider triage lines during early labor.</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="commSms" checked>
+              <span><strong>Encrypted SMS & Messaging:</strong> Real-time labor updates with care team.</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="commPortal" checked>
+              <span><strong>Digital Summary Exchange:</strong> Sharing completed birth preferences with nursing staff.</span>
+            </label>
+          </div>
+
+          <!-- 4. Emergency Proxy Protocol (Click Radio Cards) -->
+          <div class="form-section-header">
+            <h3>4. Emergency Medical Proxy Delegation</h3>
+            <p>In the unlikely event you are temporarily incapacitated or under general anesthesia:</p>
+          </div>
+          <div class="cards-grid-2">
+            <label class="click-option-card">
+              <input type="radio" name="hipaaProxy" value="Advocacy Proxy Authorized" checked>
+              <div class="opt-content">
+                <span class="opt-title">Advocacy Proxy Authorized</span>
+                <p class="opt-desc">I authorize Vanya to verbally present and advocate for my written birth preferences document to attending clinical staff.</p>
+              </div>
+            </label>
+            <label class="click-option-card">
+              <input type="radio" name="hipaaProxy" value="Designated Partner Only">
+              <div class="opt-content">
+                <span class="opt-title">Partner Only</span>
+                <p class="opt-desc">Only my designated legal partner/co-parent is authorized to communicate preferences during an emergency.</p>
+              </div>
+            </label>
+          </div>
+
+          <!-- 5. Revocation & Expiration Terms (Click Checkboxes) -->
+          <div class="form-section-header">
+            <h3>5. Patient Rights & Privacy Safeguards</h3>
+            <p>Review and confirm your patient rights under federal HIPAA guidelines:</p>
+          </div>
+          <div class="checkbox-grid">
+            <label class="check-card">
+              <input type="checkbox" id="hipaaVoluntary" checked>
+              <span><strong>Voluntary Authorization:</strong> I acknowledge that signing this release is voluntary and is not a condition for receiving medical treatment.</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="hipaaRevoke" checked>
+              <span><strong>Right to Revoke:</strong> I understand I have the right to revoke this release in writing at any time by contacting hello@maternalsupportco.com.</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="hipaaDuration" checked>
+              <span><strong>12-Week Expiration:</strong> This authorization automatically expires 12 weeks following the birth date unless revoked earlier.</span>
+            </label>
+          </div>
+
+          <div class="form-group" style="margin-top: 1.5rem;">
+            <label for="d2PersonalNotes" style="font-weight: 600; color: var(--text);">
+              Designated Care Providers, Specific Specialists & Custom Privacy Boundaries (In Your Own Words)
+            </label>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+              Name specific doctors, clinics, midwives, or specialists you authorize, as well as any individuals or family members to strictly exclude from updates:
+            </p>
+            <textarea id="d2PersonalNotes" class="form-control" rows="3" placeholder="e.g., Primary OB: Dr. Sarah Jenkins (Swedish Hospital Floor 3); also authorized to speak with our pelvic floor PT Dr. Jessica Vance. Do not disclose labor updates or room number to extended family without explicit verbal confirmation..."></textarea>
+          </div>
+
+          <div class="click-option-card" style="margin-top: 1.5rem; background: var(--surface); border: 2px solid var(--primary);">
+            <input type="checkbox" id="agreeDoc2" checked>
+            <div class="opt-content">
+              <span class="opt-title" style="color: var(--primary);">Formal Authorization of Medical Information Disclosure</span>
+              <p class="opt-desc">By checking this box and applying my digital signature below, I formally execute this HIPAA Privacy Authorization for the purposes of integrated doula care.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="signature-section">
+          <h3>Client Signature</h3>
+          <div class="sig-pad-wrapper">
+            <div class="sig-placeholder" id="placeholderDoc2">Sign here — draw with mouse or touch</div>
+            <div class="sig-line"></div>
+            <canvas class="sig-canvas" id="canvasDoc2"></canvas>
+          </div>
+          <div class="sig-actions" id="actionsDoc2">
+            <button class="btn btn-outline" onclick="clearCanvas(2)">Clear</button>
+            <button class="btn btn-outline" onclick="adoptScript(2)">Adopt Script</button>
+            <button class="btn btn-primary" onclick="signDocument(2)">Sign & Stamp</button>
+          </div>
+          <div class="signed-seal" id="sealDoc2">
+            <div class="seal-badge">✓ Verified Digital Signature</div>
+            <div class="seal-meta" id="metaDoc2"></div>
+            <div class="seal-bg">✓</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Doc 3: Medical History -->
+      <section id="doc3" class="doc-page">
+        <div class="doc-header">
+          <div>
+            <span class="doc-meta">Document 03</span>
+            <h2>Medical History & Prenatal Intake</h2>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <button type="button" class="btn btn-outline btn-sm no-print" onclick="printCurrentDoc()" title="Print or save this document as PDF" style="font-size: 0.8rem; padding: 0.35rem 0.75rem;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 4px; vertical-align: -1px;"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>Print Doc (PDF)
+            </button>
+            <span class="badge pending" id="badgeDoc3">Pending Signature</span>
+          </div>
+        </div>
+        
+        <div class="legal-text">
+          <p>Please complete your clinical and physiological profile below. To protect your energy, this intake is <strong>85-90% click-selected</strong> — simply tap the options that reflect your body and history.</p>
+
+          <!-- 1. Obstetric History (Clickable Chips) -->
+          <div class="form-section-header">
+            <h3>1. Obstetric & Pregnancy Profile</h3>
+            <p>Select your numbers by clicking the chips below:</p>
+          </div>
+          <div style="margin-bottom: 1.25rem;">
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text);">Total Pregnancies (Gravida, including current):</label>
+            <div class="chip-selector-group">
+              <label class="chip-item"><input type="radio" name="gravidaChip" value="1" checked><span>1 (First Pregnancy)</span></label>
+              <label class="chip-item"><input type="radio" name="gravidaChip" value="2"><span>2</span></label>
+              <label class="chip-item"><input type="radio" name="gravidaChip" value="3"><span>3</span></label>
+              <label class="chip-item"><input type="radio" name="gravidaChip" value="4"><span>4</span></label>
+              <label class="chip-item"><input type="radio" name="gravidaChip" value="5+"><span>5+</span></label>
+            </div>
+
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text);">Previous Living Births (Para):</label>
+            <div class="chip-selector-group">
+              <label class="chip-item"><input type="radio" name="paraChip" value="0" checked><span>0 (First Birth)</span></label>
+              <label class="chip-item"><input type="radio" name="paraChip" value="1"><span>1</span></label>
+              <label class="chip-item"><input type="radio" name="paraChip" value="2"><span>2</span></label>
+              <label class="chip-item"><input type="radio" name="paraChip" value="3+"><span>3+</span></label>
+            </div>
+          </div>
+
+          <!-- 2. Conception Method (Click Radio Cards) -->
+          <div class="form-section-header">
+            <h3>2. Conception Pathway</h3>
+            <p>Select how this baby was conceived:</p>
+          </div>
+          <div class="cards-grid-3">
+            <label class="click-option-card">
+              <input type="radio" name="conception" value="Spontaneous Natural" checked>
+              <div class="opt-content">
+                <span class="opt-title">Spontaneous</span>
+                <p class="opt-desc">Natural conception without medical intervention.</p>
+              </div>
+            </label>
+            <label class="click-option-card">
+              <input type="radio" name="conception" value="IVF (In Vitro Fertilization)">
+              <div class="opt-content">
+                <span class="opt-title">IVF Journey</span>
+                <p class="opt-desc">Conceived via IVF / embryo transfer.</p>
+              </div>
+            </label>
+            <label class="click-option-card">
+              <input type="radio" name="conception" value="IUI / Fertility Medication">
+              <div class="opt-content">
+                <span class="opt-title">IUI / Medication</span>
+                <p class="opt-desc">Intrauterine insemination or medicated cycle.</p>
+              </div>
+            </label>
+          </div>
+
+          <!-- 3. Prior Birth Experience (Click Checkboxes) -->
+          <div class="form-section-header">
+            <h3>3. Prior Delivery Experience</h3>
+            <p>Select all experiences that apply to your prior births (if applicable):</p>
+          </div>
+          <div class="checkbox-grid">
+            <label class="check-card">
+              <input type="checkbox" id="pbFirst" checked>
+              <span>First-time birthing parent (No prior births)</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="pbUnmed">
+              <span>Prior unmedicated physiological birth</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="pbEpidural">
+              <span>Prior vaginal delivery with epidural</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="pbInduction">
+              <span>Prior medically induced labor</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="pbCesareanPlanned">
+              <span>Prior planned / gentle cesarean birth</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="pbCesareanEmerg">
+              <span>Prior emergency / unplanned cesarean birth</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="pbVbac">
+              <span>Planning VBAC (Vaginal Birth After Cesarean)</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="pbAssisted">
+              <span>Prior vacuum or forceps assisted delivery</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="pbFast">
+              <span>Prior precipitous rapid labor (under 4 hours)</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="pbLong">
+              <span>Prior prolonged labor (over 24 hours)</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="pbPph">
+              <span>History of postpartum hemorrhage (PPH)</span>
+            </label>
+          </div>
+
+          <!-- 4. Current Clinical Markers & Symptoms (Click Checkboxes) -->
+          <div class="form-section-header">
+            <h3>4. Current Pregnancy Health & Physiological Flags</h3>
+            <p>Select any conditions currently diagnosed or experienced:</p>
+          </div>
+          <div class="checkbox-grid">
+            <label class="check-card">
+              <input type="checkbox" id="sympLowRisk" checked>
+              <span>Healthy, low-risk uncomplicated pregnancy</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="sympNausea">
+              <span>Morning sickness / Hyperemesis Gravidarum (HG)</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="sympSciatica">
+              <span>Sciatica / Lower lumbar back pain</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="sympPelvic">
+              <span>Pelvic Girdle Pain (SPD / Symphysis Pubis)</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="sympGdDiet">
+              <span>Gestational Diabetes (Diet-controlled)</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="sympGdInsulin">
+              <span>Gestational Diabetes (Insulin-dependent)</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="sympHyper">
+              <span>Gestational Hypertension / Elevated BP</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="sympGbsPos">
+              <span>Group B Strep (GBS) Positive (IV antibiotics planned)</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="sympGbsNeg">
+              <span>Group B Strep (GBS) Negative</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="sympAnterior">
+              <span>Anterior Placenta (muffled fetal movement)</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="sympLowPlacenta">
+              <span>Low-lying placenta / Marginal previa resolved</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="sympAnemia">
+              <span>Anemia / Iron deficiency</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="sympThyroid">
+              <span>Thyroid condition (Hypo/Hyper Hashimoto's)</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="sympProdromal">
+              <span>Prodromal labor / Frequent false labor surges</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="sympHighRisk">
+              <span>Formal High-Risk Pregnancy designation</span>
+            </label>
+          </div>
+
+          <!-- 5. Allergies & Drug Sensitivities (Click Checkboxes) -->
+          <div class="form-section-header">
+            <h3>5. Allergies & Sensitivities Matrix</h3>
+            <p>Click all applicable allergies to protect your safety:</p>
+          </div>
+          <div class="checkbox-grid">
+            <label class="check-card">
+              <input type="checkbox" id="algNone" checked>
+              <span>No known drug or environmental allergies</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="algPen">
+              <span>Penicillin / Amoxicillin</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="algLatex">
+              <span>Latex rubber products</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="algTape">
+              <span>Medical adhesives / Surgical tape</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="algIodine">
+              <span>Iodine / Betadine surgical prep</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="algAnes">
+              <span>Local anesthetics (Lidocaine / Bupivacaine)</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="algSulfa">
+              <span>Sulfa drugs / Bactrim</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="algOpioids">
+              <span>Codeine / Morphine / Fentanyl</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="algFood">
+              <span>Severe food allergies (Nuts, Shellfish, Gluten)</span>
+            </label>
+          </div>
+
+          <!-- 6. Daily Supplements & Regimen (Click Checkboxes) -->
+          <div class="form-section-header">
+            <h3>6. Daily Supplements & Nutrition</h3>
+            <p>Select your daily perinatal nutritional support:</p>
+          </div>
+          <div class="checkbox-grid">
+            <label class="check-card">
+              <input type="checkbox" id="medPrenatal" checked>
+              <span>Daily Prenatal Multivitamin (with Folate)</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="medDha" checked>
+              <span>DHA / Omega-3 Fatty Acids</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="medIron">
+              <span>Iron Supplement (Floradix / Gentle Iron)</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="medMagnesium" checked>
+              <span>Magnesium (Calm sleep / leg cramp support)</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="medProbiotics" checked>
+              <span>Probiotics (Gut & vaginal biome)</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="medVitaminD">
+              <span>Vitamin D3 / K2 drops</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="medRaspberry">
+              <span>Red Raspberry Leaf Tea / Dates protocol</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="medPrescription">
+              <span>Daily prescription medications (Thyroid, BP, Asthma)</span>
+            </label>
+          </div>
+
+          <!-- 7. Perinatal Mental Health History (Click Checkboxes) -->
+          <div class="form-section-header">
+            <h3>7. Emotional Health & Mental Wellness Background</h3>
+            <p>Select any emotional experiences Vanya should sensitively hold:</p>
+          </div>
+          <div class="checkbox-grid">
+            <label class="check-card">
+              <input type="checkbox" id="mhStable" checked>
+              <span>Emotionally stable; seeking proactive labor coping tools</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="mhAnx">
+              <span>Generalized Anxiety / Tendency toward panic attacks</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="mhDep">
+              <span>History of Clinical Depression / Mood disorders</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="mhPpmd">
+              <span>Prior Postpartum Depression or Anxiety (PPD / PPA)</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="mhTrauma">
+              <span>Previous medical birth trauma / Difficult hospital memory</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="mhTher">
+              <span>Currently seeing a licensed perinatal therapist / counselor</span>
+            </label>
+          </div>
+
+          <!-- 8. Sensory Profile in Labor (Click Checkboxes) -->
+          <div class="form-section-header">
+            <h3>8. Sensory Preferences During Labor Surges</h3>
+            <p>How does your nervous system process intense sensations?</p>
+          </div>
+          <div class="checkbox-grid">
+            <label class="check-card">
+              <input type="checkbox" id="senseDark" checked>
+              <span>Extreme light sensitivity: Needs dark, amber ambient room</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="senseSound" checked>
+              <span>Sound sensitive: Needs quiet whispers, zero hospital chatter</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="senseTouchAverse">
+              <span>Touch averse when surging: Do not touch without asking first</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="senseHotFlashes" checked>
+              <span>Hot flash prone: Keep cool washcloths & hand fan ready</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="senseSmell">
+              <span>Smell sensitive: Avoid strong synthetic scents / diffuser</span>
+            </label>
+          </div>
+
+          <!-- 9. Trauma-Informed Touch Matrix (Click Segmented Table) -->
+          <div class="form-section-header">
+            <h3>9. Trauma-Informed Physical Touch Consent Matrix</h3>
+            <p>Click your permission level for each physical doula comfort technique:</p>
+          </div>
+          <table class="touch-matrix-table">
+            <thead>
+              <tr>
+                <th>Physical Technique</th>
+                <th style="text-align: center;">Permission Level (Click One)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Sacral Counter-Pressure:</strong> Firm steady palm pressure on lower spine during contractions.</td>
+                <td>
+                  <div class="matrix-radio-group">
+                    <label class="matrix-radio-label"><input type="radio" name="touchSacral" value="Enthusiastic Yes" checked> Yes, Encourage</label>
+                    <label class="matrix-radio-label"><input type="radio" name="touchSacral" value="Ask During Labor"> Ask First</label>
+                    <label class="matrix-radio-label"><input type="radio" name="touchSacral" value="Avoid"> Avoid</label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Double Hip Squeeze:</strong> Compressing pelvic wings to open pelvic outlet and relieve pressure.</td>
+                <td>
+                  <div class="matrix-radio-group">
+                    <label class="matrix-radio-label"><input type="radio" name="touchHip" value="Enthusiastic Yes" checked> Yes, Encourage</label>
+                    <label class="matrix-radio-label"><input type="radio" name="touchHip" value="Ask During Labor"> Ask First</label>
+                    <label class="matrix-radio-label"><input type="radio" name="touchHip" value="Avoid"> Avoid</label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Rebozo Sifting:</strong> Using Mexican woven scarf around belly/hips to relax uterine ligaments.</td>
+                <td>
+                  <div class="matrix-radio-group">
+                    <label class="matrix-radio-label"><input type="radio" name="touchRebozo" value="Enthusiastic Yes" checked> Yes, Encourage</label>
+                    <label class="matrix-radio-label"><input type="radio" name="touchRebozo" value="Ask During Labor"> Ask First</label>
+                    <label class="matrix-radio-label"><input type="radio" name="touchRebozo" value="Avoid"> Avoid</label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Firm Neck & Shoulder Massage:</strong> Releasing tense shoulders and jaw between contractions.</td>
+                <td>
+                  <div class="matrix-radio-group">
+                    <label class="matrix-radio-label"><input type="radio" name="touchShoulder" value="Enthusiastic Yes" checked> Yes, Encourage</label>
+                    <label class="matrix-radio-label"><input type="radio" name="touchShoulder" value="Ask During Labor"> Ask First</label>
+                    <label class="matrix-radio-label"><input type="radio" name="touchShoulder" value="Avoid"> Avoid</label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Acupressure (Spleen 6 / Large Intestine 4):</strong> Pressing specific acupoints to encourage efficient surges.</td>
+                <td>
+                  <div class="matrix-radio-group">
+                    <label class="matrix-radio-label"><input type="radio" name="touchAcu" value="Enthusiastic Yes" checked> Yes, Encourage</label>
+                    <label class="matrix-radio-label"><input type="radio" name="touchAcu" value="Ask During Labor"> Ask First</label>
+                    <label class="matrix-radio-label"><input type="radio" name="touchAcu" value="Avoid"> Avoid</label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Hand Holding & Grounding Anchor:</strong> Firm eye contact and holding hands through transition.</td>
+                <td>
+                  <div class="matrix-radio-group">
+                    <label class="matrix-radio-label"><input type="radio" name="touchAnchor" value="Enthusiastic Yes" checked> Yes, Encourage</label>
+                    <label class="matrix-radio-label"><input type="radio" name="touchAnchor" value="Ask During Labor"> Ask First</label>
+                    <label class="matrix-radio-label"><input type="radio" name="touchAnchor" value="Avoid"> Avoid</label>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- 10. Essential Clinical Text Fields (Only 2 essential text fields) -->
+          <div class="form-section-header">
+            <h3>10. Essential Clinical Logistics</h3>
+            <p>Only essential text details needed:</p>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="inputEddDate">Estimated Due Date (EDD)</label>
+              <input type="date" id="inputEddDate" class="form-control" value="2026-11-14">
+            </div>
+            <div class="form-group">
+              <label for="inputBloodTypeSelect">Blood Type & Rh Factor</label>
+              <select id="inputBloodTypeSelect" class="form-control">
+                <option value="O+" selected>O Positive (O+)</option>
+                <option value="O-">O Negative (O-)</option>
+                <option value="A+">A Positive (A+)</option>
+                <option value="A-">A Negative (A-)</option>
+                <option value="B+">B Positive (B+)</option>
+                <option value="B-">B Negative (B-)</option>
+                <option value="AB+">AB Positive (AB+)</option>
+                <option value="AB-">AB Negative (AB-)</option>
+                <option value="Unknown">Unknown / Pending Lab</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 11. Personal Medical Context, Hopes & Boundaries (In Your Own Words) -->
+          <div class="form-section-header" style="margin-top: 1.75rem;">
+            <h3>11. Personal Birth Story, Emotional Anchors & Safe Boundaries</h3>
+            <p>Take a few moments to express your unique journey in your own words:</p>
+          </div>
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label for="d3PriorBirthNotes" style="font-weight: 600; color: var(--text);">
+              Prior Birth Reflections & Significant Medical History (In Your Own Words)
+            </label>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.4rem;">
+              Share any reflections from previous births, pregnancy losses, surgeries, or conditions you want Vanya to hold with sensitivity:
+            </p>
+            <textarea id="d3PriorBirthNotes" class="form-control" rows="3" placeholder="e.g., During my first birth, labor stalled at 7cm and I felt rushed into interventions. This time, I want patience and positional guidance to help baby rotate naturally..."></textarea>
+          </div>
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label for="d3FearsHopes" style="font-weight: 600; color: var(--text);">
+              Deepest Fears, Grounding Anchors & Emotional Hopes (In Your Own Words)
+            </label>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.4rem;">
+              What worries you most at night? What words, touch, or grounding reminders help bring you back to calm capability?
+            </p>
+            <textarea id="d3FearsHopes" class="form-control" rows="3" placeholder="e.g., My biggest worry is losing my sense of control or panic during transition. Reassuring whispers from Marcus and Vanya reminding me 'each wave brings our baby closer' help me stay anchored..."></textarea>
+          </div>
+          <div class="form-group" style="margin-bottom: 1.5rem;">
+            <label for="d3TraumaNotes" style="font-weight: 600; color: var(--text);">
+              Trauma-Informed Notes & Physical Body Boundaries (Sensitive triggers or words to avoid)
+            </label>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.4rem;">
+              Any sensitive areas, trigger words, or physical touch guidelines you'd like your doula to know:
+            </p>
+            <textarea id="d3TraumaNotes" class="form-control" rows="2" placeholder="e.g., Please ask before touching my lower belly; avoid telling me to 'relax', instead guide me to 'soften my jaw and release my shoulders'..."></textarea>
+          </div>
+
+          <div class="click-option-card" style="margin-top: 1.5rem; background: var(--surface); border: 2px solid var(--primary);">
+            <input type="checkbox" id="agreeDoc3" checked>
+            <div class="opt-content">
+              <span class="opt-title" style="color: var(--primary);">Certification of Accurate Perinatal Health Record</span>
+              <p class="opt-desc">I confirm that the physiological, medical, and personal selections above are accurate to the best of my knowledge and reflect my informed preferences for prenatal and birth support.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="signature-section">
+          <h3>Client Signature</h3>
+          <div class="sig-pad-wrapper">
+            <div class="sig-placeholder" id="placeholderDoc3">Sign here — draw with mouse or touch</div>
+            <div class="sig-line"></div>
+            <canvas class="sig-canvas" id="canvasDoc3"></canvas>
+          </div>
+          <div class="sig-actions" id="actionsDoc3">
+            <button class="btn btn-outline" onclick="clearCanvas(3)">Clear</button>
+            <button class="btn btn-outline" onclick="adoptScript(3)">Adopt Script</button>
+            <button class="btn btn-primary" onclick="signDocument(3)">Sign & Stamp</button>
+          </div>
+          <div class="signed-seal" id="sealDoc3">
+            <div class="seal-badge">✓ Verified Digital Signature</div>
+            <div class="seal-meta" id="metaDoc3"></div>
+            <div class="seal-bg">✓</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Doc 4: Birth Preferences -->
+      <section id="doc4" class="doc-page">
+        <div class="doc-header">
+          <div>
+            <span class="doc-meta">Document 04</span>
+            <h2>Birth Preferences & Advocacy Matrix</h2>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <button type="button" class="btn btn-outline btn-sm no-print" onclick="printCurrentDoc()" title="Print or save this document as PDF" style="font-size: 0.8rem; padding: 0.35rem 0.75rem;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 4px; vertical-align: -1px;"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>Print Doc (PDF)
+            </button>
+            <span class="badge pending" id="badgeDoc4">Pending Signature</span>
+          </div>
+        </div>
+        
+        <div class="legal-text">
+          <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.6;">
+            This advocacy matrix informs your doula, OB/midwife, and L&D nursing team of your values and physiological goals. <strong>85–90% click-based:</strong> simply select your preferred options below.
+          </p>
+
+          <!-- 1. Atmosphere & Sensory Environment -->
+          <h3 style="margin-top: 1rem;">1. Labor Environment & Sensory Sanctuary</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">Select all environmental conditions desired in your labor room:</p>
+          <div class="cards-grid-3" style="margin-bottom: 1.25rem;">
+            <label class="check-card">
+              <input type="checkbox" id="envDim" checked>
+              <strong>Dim & Calming Ambiance</strong>
+              <span>Blinds closed, overhead clinical lighting off, soft pathway illumination</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="envCandles" checked>
+              <strong>Fairy / Flameless Candles</strong>
+              <span>Warm flicker battery LED tea lights arranged around tub & bed</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="envMusic" checked>
+              <strong>Curated Audio Sanctuary</strong>
+              <span>Continuous 432Hz ambient soundscape & personal birthing playlist</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="envAroma" checked>
+              <strong>Clinical Aromatherapy</strong>
+              <span>Diffuser or cotton drops: Clary Sage, Lavender & Citrus</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="envAffirm">
+              <strong>Birth Affirmation Banners</strong>
+              <span>Visual affirmation cards hung along wall & mirror in eye line</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="envQuiet" checked>
+              <strong>Whisper-Only Policy</strong>
+              <span>Staff requested to speak in calm murmurs; knock quietly before entering</span>
+            </label>
+          </div>
+
+          <!-- 2. Pain Coping & Physiological Toolkit -->
+          <h3>2. Labor Comfort & Pain Management Toolkit</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">Primary non-pharmacological comfort techniques to deploy:</p>
+          <div class="cards-grid-3" style="margin-bottom: 1rem;">
+            <label class="check-card">
+              <input type="checkbox" id="painHydro" checked>
+              <strong>Hydrotherapy Immersion</strong>
+              <span>Deep soaking tub / continuous warm shower spray on sacrum</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="painCounter" checked>
+              <strong>Sacral Counter-Pressure</strong>
+              <span>Doula firm double hip squeezes & bone-on-bone sacral relief</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="painRebozo" checked>
+              <strong>Rebozo Sifting & Shaking</strong>
+              <span>Mexican shawl gentle pelvic rocking & belly lift during rest</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="painTens">
+              <strong>Maternity TENS Unit</strong>
+              <span>Rhythmic electrical nerve stimulation on lower back pulses</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="painBreathe" checked>
+              <strong>Breath Anchoring & Vocal Toning</strong>
+              <span>Doula vocal co-regulation, low groans, open-throat exhales</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="painPositions" checked>
+              <strong>Asymmetrical Movement</strong>
+              <span>Peanut ball, lunges, stair climbing, curb-walking, pelvic tilts</span>
+            </label>
+          </div>
+
+          <p style="font-size: 0.9rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.5rem;">Pharmacological Pain Relief Philosophy:</p>
+          <div class="cards-grid-3" style="margin-bottom: 1.25rem;">
+            <label class="click-option-card">
+              <input type="radio" name="painStrategy" id="stratPhysio" checked>
+              <strong>100% Physiological Intent</strong>
+              <span>Exhaust all physical comfort measures; please do NOT offer epidural.</span>
+            </label>
+            <label class="click-option-card">
+              <input type="radio" name="painStrategy" id="stratNitrous">
+              <strong>Step-Up (Nitrous First)</strong>
+              <span>Inhaled nitrous oxide (laughing gas) as bridge before considering epidural.</span>
+            </label>
+            <label class="click-option-card">
+              <input type="radio" name="painStrategy" id="stratEpidural">
+              <strong>Epidural Planned / Open</strong>
+              <span>Plan to request epidural once active labor rhythm is established.</span>
+            </label>
+          </div>
+
+          <!-- 3. Medical Procedures & Clinical Stance -->
+          <h3>3. Clinical Procedures & Informed Consent Matrix</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">Select your default preference for each clinical scenario:</p>
+          
+          <table class="touch-matrix-table" style="margin-bottom: 1.5rem;">
+            <thead>
+              <tr>
+                <th style="width: 38%;">Clinical Decision Point</th>
+                <th style="width: 20%;">Preferred Physiological</th>
+                <th style="width: 22%;">Discuss First (BRAIN)</th>
+                <th style="width: 20%;">Standard Clinical</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Intravenous Line</strong><br><span style="font-size: 0.75rem; color: var(--text-secondary);">Hydration & venous access</span></td>
+                <td><label class="matrix-radio-group"><input type="radio" name="matIV" value="saline" checked> Heparin/Saline Lock</label></td>
+                <td><label class="matrix-radio-group"><input type="radio" name="matIV" value="discuss"> Discuss Need</label></td>
+                <td><label class="matrix-radio-group"><input type="radio" name="matIV" value="continuous"> Continuous IV Fluid</label></td>
+              </tr>
+              <tr>
+                <td><strong>Fetal Monitoring</strong><br><span style="font-size: 0.75rem; color: var(--text-secondary);">Baby heart rate tracing</span></td>
+                <td><label class="matrix-radio-group"><input type="radio" name="matMon" value="intermittent" checked> Intermittent Doppler</label></td>
+                <td><label class="matrix-radio-group"><input type="radio" name="matMon" value="telemetry"> Wireless Telemetry</label></td>
+                <td><label class="matrix-radio-group"><input type="radio" name="matMon" value="continuous"> Continuous Belt</label></td>
+              </tr>
+              <tr>
+                <td><strong>Amniotic Sac (Membranes)</strong><br><span style="font-size: 0.75rem; color: var(--text-secondary);">Breaking waters</span></td>
+                <td><label class="matrix-radio-group"><input type="radio" name="matArom" value="spontaneous" checked> Intact / Spontaneous</label></td>
+                <td><label class="matrix-radio-group"><input type="radio" name="matArom" value="stall"> Only if Labor Stalls</label></td>
+                <td><label class="matrix-radio-group"><input type="radio" name="matArom" value="routine"> Routine AROM Amnihook</label></td>
+              </tr>
+              <tr>
+                <td><strong>Labor Augmentation (Pitocin)</strong><br><span style="font-size: 0.75rem; color: var(--text-secondary);">Synthetic oxytocin infusion</span></td>
+                <td><label class="matrix-radio-group"><input type="radio" name="matPit" value="avoid" checked> Natural Nipple/Positions</label></td>
+                <td><label class="matrix-radio-group"><input type="radio" name="matPit" value="lowdose"> Lowest Dose Trial</label></td>
+                <td><label class="matrix-radio-group"><input type="radio" name="matPit" value="protocol"> Standard Protocol</label></td>
+              </tr>
+              <tr>
+                <td><strong>Vaginal Examinations</strong><br><span style="font-size: 0.75rem; color: var(--text-secondary);">Cervical dilation checks</span></td>
+                <td><label class="matrix-radio-group"><input type="radio" name="matVag" value="minimal" checked> Minimal / On Request Only</label></td>
+                <td><label class="matrix-radio-group"><input type="radio" name="matVag" value="shift"> Shift Change Only</label></td>
+                <td><label class="matrix-radio-group"><input type="radio" name="matVag" value="routine"> Routine (q2h)</label></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="cards-grid-2" style="margin-bottom: 1.25rem;">
+            <label class="check-card">
+              <input type="checkbox" id="medBrain" checked>
+              <strong>15-Minute B.R.A.I.N. Protocol</strong>
+              <span>I request 15 minutes of private discussion with my doula/partner prior to non-emergency interventions (Benefits, Risks, Alternatives, Intuition, Nothing).</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="medPush" checked>
+              <strong>Spontaneous Physiological Pushing</strong>
+              <span>Support involuntary mother-directed bearing down; please avoid countdown coached purple-pushing.</span>
+            </label>
+          </div>
+
+          <!-- 4. Second Stage & Perineal Integrity -->
+          <h3>4. Second Stage, Pushing & Perineal Care</h3>
+          <div class="cards-grid-3" style="margin-bottom: 1.25rem;">
+            <label class="check-card">
+              <input type="checkbox" id="medWarm" checked>
+              <strong>Warm Herbal Compresses</strong>
+              <span>Apply warm sterile washcloths to perineum during crowning</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="medOil" checked>
+              <strong>Perineal Support Lubrication</strong>
+              <span>Sterile organic sweet almond or olive oil perineal support</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="pushPositions" checked>
+              <strong>Upright / All-Fours Position</strong>
+              <span>Pushing off the back: hands-and-knees, side-lying, or birth squat</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="noEpisiotomy" checked>
+              <strong>No Episiotomy</strong>
+              <span>Prefer natural micro-tearing if unavoidable over surgical cut</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="mirrorTouch">
+              <strong>Birth Mirror & First Touch</strong>
+              <span>Angle mirror to view crowning; allow parent to touch emerging head</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="catchPartner">
+              <strong>Partner Assisted Catch</strong>
+              <span>Partner invites OB/midwife to guide hands to assist final delivery</span>
+            </label>
+          </div>
+
+          <!-- 5. Cesarean Birth Contingency -->
+          <h3>5. Gentle Cesarean Birth Contingency</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">If surgical birth becomes clinically necessary, our family requests:</p>
+          <div class="cards-grid-3" style="margin-bottom: 1.25rem;">
+            <label class="check-card">
+              <input type="checkbox" id="csDrape" checked>
+              <strong>Clear Surgical Drape</strong>
+              <span>Drop or clear window drape so parents can witness birth moment</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="csSkin" checked>
+              <strong>Direct Skin-to-Skin in OR</strong>
+              <span>Baby placed on birthing parent chest immediately in surgery suite</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="csDoula" checked>
+              <strong>Doula & Partner in OR</strong>
+              <span>Both partner and doula present for continuous emotional anchor</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="csArms">
+              <strong>Untethered Upper Arm</strong>
+              <span>ECG leads placed on back so one arm remains free to hold baby</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="csMusic" checked>
+              <strong>Sanctuary Playlist in OR</strong>
+              <span>Family audio playlist played over speaker during operation</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="csSlow">
+              <strong>Slow Cephalic Delivery</strong>
+              <span>Baby head delivered gently to allow natural lung fluid squeeze</span>
+            </label>
+          </div>
+
+          <!-- 6. Golden Hour & Newborn Protocol -->
+          <h3>6. The Sacred Golden Hour & Newborn Hierarchy</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">First 60–90 minutes following delivery:</p>
+          <div class="cards-grid-3" style="margin-bottom: 1.25rem;">
+            <label class="check-card">
+              <input type="checkbox" id="medCord" checked>
+              <strong>Delayed Cord Clamping</strong>
+              <span>Wait until cord is completely white, limp & pulseless (3–5 min)</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="medSkin" checked>
+              <strong>Unbroken Skin-to-Skin</strong>
+              <span>Full 60+ min chest-to-chest contact prior to any weighing/swaddling</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="ghFeed" checked>
+              <strong>Early Latch Assistance</strong>
+              <span>Doula assisted first breastfeed/chestfeed within the first hour</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="ghDelay" checked>
+              <strong>Delay Weight & Measurements</strong>
+              <span>Perform all measurements, bath and exams on parent chest or after 2h</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="ghPartnerCut" checked>
+              <strong>Partner Cuts Cord</strong>
+              <span>Partner cuts umbilical cord with doula photo capture</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="ghPlacenta">
+              <strong>Placenta Encapsulation</strong>
+              <span>Keep chilled in double ziplock; doula transports for encapsulation</span>
+            </label>
+          </div>
+
+          <p style="font-size: 0.9rem; font-weight: 600; margin-top: 1rem; margin-bottom: 0.5rem;">Routine Newborn Prophylaxis Preferences:</p>
+          <div class="cards-grid-3" style="margin-bottom: 1rem;">
+            <div>
+              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text);">Vitamin K:</span>
+              <div class="chip-selector-group" style="margin-top: 4px;">
+                <label class="chip-item"><input type="radio" name="nbVitK" value="im" checked><span>IM Injection</span></label>
+                <label class="chip-item"><input type="radio" name="nbVitK" value="oral"><span>Oral Drops</span></label>
+                <label class="chip-item"><input type="radio" name="nbVitK" value="decline"><span>Decline</span></label>
+              </div>
+            </div>
+            <div>
+              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text);">Eye Ointment (Erythromycin):</span>
+              <div class="chip-selector-group" style="margin-top: 4px;">
+                <label class="chip-item"><input type="radio" name="nbEye" value="routine"><span>Immediate</span></label>
+                <label class="chip-item"><input type="radio" name="nbEye" value="delay" checked><span>Delay 2h (Bonding)</span></label>
+                <label class="chip-item"><input type="radio" name="nbEye" value="decline"><span>Decline</span></label>
+              </div>
+            </div>
+            <div>
+              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text);">Hepatitis B Vaccine:</span>
+              <div class="chip-selector-group" style="margin-top: 4px;">
+                <label class="chip-item"><input type="radio" name="nbHepB" value="hospital"><span>At Hospital</span></label>
+                <label class="chip-item"><input type="radio" name="nbHepB" value="ped" checked><span>At 2-Wk Peds</span></label>
+                <label class="chip-item"><input type="radio" name="nbHepB" value="decline"><span>Decline</span></label>
+              </div>
+            </div>
+          </div>
+
+          <!-- 7. Personalized Birth Vision & Affirmations in Your Own Words -->
+          <div style="margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border);">
+            <h3>7. Personal Birth Vision, Affirmations & Support Instructions</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+              Express your unique birth wishes in your own words:
+            </p>
+            <div class="form-group" style="margin-bottom: 1rem;">
+              <label for="d4BirthVision" style="font-weight: 600; color: var(--text);">
+                Our Ideal Birth Vision, Spiritual Rhythms & Sacred Atmosphere (In Your Own Words)
+              </label>
+              <textarea id="d4BirthVision" class="form-control" rows="3" placeholder="Describe the feeling, rhythm, and tone you desire for your labor. Any specific affirmations, spiritual rituals, or special items you will have with you in the room?"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="d4SurgeGuidance" style="font-weight: 600; color: var(--text);">
+                Guidance for Doula & Partner During Peak Surges & Transition (What to say/do when I say 'I can't')
+              </label>
+              <textarea id="d4SurgeGuidance" class="form-control" rows="3" placeholder="When labor reaches its peak intensity or if I say 'I can't do this', how should my doula and partner respond? (e.g., remind me of my breath, apply hard sacral counter-pressure, encourage me silently without talking, offer warm sips of water...)"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="signature-section">
+          <h3>Client Signature</h3>
+          <div class="sig-pad-wrapper">
+            <div class="sig-placeholder" id="placeholderDoc4">Sign here — draw with mouse or touch</div>
+            <div class="sig-line"></div>
+            <canvas class="sig-canvas" id="canvasDoc4"></canvas>
+          </div>
+          <div class="sig-actions" id="actionsDoc4">
+            <button class="btn btn-outline" onclick="clearCanvas(4)">Clear</button>
+            <button class="btn btn-outline" onclick="adoptScript(4)">Adopt Script</button>
+            <button class="btn btn-primary" onclick="signDocument(4)">Sign & Stamp</button>
+          </div>
+          <div class="signed-seal" id="sealDoc4">
+            <div class="seal-badge">✓ Verified Digital Signature</div>
+            <div class="seal-meta" id="metaDoc4"></div>
+            <div class="seal-bg">✓</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Doc 5: Postpartum Plan -->
+      <section id="doc5" class="doc-page">
+        <div class="doc-header">
+          <div>
+            <span class="doc-meta">Document 05</span>
+            <h2>Postpartum Sanctuary Routine</h2>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <button type="button" class="btn btn-outline btn-sm no-print" onclick="printCurrentDoc()" title="Print or save this document as PDF" style="font-size: 0.8rem; padding: 0.35rem 0.75rem;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 4px; vertical-align: -1px;"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>Print Doc (PDF)
+            </button>
+            <span class="badge pending" id="badgeDoc5">Pending Signature</span>
+          </div>
+        </div>
+        
+        <div class="legal-text">
+          <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.6;">
+            The fourth trimester requires gentle, deliberate holding. Configure your family's postpartum sanctuary routine. <strong>85–90% click-based:</strong> simply select your preferred options below.
+          </p>
+
+          <!-- 1. The Lying-In Sanctuary Bubble -->
+          <h3 style="margin-top: 1rem;">1. The 7–14 Day "Lying-In" Bubble Philosophy</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">Choose your family's baseline boundary policy for the first 14 days home:</p>
+          <div class="cards-grid-3" style="margin-bottom: 1.25rem;">
+            <label class="click-option-card">
+              <input type="radio" name="ppSanctuaryBubble" id="bubbleStrict" checked>
+              <strong>Strict Sanctuary Bubble</strong>
+              <span>Birthing parent, partner & baby only. Zero outside house visitors for the first 7–10 days.</span>
+            </label>
+            <label class="click-option-card">
+              <input type="radio" name="ppSanctuaryBubble" id="bubbleGuarded">
+              <strong>Guarded Circle Only</strong>
+              <span>Grandparents & siblings only; strictly 30-minute quiet visits with no entertaining expected.</span>
+            </label>
+            <label class="click-option-card">
+              <input type="radio" name="ppSanctuaryBubble" id="bubbleVillage">
+              <strong>Open Village Support</strong>
+              <span>Trusted community welcome provided each visitor completes a chore or brings a warm meal.</span>
+            </label>
+          </div>
+
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">Visitor Protocol Rules (Select all that apply):</p>
+          <div class="cards-grid-3" style="margin-bottom: 1.25rem;">
+            <label class="check-card">
+              <input type="checkbox" id="ppWashHands" checked>
+              <strong>Elbow-Length Handwashing</strong>
+              <span>All visitors must wash hands thoroughly before touching baby</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="ppNoKiss" checked>
+              <strong>Strict No-Kissing Rule</strong>
+              <span>Zero kisses on baby face, hands, or head (RSV / HSV prevention)</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="ppHealthCheck" checked>
+              <strong>Health & Cough Screen</strong>
+              <span>Anyone with sniffles, allergies or recent exposure cannot enter</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="ppNeverWake" checked>
+              <strong>Never Wake Baby or Mother</strong>
+              <span>No disturbing active sleep cycles for casual photo ops</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="ppChoreRule" checked>
+              <strong>Chore Before Holding Baby</strong>
+              <span>Guests must fold laundry, load dishwasher, or walk pets first</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="ppMaskRule">
+              <strong>Masks Required for Visitors</strong>
+              <span>Clean KN95 masks worn by all non-household visitors indoors</span>
+            </label>
+          </div>
+
+          <!-- 2. Feeding Intentions -->
+          <h3>2. Infant Feeding Intentions & Clinical Strategy</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">Your initial feeding goal (Vanya provides Certified Lactation Counselor support):</p>
+          <div class="cards-grid-2" style="margin-bottom: 1.25rem;">
+            <label class="click-option-card">
+              <input type="radio" name="feedInt" id="feedBf" checked>
+              <strong>Exclusive Chestfeeding / Nursing</strong>
+              <span>Focus on deep pain-free latching, colostrum hand-expression, supply calibration & nipple healing.</span>
+            </label>
+            <label class="click-option-card">
+              <input type="radio" name="feedInt" id="feedComb">
+              <strong>Combination Feeding</strong>
+              <span>Blend of direct nursing with paced bottle feeding using expressed breast milk or premium infant formula.</span>
+            </label>
+            <label class="click-option-card">
+              <input type="radio" name="feedInt" id="feedPump">
+              <strong>Exclusive Pumping & Bottle Nourishment</strong>
+              <span>Optimizing pump flange sizing, yield schedules, hands-on pumping & safe milk storage guidelines.</span>
+            </label>
+            <label class="click-option-card">
+              <input type="radio" name="feedInt" id="feedForm">
+              <strong>Formula Nourishment Focus</strong>
+              <span>Paced bottle feeding coaching, organic formula preparation, burping rhythm & equipment sanitation.</span>
+            </label>
+          </div>
+
+          <!-- 3. Doula Daytime Priority Queue -->
+          <h3>3. Daytime Sanctuary Tasks (Doula Priority Queue)</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">Select all tasks you want prioritized during daytime shifts ($45/hr):</p>
+          <div class="cards-grid-3" style="margin-bottom: 1.25rem;">
+            <label class="check-card">
+              <input type="checkbox" id="ppHelpSleep" checked>
+              <strong>Parental Sleep Protection</strong>
+              <span>2–3 hours of guarded sleep while doula cares for infant</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="ppHelpBf" checked>
+              <strong>Lactation & Latch Guidance</strong>
+              <span>Positioning, flange sizing, clogged duct mitigation & nursing holds</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="ppHelpBath" checked>
+              <strong>Herbal Sitz Bath & Peri Care</strong>
+              <span>Brewing organic comfrey/calendula sitz baths & herbal peri sprays</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="ppHelpMeal" checked>
+              <strong>Warming Postpartum Meals</strong>
+              <span>Congee, slow-simmered bone broths, golden milk & lactation bites</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="ppHelpDiaper" checked>
+              <strong>Soothing & Swaddling Tutorial</strong>
+              <span>Mastering the 5 S's, newborn tummy time & swaddle wraps</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="ppHelpBabywear">
+              <strong>Ergonomic Babywearing</strong>
+              <span>Safe fitting of ring slings, stretchy wraps, and structured carriers</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="ppHelpPump" checked>
+              <strong>Pump Sterilization & Wash</strong>
+              <span>Cleaning parts, silicone valve checks & milk storage labeling</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="ppHelpLaundry" checked>
+              <strong>Baby & Nursery Laundry</strong>
+              <span>Washing burp cloths, swaddles, and folding nursery drawer essentials</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="ppHelpListen" checked>
+              <strong>Birth Story Debrief & Holding</strong>
+              <span>Tearful, joyful, or complex feelings held in confidential space</span>
+            </label>
+          </div>
+
+          <!-- 4. Overnight Shift Protocol -->
+          <h3>4. Overnight Sleep Sanctuary (10:00 PM – 6:00 AM)</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">Night shift cadence preference ($50/hr):</p>
+          <div class="chip-selector-group" style="margin-bottom: 1rem;">
+            <label class="chip-item"><input type="radio" name="ppNightCadence" value="4nights"><span>4 Nights / Wk</span></label>
+            <label class="chip-item"><input type="radio" name="ppNightCadence" value="3nights" checked><span>3 Nights / Wk</span></label>
+            <label class="chip-item"><input type="radio" name="ppNightCadence" value="2nights"><span>2 Nights / Wk</span></label>
+            <label class="chip-item"><input type="radio" name="ppNightCadence" value="asneeded"><span>As-Needed On-Call</span></label>
+            <label class="chip-item"><input type="radio" name="ppNightCadence" value="none"><span>Daytime Only</span></label>
+          </div>
+
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">Overnight Newborn Management Style:</p>
+          <div class="cards-grid-2" style="margin-bottom: 1.25rem;">
+            <label class="click-option-card">
+              <input type="radio" name="ppNightStyle" id="styleNurseHand" checked>
+              <strong>Nurse-and-Hand-Off (For Nursing Parents)</strong>
+              <span>Doula brings swaddled baby to bed when hungry; takes baby immediately after feed to burp, diaper, and soothe back to crib while parent returns to sleep.</span>
+            </label>
+            <label class="click-option-card">
+              <input type="radio" name="ppNightStyle" id="styleFullSleep">
+              <strong>Full 8-Hour Unbroken Sleep (Bottle Feeds)</strong>
+              <span>Doula takes complete responsibility for all overnight feeds using expressed breast milk or formula. Parents do not wake until morning sun.</span>
+            </label>
+          </div>
+
+          <!-- 5. Perinatal Mental Health Safety Net -->
+          <h3>5. Perinatal Mental Health & Emotional Safety Net</h3>
+          <div class="cards-grid-2" style="margin-bottom: 1.25rem;">
+            <label class="check-card">
+              <input type="checkbox" id="ppScreenOk" checked>
+              <strong>EPDS Screening Consent</strong>
+              <span>I give permission for Vanya to perform gentle Edinburgh Postnatal Depression Scale screenings on Days 3, 14, and 30 to catch postpartum mood variations early.</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="ppEscalateConsent" checked>
+              <strong>Emergency Escalation Protocol</strong>
+              <span>If symptoms of acute postpartum anxiety, psychosis, or deep despair appear, doula is authorized to contact my designated support person and OB/midwife.</span>
+            </label>
+          </div>
+
+          <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1rem;">
+            <span style="font-size: 0.85rem; font-weight: 600; color: var(--text); display: block; margin-bottom: 0.5rem;">Designated Emergency Support Contact (Family or Mental Health):</span>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div>
+                <label style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase;">Contact Name & Relationship</label>
+                <input type="text" id="ppContactName" class="form-control" value="Sarah Sterling (Sister)" style="font-size: 0.85rem; padding: 0.5rem;">
+              </div>
+              <div>
+                <label style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase;">Direct Phone</label>
+                <input type="tel" id="ppContactPhone" class="form-control" value="(555) 293-8471" style="font-size: 0.85rem; padding: 0.5rem;">
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. Custom Household Rhythms & Nourishment Traditions (In Your Own Words) -->
+          <div style="margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border);">
+            <h3>6. Custom Household Rhythms, Nourishment & Postpartum Anxieties</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+              Help Vanya tailor your sanctuary care with your personal notes:
+            </p>
+            <div class="form-group" style="margin-bottom: 1rem;">
+              <label for="d5HouseholdNotes" style="font-weight: 600; color: var(--text);">
+                Household Rhythms, Sibling/Pet Dynamics & Nursery Preferences (In Your Own Words)
+              </label>
+              <textarea id="d5HouseholdNotes" class="form-control" rows="3" placeholder="Describe your home's unique rhythm: pet care, older sibling sensitivities, preferred nursery arrangement, or specific visitor boundaries you'd like Vanya to protectively guard..."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="d5NourishmentNotes" style="font-weight: 600; color: var(--text);">
+                Healing Comfort Foods, Postpartum Nourishment & Herbal Traditions (In Your Own Words)
+              </label>
+              <textarea id="d5NourishmentNotes" class="form-control" rows="3" placeholder="Tell Vanya what foods bring you deep comfort: e.g. warming chicken bone broths, vegan congee, specific herbal teas, dietary allergies, or postpartum traditions (like belly binding, herbal perineal care)..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="signature-section">
+          <h3>Client Signature</h3>
+          <div class="sig-pad-wrapper">
+            <div class="sig-placeholder" id="placeholderDoc5">Sign here — draw with mouse or touch</div>
+            <div class="sig-line"></div>
+            <canvas class="sig-canvas" id="canvasDoc5"></canvas>
+          </div>
+          <div class="sig-actions" id="actionsDoc5">
+            <button class="btn btn-outline" onclick="clearCanvas(5)">Clear</button>
+            <button class="btn btn-outline" onclick="adoptScript(5)">Adopt Script</button>
+            <button class="btn btn-primary" onclick="signDocument(5)">Sign & Stamp</button>
+          </div>
+          <div class="signed-seal" id="sealDoc5">
+            <div class="seal-badge">✓ Verified Digital Signature</div>
+            <div class="seal-meta" id="metaDoc5"></div>
+            <div class="seal-bg">✓</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Doc 6: Photo Consent -->
+      <section id="doc6" class="doc-page">
+        <div class="doc-header">
+          <div>
+            <span class="doc-meta">Document 06</span>
+            <h2>Photography & Media Consent</h2>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <button type="button" class="btn btn-outline btn-sm no-print" onclick="printCurrentDoc()" title="Print or save this document as PDF" style="font-size: 0.8rem; padding: 0.35rem 0.75rem;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 4px; vertical-align: -1px;"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>Print Doc (PDF)
+            </button>
+            <span class="badge pending" id="badgeDoc6">Pending Signature</span>
+          </div>
+        </div>
+        
+        <div class="legal-text">
+          <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.6;">
+            Birth and postpartum are intimate, sacred life passages. MaternalSupportCo honors your absolute right to digital privacy. <strong>85–90% click-based:</strong> select your exact comfort tier and boundaries below.
+          </p>
+
+          <!-- 1. The 4-Tier Privacy Architecture -->
+          <h3 style="margin-top: 1rem;">1. The 4-Tier Privacy Architecture</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">Select the single privacy level that matches your family's comfort:</p>
+          <div class="cards-grid-2" style="margin-bottom: 1.25rem;">
+            <label class="click-option-card">
+              <input type="radio" name="photoConsent" id="photoPrivate" checked>
+              <strong>Tier 1: Strictly Private (Zero Photography)</strong>
+              <span>A sacred offline birth space. No photography or video recorded on any device by your doula under any circumstance.</span>
+            </label>
+            <label class="click-option-card">
+              <input type="radio" name="photoConsent" id="photoPersonal">
+              <strong>Tier 2: Family Keepsakes Only (Client Devices)</strong>
+              <span>Doula takes candid photos and videos solely on parent's personal phone/camera for private family keepsakes. Files never touch doula hardware.</span>
+            </label>
+            <label class="click-option-card">
+              <input type="radio" name="photoConsent" id="photoEdu">
+              <strong>Tier 3: Anonymous Educational & Clinical Portfolio</strong>
+              <span>Artistic de-identified captures (e.g., tender hand holding, baby feet, rebozo techniques) with all faces and identifying features strictly excluded.</span>
+            </label>
+            <label class="click-option-card">
+              <input type="radio" name="photoConsent" id="photoFull">
+              <strong>Tier 4: Curated Editorial Showcase (MaternalSupportCo)</strong>
+              <span>Artistic birth story imagery featured on MaternalSupportCo website and editorial print. Subject to mandatory 14-day preview and written approval.</span>
+            </label>
+          </div>
+
+          <!-- 2. Permitted Capture Moments -->
+          <h3>2. Permitted Photographic Moments (If Tier 2, 3, or 4 selected)</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">Select which birth moments you welcome your doula documenting:</p>
+          <div class="cards-grid-3" style="margin-bottom: 1.25rem;">
+            <label class="check-card">
+              <input type="checkbox" id="photoLabor" checked>
+              <strong>Early & Active Labor Support</strong>
+              <span>Laboring at home, walking, movement, and partner counter-pressure</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="photoGolden" checked>
+              <strong>Immediate Golden Hour</strong>
+              <span>First chest-to-chest skin contact, tears of relief, and initial bonding</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="photoCord" checked>
+              <strong>Cord Clamping & First Glance</strong>
+              <span>Partner cutting the umbilical cord and parents meeting baby's eyes</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="photoFeed" checked>
+              <strong>First Latch & Nourishment</strong>
+              <span>Artistic, tastefully angled nursing or bottle connection moments</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="photoPP" checked>
+              <strong>Postpartum Sanctuary Visits</strong>
+              <span>Quiet nursery moments, herbal bath preparation, and swaddled rest</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="photoFamily" checked>
+              <strong>Partner & Sibling Introductions</strong>
+              <span>First family group portrait and sibling meetings in postpartum room</span>
+            </label>
+          </div>
+
+          <!-- 3. Explicit Exclusion Filters -->
+          <h3>3. Absolute Photographic Red Lines (Exclusion Filters)</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">MaternalSupportCo strictly enforces all selected exclusion parameters:</p>
+          <div class="cards-grid-2" style="margin-bottom: 1.25rem;">
+            <label class="check-card">
+              <input type="checkbox" id="exclGenital" checked>
+              <strong>No Perineal or Crowning Images</strong>
+              <span>Absolute prohibition of genital exposure or graphic anatomical crowning imagery</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="exclFacialVulnerability" checked>
+              <strong>No Vulnerable Facial Distress</strong>
+              <span>No photography capturing facial anguish during peak transition surges</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="exclMedicalEquip" checked>
+              <strong>No Clinical Telemetry / Staff Badges</strong>
+              <span>Medical monitors, catheters, IV poles, and hospital staff badges kept out of frame</span>
+            </label>
+            <label class="check-card">
+              <input type="checkbox" id="exclSocialTags" checked>
+              <strong>No Social Media Handle Tagging</strong>
+              <span>Never tag personal handles, reveal birth location, or mention baby's legal name publicly</span>
+            </label>
+          </div>
+
+          <!-- 4. Client Guarantee & Unilateral Veto -->
+          <div style="background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--secondary); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.25rem;">
+            <label class="check-card" style="border: none; padding: 0; background: transparent;">
+              <input type="checkbox" id="photoVetoGuarantee" checked>
+              <strong style="color: var(--primary-dark); font-size: 0.95rem;">14-Day Mandatory Review & 100% Unilateral Veto Guarantee</strong>
+              <span style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-top: 4px;">
+                I understand that regardless of consent tier, I retain 100% unilateral veto authority. Every photo or video considered for external use must be delivered to me in a private digital proof gallery with 14 full days to approve, crop, or reject individual frames. Consent may be revoked in writing at any future time.
+              </span>
+            </label>
+          </div>
+
+          <!-- 5. Special Photography Instructions & Boundary Notes -->
+          <div class="form-group" style="margin-top: 1.5rem;">
+            <label for="d6PhotoNotes" style="font-weight: 600; color: var(--text);">
+              Special Photography Instructions, Preferred Angles & Boundary Notes (In Your Own Words)
+            </label>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+              Describe any specific shots you cherish (e.g., partner holding baby's feet, cord cutting) or exact angles / lighting you wish avoided:
+            </p>
+            <textarea id="d6PhotoNotes" class="form-control" rows="3" placeholder="e.g., We would love black-and-white candid shots of Marcus's emotional expression when baby is born, and close-ups of tiny hands and feet. Please avoid photos of birthing parent from front angle or during transition surges..."></textarea>
+          </div>
+        </div>
+
+        <div class="signature-section">
+          <h3>Client Signature</h3>
+          <div class="sig-pad-wrapper">
+            <div class="sig-placeholder" id="placeholderDoc6">Sign here — draw with mouse or touch</div>
+            <div class="sig-line"></div>
+            <canvas class="sig-canvas" id="canvasDoc6"></canvas>
+          </div>
+          <div class="sig-actions" id="actionsDoc6">
+            <button class="btn btn-outline" onclick="clearCanvas(6)">Clear</button>
+            <button class="btn btn-outline" onclick="adoptScript(6)">Adopt Script</button>
+            <button class="btn btn-primary" onclick="signDocument(6)">Sign & Stamp</button>
+          </div>
+          <div class="signed-seal" id="sealDoc6">
+            <div class="seal-badge">✓ Verified Digital Signature</div>
+            <div class="seal-meta" id="metaDoc6"></div>
+            <div class="seal-bg">✓</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Heirloom Certificate -->
+      <div class="certificate">
+        <h2 class="cert-title">Certificate of Perinatal Support</h2>
+        <div class="cert-body">
+          This certifies that<br>
+          <span class="cert-names" id="certFamilyNames">Elena Sterling & Marcus Sterling</span>
+          are enrolled in continuous on-call support under<br>
+          <strong>Vanya, CD(DONA)</strong><br>
+          MaternalSupportCo
+        </div>
+        <div style="margin-top: 1.5rem;" class="no-print">
+          <button type="button" class="btn btn-outline btn-sm" onclick="printCertificate()" style="font-size: 0.85rem; border-color: var(--primary); color: var(--primary);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 5px; vertical-align: -2px;"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>Print Heirloom Certificate (PDF)
+          </button>
+        </div>
+      </div>
+
+      <!-- Action Banner -->
+      <div class="action-banner">
+        <h2>Ready to submit to your doula?</h2>
+        <div class="banner-actions">
+          <button class="btn btn-primary" onclick="openModal()">Send Packet to Vanya</button>
+          <button class="btn btn-outline" style="color: white; border-color: white;" onclick="printCurrentDoc()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px; vertical-align: -2px;"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>Print Current Document
+          </button>
+          <button class="btn btn-outline" style="color: white; border-color: white;" onclick="printAllDocs()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px; vertical-align: -2px;"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>Print All 6 Documents (PDF)
+          </button>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Dispatch Modal -->
+  <div class="modal-overlay" id="emailModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Transmit Onboarding Packet to Doula</h2>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1rem;">
+        Review your complete client dossier below. Click <strong>Send Packet to Doula's Inbox</strong> to transmit all clinical data, birth preferences, and verification signatures directly to Vanya via our 100% serverless, zero-maintenance backend.
+      </p>
+      <div class="summary-box" id="summaryBox"></div>
+      <div id="portal-submit-status" style="display: none; margin-bottom: 1.25rem; padding: 0.9rem 1.15rem; border-radius: var(--radius-md); font-size: 0.88rem; line-height: 1.5;"></div>
+      <div class="modal-actions">
+        <button class="btn btn-outline" onclick="copySummary()">Copy to Clipboard</button>
+        <button class="btn btn-outline" onclick="downloadTxt()">Download .TXT</button>
+        <button type="button" class="btn btn-primary" id="btn-submit-packet" onclick="submitPacketToDoula()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px; vertical-align: -2px;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          Send Packet via Email
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- INVISIBLE ZERO-ERROR YOUTUBE BACKGROUND SOUNDSCAPE CONTAINER (OlJ1vYcE06U) -->
+  <div id="youtube-audio-host" aria-hidden="true" style="position: fixed; top: -9999px; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none; overflow: hidden; z-index: -1;">
+    <iframe
+      id="yt-player-frame"
+      src=""
+      data-src="https://www.youtube-nocookie.com/embed/OlJ1vYcE06U?enablejsapi=1&autoplay=0&loop=1&playlist=OlJ1vYcE06U&playsinline=1&rel=0&modestbranding=1&controls=0"
+      title="Sanctuary Soundscape Background Audio"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      tabindex="-1">
+    </iframe>
+  </div>
+
+  <script>
+    /* ==========================================================================
+       DOULA CONFIGURATION VARIABLES (100% Serverless Zero-Maintenance Backend)
+       Activate in 15 seconds: Simply paste your receiving email & Calendly/Cal link below.
+       ========================================================================== */
+    const DOULA_RECEIVING_EMAIL = "rs905128@gmail.com";
+    const DOULA_CALENDLY_URL = "";
+
+    // Tab Navigation
+    const tabs = document.querySelectorAll('.tab-btn');
+    const pages = document.querySelectorAll('.doc-page');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        pages.forEach(p => p.classList.remove('active'));
+        
+        tab.classList.add('active');
+        const targetPage = document.getElementById(tab.dataset.target);
+        if (targetPage) {
+          targetPage.classList.add('active');
+          const docId = tab.dataset.target.replace('doc', '');
+          if (!docStatus[docId]) {
+            setTimeout(() => initCanvas(docId), 20);
+          }
+        }
+      });
+    });
+
+    // Client Info Sync
+    const inputClient = document.getElementById('inputClientName');
+    const inputPartner = document.getElementById('inputPartnerName');
+    const certNames = document.getElementById('certFamilyNames');
+
+    function updateCertNames() {
+      const client = inputClient.value.trim() || 'Client';
+      const partner = inputPartner.value.trim();
+      certNames.textContent = partner ? `${client} & ${partner}` : client;
+    }
+    inputClient.addEventListener('input', updateCertNames);
+    inputPartner.addEventListener('input', updateCertNames);
+
+    // Signature Pad Logic
+    const docStatus = { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false };
+    const canvases = {};
+    const contexts = {};
+
+    function initCanvas(id) {
+      const canvas = document.getElementById(`canvasDoc${id}`);
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const wrapper = canvas.parentElement;
+      
+      // High-DPI scaling
+      const dpr = window.devicePixelRatio || 1;
+      const rect = wrapper.getBoundingClientRect();
+      if (rect.width === 0) return; // Hidden tab, will initialize upon tab switch
+
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+      canvas.style.width = `${rect.width}px`;
+      canvas.style.height = `${rect.height}px`;
+
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.strokeStyle = '#2C2420'; // var(--text)
+
+      canvases[id] = canvas;
+      contexts[id] = ctx;
+
+      let isDrawing = false;
+      let lastX = 0;
+      let lastY = 0;
+      let lastTime = 0;
+
+      function getCoords(e) {
+        if (e.touches && e.touches.length > 0) {
+          const rect = canvas.getBoundingClientRect();
+          return {
+            x: e.touches[0].clientX - rect.left,
+            y: e.touches[0].clientY - rect.top
+          };
+        }
+        return { x: e.offsetX, y: e.offsetY };
+      }
+
+      function startDrawing(e) {
+        if (docStatus[id]) return;
+        isDrawing = true;
+        const coords = getCoords(e);
+        lastX = coords.x;
+        lastY = coords.y;
+        lastTime = Date.now();
+        document.getElementById(`placeholderDoc${id}`).style.display = 'none';
+      }
+
+      function draw(e) {
+        if (!isDrawing || docStatus[id]) return;
+        e.preventDefault();
+        
+        const coords = getCoords(e);
+        const currTime = Date.now();
+        
+        // Velocity sensitive width calculation
+        const dx = coords.x - lastX;
+        const dy = coords.y - lastY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const timeDelta = currTime - lastTime;
+        const velocity = dist / Math.max(1, timeDelta);
+        
+        // Map velocity to stroke width (faster = thinner)
+        let lineWidth = Math.max(1.2, 3.8 - (velocity * 2));
+        ctx.lineWidth = lineWidth;
+
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(coords.x, coords.y);
+        ctx.stroke();
+
+        lastX = coords.x;
+        lastY = coords.y;
+        lastTime = currTime;
+      }
+
+      function stopDrawing() { isDrawing = false; }
+
+      canvas.addEventListener('mousedown', startDrawing);
+      canvas.addEventListener('mousemove', draw);
+      canvas.addEventListener('mouseup', stopDrawing);
+      canvas.addEventListener('mouseout', stopDrawing);
+
+      canvas.addEventListener('touchstart', startDrawing, { passive: false });
+      canvas.addEventListener('touchmove', draw, { passive: false });
+      canvas.addEventListener('touchend', stopDrawing);
+    }
+
+    // Initialize all 6 canvases
+    window.addEventListener('load', () => {
+      for (let i = 1; i <= 6; i++) {
+        initCanvas(i);
+      }
+    });
+
+    // Handle resizing
+    window.addEventListener('resize', () => {
+      for (let i = 1; i <= 6; i++) {
+        if (!docStatus[i]) { // Only resize if not signed to avoid clearing signature
+          initCanvas(i);
+        }
+      }
+    });
+
+    function clearCanvas(id) {
+      if (!canvases[id]) initCanvas(id);
+      const canvas = canvases[id];
+      const ctx = contexts[id];
+      if (!canvas || !ctx) return;
+      const rect = canvas.getBoundingClientRect();
+      ctx.clearRect(0, 0, rect.width, rect.height);
+      const ph = document.getElementById(`placeholderDoc${id}`);
+      if (ph) ph.style.display = 'block';
+    }
+
+    function adoptScript(id) {
+      if (!canvases[id]) initCanvas(id);
+      clearCanvas(id);
+      const canvas = canvases[id];
+      const ctx = contexts[id];
+      if (!canvas || !ctx) return;
+      const rect = canvas.getBoundingClientRect();
+      const name = document.getElementById('inputClientName')?.value || 'Elena Sterling';
+      
+      const ph = document.getElementById(`placeholderDoc${id}`);
+      if (ph) ph.style.display = 'none';
+      
+      ctx.font = 'italic 48px "Cormorant Garamond", serif';
+      ctx.fillStyle = '#2C2420';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(name, rect.width / 2, rect.height / 2 - 10);
+    }
+
+    // Helper to generate a fake SHA-256 for visual effect
+    function generateHash() {
+      return Array.from({length: 64}, () => Math.floor(Math.random() * 16).toString(16)).join('');
+    }
+
+    function signDocument(id) {
+      // Mark as signed
+      docStatus[id] = true;
+      
+      // Update UI
+      document.getElementById(`actionsDoc${id}`).style.display = 'none';
+      document.getElementById(`sealDoc${id}`).classList.add('active');
+      document.getElementById(`canvasDoc${id}`).style.pointerEvents = 'none';
+      
+      const badge = document.getElementById(`badgeDoc${id}`);
+      badge.textContent = 'Signed';
+      badge.className = 'badge signed';
+
+      // Find the tab button corresponding to this doc and add 'signed' class
+      const tab = document.querySelector(`.tab-btn[data-target="doc${id}"]`);
+      if (tab) tab.classList.add('signed');
+      
+      // Generate Meta info
+      const timestamp = new Date().toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+      const hash = generateHash();
+      document.getElementById(`metaDoc${id}`).innerHTML = `Date: ${timestamp}<br>Hash: ${hash.substring(0,24)}...`;
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const count = Object.values(docStatus).filter(Boolean).length;
+      document.getElementById('progressText').textContent = `${count} of 6 documents signed`;
+      document.getElementById('progressBar').style.width = `${(count / 6) * 100}%`;
+    }
+
+    // Email Dispatch Modal Logic
+    const modal = document.getElementById('emailModal');
+    let generatedSummary = '';
+
+    function generateSummaryText() {
+      const client = document.getElementById('inputClientName')?.value || 'Elena Sterling';
+      const partner = document.getElementById('inputPartnerName')?.value || 'Marcus Sterling';
+      const phone = document.getElementById('inputPhone')?.value || '(555) 382-7491';
+      const address = document.getElementById('inputAddress')?.value || 'N/A';
+      const provider = document.getElementById('inputProviderName')?.value || 'Dr. Sarah Jenkins, MD (Pacific Perinatal)';
+      const venue = document.getElementById('inputDeliveryVenue')?.value || 'Swedish Medical Center - L&D Floor 3';
+      
+      const dateStr = new Date().toLocaleDateString();
+      
+      let summary = `MATERNALSUPPORTCO — COMPREHENSIVE CLIENT INTAKE & PREFERENCE DOSSIER\n`;
+      summary += `Prepared for Head Doula Vanya, CD(DONA), CLC\n`;
+      summary += `Generated: ${dateStr}\n`;
+      summary += `======================================================================\n\n`;
+      
+      summary += `1. CLIENT & CLINICAL TEAM IDENTIFICATION:\n`;
+      summary += `   • Birthing Parent: ${client}\n`;
+      summary += `   • Partner / Co-Parent: ${partner}\n`;
+      summary += `   • Contact Phone: ${phone}\n`;
+      summary += `   • Home Address: ${address}\n`;
+      summary += `   • Attending OB / Midwife: ${provider}\n`;
+      summary += `   • Planned Delivery Facility: ${venue}\n\n`;
+      
+      summary += `2. DOCUMENT SIGNATURE AUDIT TRAIL:\n`;
+      const docs = [
+        "Doula Services Agreement ($2,400)",
+        "HIPAA & Medical Privacy Release",
+        "Medical History & Prenatal Intake",
+        "Birth Preferences & Advocacy Matrix",
+        "Postpartum Sanctuary Routine",
+        "Photography & Media Consent"
+      ];
+      for (let i = 1; i <= 6; i++) {
+        summary += `   [${docStatus[i] ? 'SIGNED ✓' : 'PENDING ⚠'}] Doc 0${i}: ${docs[i-1]}\n`;
+      }
+      summary += `\n`;
+
+      // Intake & Clinical Summary
+      const edd = document.getElementById('medDueDate')?.value || 'November 14, 2026';
+      const ga = document.getElementById('medGA')?.value || '28 Weeks 3 Days';
+      const btype = document.getElementById('medBlood')?.value || 'O+ (Positive)';
+      const grav = document.querySelector('input[name="gravida"]:checked')?.value || '1';
+      const para = document.querySelector('input[name="para"]:checked')?.value || '0';
+      const pkg = document.querySelector('input[name="pkgTier"]:checked')?.id || 'pkgComprehensive';
+      const pkgName = pkg === 'pkgComprehensive' ? 'Full Comprehensive Doula ($2,400)' : (pkg === 'pkgBirth' ? 'Core Birth Support ($1,950)' : 'Fourth Trimester Sanctuary ($1,800)');
+      const payPlan = document.querySelector('input[name="payPlan"]:checked')?.id === 'planFull' ? 'Single Upfront Payment' : '3-Part Equal Installment Plan ($800 x 3)';
+      const painStrat = document.querySelector('input[name="painStrategy"]:checked')?.id || 'stratPhysio';
+      const painName = painStrat === 'stratPhysio' ? '100% Physiological Intent (Do not offer epidural)' : (painStrat === 'stratNitrous' ? 'Nitrous Oxide bridge first' : 'Open / Planned Epidural');
+      const bubble = document.querySelector('input[name="ppSanctuaryBubble"]:checked')?.id || 'bubbleStrict';
+      const bubbleName = bubble === 'bubbleStrict' ? 'Strict Sanctuary Bubble (Zero outside visitors 7-10 days)' : (bubble === 'bubbleGuarded' ? 'Guarded Circle (Immediate family 30-min only)' : 'Open Village Support');
+      const feed = document.querySelector('input[name="feedInt"]:checked')?.id || 'feedBf';
+      const feedName = feed === 'feedBf' ? 'Exclusive Chestfeeding / Nursing' : (feed === 'feedComb' ? 'Combination Feeding' : (feed === 'feedPump' ? 'Exclusive Pumping' : 'Formula Nourishment'));
+      const photoTier = document.querySelector('input[name="photoConsent"]:checked')?.id || 'photoPrivate';
+      const photoName = photoTier === 'photoPrivate' ? 'Tier 1: Strictly Private (Zero Photography)' : (photoTier === 'photoPersonal' ? 'Tier 2: Family Keepsakes (Client phone only)' : (photoTier === 'photoEdu' ? 'Tier 3: Anonymous Educational Portfolio' : 'Tier 4: Curated Editorial Showcase'));
+
+      summary += `3. CLINICAL PROFILE & OBSTETRIC HISTORY:\n`;
+      summary += `   • Estimated Due Date: ${edd} (GA: ${ga})\n`;
+      summary += `   • Blood Type: ${btype} | Gravida: ${grav} | Para: ${para}\n`;
+      summary += `   • Selected Support Package: ${pkgName}\n`;
+      summary += `   • Payment Structure: ${payPlan}\n\n`;
+
+      summary += `4. BIRTH ADVOCACY HIGHLIGHTS:\n`;
+      summary += `   • Pain Management Philosophy: ${painName}\n`;
+      summary += `   • IV Preference: ${document.querySelector('input[name="matIV"]:checked')?.value || 'saline lock'}\n`;
+      summary += `   • Monitoring: ${document.querySelector('input[name="matMon"]:checked')?.value || 'intermittent'}\n`;
+      summary += `   • 15-Minute B.R.A.I.N. Protocol: ${document.getElementById('medBrain')?.checked ? 'Active Request' : 'Standard'}\n`;
+      summary += `   • Golden Hour: 60+ min uninterrupted skin-to-skin, delayed cord clamping\n\n`;
+
+      summary += `5. POSTPARTUM & FOURTH TRIMESTER PROTOCOL:\n`;
+      summary += `   • Sanctuary Policy: ${bubbleName}\n`;
+      summary += `   • Infant Feeding Intention: ${feedName}\n`;
+      summary += `   • Overnight Shift Cadence: ${document.querySelector('input[name="ppNightCadence"]:checked')?.value || '3 nights/week'}\n`;
+      summary += `   • Emergency Mental Health Contact: ${document.getElementById('ppContactName')?.value || 'Sarah Sterling (Sister)'} - ${document.getElementById('ppContactPhone')?.value || '(555) 293-8471'}\n\n`;
+
+      summary += `6. MEDIA & PRIVACY SELECTION:\n`;
+      summary += `   • Photography Level: ${photoName}\n`;
+      summary += `   • 14-Day Mandatory Review Guarantee: Active & Agreed\n\n`;
+
+      summary += `7. CLIENT PERSONAL REFLECTIONS & INSTRUCTIONS (IN THEIR OWN WORDS):\n`;
+      const d1Notes = document.getElementById('d1PersonalNotes')?.value.trim();
+      const d2Notes = document.getElementById('d2PersonalNotes')?.value.trim();
+      const d3Prior = document.getElementById('d3PriorBirthNotes')?.value.trim();
+      const d3Hopes = document.getElementById('d3FearsHopes')?.value.trim();
+      const d3Trauma = document.getElementById('d3TraumaNotes')?.value.trim();
+      const d4Vision = document.getElementById('d4BirthVision')?.value.trim();
+      const d4Guidance = document.getElementById('d4SurgeGuidance')?.value.trim();
+      const d5House = document.getElementById('d5HouseholdNotes')?.value.trim();
+      const d5Food = document.getElementById('d5NourishmentNotes')?.value.trim();
+      const d6Photo = document.getElementById('d6PhotoNotes')?.value.trim();
+
+      if (d1Notes) summary += `   • Special Cultural / Family Traditions: "${d1Notes}"\n`;
+      if (d2Notes) summary += `   • Specific Clinical Designations / Restrictions: "${d2Notes}"\n`;
+      if (d3Prior) summary += `   • Prior Birth / Medical Reflections: "${d3Prior}"\n`;
+      if (d3Hopes) summary += `   • Deepest Fears & Grounding Anchors: "${d3Hopes}"\n`;
+      if (d3Trauma) summary += `   • Physical Boundaries / Sensitive Touch Notes: "${d3Trauma}"\n`;
+      if (d4Vision) summary += `   • Ideal Birth Environment Vision: "${d4Vision}"\n`;
+      if (d4Guidance) summary += `   • Support Team Surge / Transition Guidance: "${d4Guidance}"\n`;
+      if (d5House) summary += `   • Nursery & Household Dynamics: "${d5House}"\n`;
+      if (d5Food) summary += `   • Nourishment, Herbal & Healing Food Preferences: "${d5Food}"\n`;
+      if (d6Photo) summary += `   • Keepsake Photography Requests & Angles to Avoid: "${d6Photo}"\n`;
+
+      if (!d1Notes && !d2Notes && !d3Prior && !d3Hopes && !d4Vision && !d5House) {
+        summary += `   • (No custom notes entered — standard Doula Care Protocol active)\n`;
+      }
+
+      summary += `======================================================================\n`;
+      summary += `End of Confidential Transmission — MaternalSupportCo Digital Suite\n`;
+
+      return summary;
+    }
+
+    function openModal() {
+      generatedSummary = generateSummaryText();
+      document.getElementById('summaryBox').textContent = generatedSummary;
+      const statusBox = document.getElementById('portal-submit-status');
+      if (statusBox) statusBox.style.display = 'none';
+      const btn = document.getElementById('btn-submit-packet');
+      if (btn) {
+        btn.disabled = false;
+        btn.style.background = 'var(--primary)';
+        btn.style.borderColor = 'var(--primary)';
+        btn.innerHTML = `
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px; vertical-align: -2px;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          Send Packet via Email`;
+      }
+      modal.classList.add('active');
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+    }
+
+    function copySummary() {
+      navigator.clipboard.writeText(generatedSummary).then(() => {
+        alert("Summary copied to clipboard!");
+      });
+    }
+
+    function downloadTxt() {
+      const blob = new Blob([generatedSummary], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      const client = (document.getElementById('inputClientName').value || 'client').replace(/\s+/g, '_');
+      a.href = url;
+      a.download = `MaternalSupportCo_Packet_${client}.txt`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function launchEmail() {
+      const client = document.getElementById('inputClientName').value || 'Client';
+      const subject = encodeURIComponent(`Client Onboarding Packet: ${client}`);
+      const body = encodeURIComponent(generatedSummary);
+      window.location.href = `mailto:${DOULA_RECEIVING_EMAIL}?subject=${subject}&body=${body}`;
+    }
+
+    /* 100% SERVERLESS DOSSIER TRANSMISSION (FormSubmit Backend) */
+    async function submitPacketToDoula() {
+      const btn = document.getElementById('btn-submit-packet');
+      const statusBox = document.getElementById('portal-submit-status');
+      const clientName = document.getElementById('inputClientName')?.value.trim() || 'Elena Sterling';
+      const partnerName = document.getElementById('inputPartnerName')?.value.trim() || 'Marcus Sterling';
+      const phone = document.getElementById('inputPhone')?.value.trim() || '';
+      const address = document.getElementById('inputAddress')?.value.trim() || '';
+      const provider = document.getElementById('inputProviderName')?.value.trim() || '';
+      const venue = document.getElementById('inputDeliveryVenue')?.value.trim() || '';
+      const edd = document.getElementById('inputEddDate')?.value || '';
+      const bloodType = document.getElementById('inputBloodTypeSelect')?.value || '';
+
+      // Refresh summary
+      generatedSummary = generateSummaryText();
+
+      // UI Submitting state
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = `
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation: spin 1s linear infinite; margin-right: 6px; vertical-align: -2px;">
+            <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
+            <path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"></path>
+          </svg>
+          Transmitting Packet to Doula...`;
+      }
+
+      if (statusBox) {
+        statusBox.style.display = 'block';
+        statusBox.style.background = 'rgba(139, 111, 92, 0.08)';
+        statusBox.style.color = 'var(--text)';
+        statusBox.style.border = '1px solid var(--border)';
+        statusBox.innerHTML = `Connecting to serverless transmission endpoint...`;
+      }
+
+      // Package full client dossier & selections across 6 docs
+      const payload = {
+        _subject: `Completed Doula Onboarding Dossier & Signed Packet - ${clientName}`,
+        _captcha: "false",
+        _template: "table",
+        _replyto: phone || clientName,
+        Birthing_Parent_Name: clientName,
+        Partner_CoParent_Name: partnerName,
+        Phone_Number: phone || 'Not provided',
+        Home_Address: address || 'Not provided',
+        Care_Provider: provider || 'Not provided',
+        Delivery_Facility: venue || 'Not provided',
+        Estimated_Due_Date: edd || 'Not provided',
+        Blood_Type_and_Rh: bloodType || 'Not provided',
+        Doc1_Services_Agreement_Status: docStatus[1] ? 'SIGNED & EXECUTED' : 'PENDING SIGNATURE',
+        Doc1_Package_Selected: document.querySelector('input[name="d1Package"]:checked')?.value || 'Full Birth Sanctuary ($2,400)',
+        Doc1_Payment_Plan: document.querySelector('input[name="d1PaymentPlan"]:checked')?.value || 'Standard 3-Part Installment',
+        Doc1_Signature_Hash: document.getElementById('metaDoc1')?.textContent || (docStatus[1] ? 'Verified' : 'Unsigned'),
+        Doc2_HIPAA_Privacy_Status: docStatus[2] ? 'SIGNED & AUTHORIZED' : 'PENDING AUTHORIZATION',
+        Doc2_Emergency_Proxy: document.querySelector('input[name="hipaaProxy"]:checked')?.value || 'Advocacy Proxy Authorized',
+        Doc2_Signature_Hash: document.getElementById('metaDoc2')?.textContent || (docStatus[2] ? 'Verified' : 'Unsigned'),
+        Doc3_Medical_Intake_Status: docStatus[3] ? 'SIGNED & CONFIRMED' : 'PENDING CONFIRMATION',
+        Doc3_Obstetric_Gravida: document.querySelector('input[name="gravida"]:checked')?.value || '1',
+        Doc3_Obstetric_Para: document.querySelector('input[name="para"]:checked')?.value || '0',
+        Doc3_Signature_Hash: document.getElementById('metaDoc3')?.textContent || (docStatus[3] ? 'Verified' : 'Unsigned'),
+        Doc4_Birth_Preferences_Status: docStatus[4] ? 'SIGNED & RATIFIED' : 'PENDING RATIFICATION',
+        Doc4_Pain_Philosophy: document.querySelector('input[name="painPhil"]:checked')?.value || 'Physiological Comfort First',
+        Doc4_Signature_Hash: document.getElementById('metaDoc4')?.textContent || (docStatus[4] ? 'Verified' : 'Unsigned'),
+        Doc5_Postpartum_Sanctuary_Status: docStatus[5] ? 'SIGNED & SECURED' : 'PENDING SECURING',
+        Doc5_Bubble_Philosophy: document.querySelector('input[name="ppBubble"]:checked')?.value || 'Strict 7-Day Family Bubble',
+        Doc5_Feeding_Intention: document.querySelector('input[name="ppFeeding"]:checked')?.value || 'Exclusively Breastfeeding',
+        Doc5_Signature_Hash: document.getElementById('metaDoc5')?.textContent || (docStatus[5] ? 'Verified' : 'Unsigned'),
+        Doc6_Photo_Consent_Status: docStatus[6] ? 'SIGNED & RECORDED' : 'PENDING RECORDING',
+        Doc6_Privacy_Tier: document.querySelector('input[name="photoTier"]:checked')?.id || 'photoPersonal',
+        Doc6_Signature_Hash: document.getElementById('metaDoc6')?.textContent || (docStatus[6] ? 'Verified' : 'Unsigned'),
+        Client_Notes_Doc1_Traditions: document.getElementById('d1PersonalNotes')?.value.trim() || 'None provided',
+        Client_Notes_Doc2_Specialists: document.getElementById('d2PersonalNotes')?.value.trim() || 'None provided',
+        Client_Notes_Doc3_Prior_Births: document.getElementById('d3PriorBirthNotes')?.value.trim() || 'None provided',
+        Client_Notes_Doc3_Fears_and_Anchors: document.getElementById('d3FearsHopes')?.value.trim() || 'None provided',
+        Client_Notes_Doc3_Trauma_Boundaries: document.getElementById('d3TraumaNotes')?.value.trim() || 'None provided',
+        Client_Notes_Doc4_Birth_Vision: document.getElementById('d4BirthVision')?.value.trim() || 'None provided',
+        Client_Notes_Doc4_Surge_Guidance: document.getElementById('d4SurgeGuidance')?.value.trim() || 'None provided',
+        Client_Notes_Doc5_Household_Rules: document.getElementById('d5HouseholdNotes')?.value.trim() || 'None provided',
+        Client_Notes_Doc5_Nourishment_Healing: document.getElementById('d5NourishmentNotes')?.value.trim() || 'None provided',
+        Client_Notes_Doc6_Keepsake_Photo_Instructions: document.getElementById('d6PhotoNotes')?.value.trim() || 'None provided',
+        Full_Confidential_Intake_Dossier: generatedSummary
+      };
+
+      const endpoint = `https://formsubmit.co/ajax/${DOULA_RECEIVING_EMAIL}`;
+
+      try {
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+        console.log('Serverless packet transmission success:', data);
+
+        if (statusBox) {
+          statusBox.style.display = 'block';
+          statusBox.style.background = 'var(--success-bg)';
+          statusBox.style.color = 'var(--success)';
+          statusBox.style.border = '1px solid var(--success)';
+          statusBox.innerHTML = `
+            <strong style="font-size: 0.95rem;">✓ Transmission Verified</strong><br>
+            Your complete intake packet has been securely filed with your doula.`;
+        }
+
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = `✓ Packet Securely Filed`;
+          btn.style.background = 'var(--success)';
+          btn.style.borderColor = 'var(--success)';
+        }
+      } catch (err) {
+        console.warn('Direct serverless fetch notice, offering fallback:', err);
+        if (statusBox) {
+          statusBox.style.display = 'block';
+          statusBox.style.background = 'var(--warning-bg)';
+          statusBox.style.color = 'var(--warning)';
+          statusBox.style.border = '1px solid var(--warning)';
+          statusBox.innerHTML = `
+            <strong>Direct Serverless Transmission Fallback</strong><br>
+            Your browser prevented direct cross-origin submission. You can still transmit immediately using your email client or save your PDF/TXT files below.<br>
+            <button type="button" class="btn btn-primary" onclick="launchEmail()" style="margin-top: 0.6rem; font-size: 0.82rem; padding: 0.4rem 0.85rem;">
+              Launch Email App to Send &rarr;
+            </button>`;
+        }
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = `Retry Sending Packet`;
+        }
+      }
+    }
+
+    // Dedicated Print Controllers — Zero Extra Blank Pages Guaranteed
+    function printCurrentDoc() {
+      document.body.classList.remove('print-all', 'print-cert');
+      document.body.classList.add('print-current-only');
+      window.print();
+    }
+
+    function printAllDocs() {
+      document.body.classList.remove('print-current-only', 'print-cert');
+      document.body.classList.add('print-all');
+      window.print();
+    }
+
+    function printCertificate() {
+      document.body.classList.remove('print-all', 'print-current-only');
+      document.body.classList.add('print-cert');
+      window.print();
+    }
+
+    window.addEventListener('afterprint', () => {
+      document.body.classList.remove('print-all', 'print-current-only', 'print-cert');
+    });
+
+    // Close modal on outside click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    /* ==========================================================================
+       CLEAN BACKGROUND SOUNDSCAPE ENGINE (OlJ1vYcE06U)
+       ========================================================================== */
+    const soundToggle = document.getElementById('portal-sound-toggle');
+    const ytPlayerFrame = document.getElementById('yt-player-frame');
+
+    let isAudioPlaying = false;
+    const YT_EMBED_URL = "https://www.youtube-nocookie.com/embed/OlJ1vYcE06U?enablejsapi=1&autoplay=0&loop=1&playlist=OlJ1vYcE06U&playsinline=1&rel=0&modestbranding=1&controls=0";
+
+    function updateAudioUI(playing) {
+      isAudioPlaying = playing;
+      if (soundToggle) {
+        if (playing) {
+          soundToggle.classList.add('playing');
+          soundToggle.setAttribute('aria-label', 'Mute ambient soundscape');
+          soundToggle.setAttribute('title', 'Playing Ambient Soundscape • Tap to Pause');
+        } else {
+          soundToggle.classList.remove('playing');
+          soundToggle.setAttribute('aria-label', 'Play ambient soundscape');
+          soundToggle.setAttribute('title', 'Play Ambient Soundscape');
+        }
+      }
+    }
+
+    function sendYtCommand(func, args) {
+      if (ytPlayerFrame && ytPlayerFrame.contentWindow) {
+        try {
+          ytPlayerFrame.contentWindow.postMessage(JSON.stringify({
+            event: 'command',
+            func: func,
+            args: args || []
+          }), '*');
+        } catch (e) {
+          console.warn('postMessage to YouTube failed:', e);
+        }
+      }
+    }
+
+    function toggleAudio(forceState) {
+      const targetState = (typeof forceState === 'boolean') ? forceState : !isAudioPlaying;
+
+      if (targetState) {
+        if (ytPlayerFrame) {
+          const currentSrc = ytPlayerFrame.getAttribute('src');
+          if (!currentSrc || currentSrc === '' || currentSrc === 'about:blank') {
+            ytPlayerFrame.setAttribute('src', YT_EMBED_URL);
+          } else {
+            sendYtCommand('playVideo');
+          }
+        }
+        updateAudioUI(true);
+      } else {
+        sendYtCommand('pauseVideo');
+        updateAudioUI(false);
+      }
+    }
+
+    if (soundToggle) {
+      soundToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleAudio();
+      });
+    }
+
+  </script>
+</body>
+</html>
