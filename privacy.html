@@ -1,0 +1,2138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Perinatal Privacy Covenant | Maternal Support Co</title>
+    <meta name="description" content="HIPAA-aligned health data protection covenant. Strict confidentiality protocols safeguarding birth plans, intake forms, and family records.">
+    <link rel="canonical" href="https://rs236.github.io/maternalsupportco/privacy.html">
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rs236.github.io/maternalsupportco/privacy.html">
+    <meta property="og:title" content="Perinatal Privacy Covenant | Maternal Support Co">
+    <meta property="og:description" content="HIPAA-aligned health data protection covenant. Strict confidentiality protocols safeguarding birth plans, intake forms, and family records.">
+    <meta property="og:image" content="https://rs236.github.io/maternalsupportco/assets/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Perinatal Privacy Covenant | Maternal Support Co">
+    <meta name="twitter:description" content="HIPAA-aligned health data protection covenant. Strict confidentiality protocols safeguarding birth plans, intake forms, and family records.">
+    <meta name="twitter:image" content="https://rs236.github.io/maternalsupportco/assets/og-image.jpg">
+
+    <!-- Favicon Suite -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="theme-color" content="#8B6F5C">
+
+    <!-- Google Analytics 4 Placeholder -->
+    <!-- REPLACE G-XXXXXXXXXX WITH YOUR GOOGLE ANALYTICS 4 MEASUREMENT ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Lenis Smooth Scroll CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.18/dist/lenis.css">
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
+    <style>
+        /* CSS VARIABLES - UNIFIED LUXURY DESIGN SYSTEM */
+        :root {
+            --primary: #8B6F5C;
+            --primary-dark: #6B5242;
+            --primary-light: #F3EDE8;
+            --secondary: #C4A882;
+            --secondary-light: #F5EFEB;
+            --accent: #7B8F7D;
+            --accent-light: #EBF0EC;
+            --background: #FDFBF9;
+            --surface: #FFFFFF;
+            --text: #2C2420;
+            --text-secondary: #7A6E66;
+            --border: #EDE7E1;
+            --dark: #1C1816;
+            --dark-surface: #242019;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 2px 8px rgba(44, 36, 32, 0.04);
+            --shadow-md: 0 8px 24px rgba(44, 36, 32, 0.06);
+            --shadow-lg: 0 16px 48px rgba(44, 36, 32, 0.08);
+            --shadow-xl: 0 24px 64px rgba(44, 36, 32, 0.1);
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-fast: 0.2s var(--ease);
+            --transition-base: 0.35s var(--ease);
+            --transition-slow: 0.6s var(--ease);
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-accent: 'Cormorant Garamond', Georgia, serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.75;
+            font-size: 1rem;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Lenis Smooth Scroll Recommended Rules */
+        html.lenis,
+        html.lenis body {
+            height: auto;
+        }
+
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+
+        /* SCROLL PROGRESS BAR */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            width: 0%;
+            z-index: 1005;
+            transition: width 0.1s ease-out;
+        }
+
+        /* CONTAINER BREAKPOINTS */
+        .container {
+            width: 100%;
+            margin-right: auto;
+            margin-left: auto;
+            padding-right: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .container {
+                max-width: 640px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 768px;
+                padding-right: 2.25rem;
+                padding-left: 2.25rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 1024px;
+                padding-right: 3.5rem;
+                padding-left: 3.5rem;
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .container {
+                max-width: 1280px;
+            }
+        }
+
+        /* BUTTONS & HOVER EFFECTS */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.95rem 2rem;
+            border-radius: var(--radius-full);
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 0.9375rem;
+            letter-spacing: 0.04em;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+            user-select: none;
+            overflow: hidden;
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -130%;
+            width: 75%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+            transform: skewX(-25deg);
+            transition: left 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn:hover::before {
+            left: 150%;
+        }
+
+        .btn > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-primary {
+            background: linear-gradient(145deg, #9C7E6A, var(--primary));
+            color: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 4px 14px rgba(139, 111, 92, 0.28), 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(145deg, var(--primary), var(--primary-dark));
+            transform: translateY(-3px) scale(1.015);
+            box-shadow: 0 12px 28px rgba(139, 111, 92, 0.38), 0 2px 6px rgba(0, 0, 0, 0.12);
+            color: #FFFFFF;
+        }
+
+        .btn-outline {
+            background-color: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: var(--text);
+            border: 1px solid rgba(196, 168, 130, 0.45);
+            box-shadow: 0 2px 8px rgba(44, 36, 32, 0.03);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary-dark);
+            background-color: var(--primary-light);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(139, 111, 92, 0.14);
+        }
+
+        /* HEADER */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 0;
+            transition: all var(--transition-base);
+        }
+
+        .header.scrolled {
+            padding: 1rem 0;
+            background-color: rgba(253, 251, 249, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid rgba(196, 168, 130, 0.25);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.25rem;
+            color: var(--text);
+            text-decoration: none;
+            line-height: 1;
+        }
+
+        .logo-serif {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            color: var(--dark);
+        }
+
+        .logo-sans {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .nav-desktop {
+            display: none;
+        }
+
+        @media (min-width: 1024px) {
+            .nav-desktop {
+                display: flex;
+                align-items: center;
+                gap: 2rem;
+            }
+
+            .nav-desktop a {
+                font-family: var(--font-sans);
+                font-size: 0.9375rem;
+                font-weight: 500;
+                color: var(--text-secondary);
+                transition: color var(--transition-fast);
+                position: relative;
+                text-decoration: none;
+            }
+
+            .nav-desktop a:hover {
+                color: var(--primary);
+            }
+
+            .nav-desktop a::after {
+                content: '';
+                position: absolute;
+                bottom: -4px;
+                left: 0;
+                width: 0;
+                height: 1px;
+                background-color: var(--primary);
+                transition: width var(--transition-fast);
+            }
+
+            .nav-desktop a:hover::after {
+                width: 100%;
+            }
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header-actions .btn {
+            display: none;
+        }
+
+        @media (min-width: 1024px) {
+            .header-actions {
+                gap: 1rem;
+            }
+
+            .header-actions .btn {
+                display: inline-flex;
+            }
+        }
+
+        /* SOUNDSCAPE TOGGLE */
+        .sound-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+            transition: all var(--transition-fast);
+            cursor: pointer;
+            border: 1px solid rgba(139, 111, 92, 0.2);
+        }
+
+        .sound-toggle:hover {
+            background-color: var(--border);
+            transform: scale(1.05);
+        }
+
+        .sound-toggle svg {
+            width: 20px;
+            height: 20px;
+            transition: transform var(--transition-fast);
+        }
+
+        .sound-toggle.playing {
+            background-color: var(--primary);
+            color: #FFFFFF;
+            border-color: var(--primary);
+            animation: pulse-ring 2s infinite;
+        }
+
+        .sound-toggle.playing svg {
+            stroke: #FFFFFF;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                box-shadow: 0 0 0 0 rgba(139, 111, 92, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(139, 111, 92, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(139, 111, 92, 0);
+            }
+        }
+
+        /* HAMBURGER */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: 44px;
+            height: 44px;
+            background: rgba(139, 111, 92, 0.08);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            padding: 0;
+            z-index: 1001;
+            position: relative;
+            transition: all var(--transition-fast);
+        }
+
+        @media (min-width: 1024px) {
+            .hamburger {
+                display: none;
+            }
+        }
+
+        .hamburger:hover,
+        .hamburger:active {
+            background: rgba(139, 111, 92, 0.16);
+        }
+
+        .hamburger {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .hamburger span {
+            pointer-events: none;
+            width: 22px;
+            height: 2px;
+            background: var(--text);
+            border-radius: 2px;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease, background-color 0.2s ease;
+            transform-origin: center;
+            display: block;
+        }
+
+        .hamburger.open,
+        .hamburger.active {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .hamburger.open span,
+        .hamburger.active span {
+            background: #FFFFFF;
+        }
+
+        .hamburger.open span:nth-child(1),
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .hamburger.open span:nth-child(2),
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .hamburger.open span:nth-child(3),
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* MOBILE DRAWER & BACKDROP */
+        .drawer-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(28, 24, 22, 0.5);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+        }
+
+        .drawer-backdrop.open,
+        .drawer-backdrop.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mobile-drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 380px;
+            height: 100vh;
+            background-color: var(--surface);
+            z-index: 2050;
+            padding: 1.5rem 1.75rem 2rem;
+            display: flex;
+            flex-direction: column;
+            transition: right 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow-y: auto;
+            box-shadow: -8px 0 32px rgba(44, 36, 32, 0.15);
+        }
+
+        .mobile-drawer.open,
+        .mobile-drawer.active {
+            right: 0;
+        }
+
+        /* HIDE STICKY HEADER WHEN MOBILE DRAWER IS ACTIVE TO PREVENT OVERLAP */
+        body.menu-open .header,
+        body.menu-open #header {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+        }
+
+        @media (max-width: 480px) {
+            .mobile-drawer {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+        }
+    
+
+        .mobile-drawer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .drawer-close-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        .drawer-close-btn svg { pointer-events: none; }
+
+        .drawer-close-btn:hover,
+        .drawer-close-btn:active {
+            background: var(--primary);
+            color: #FFFFFF;
+        }
+
+        .mobile-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            margin-bottom: auto;
+        }
+
+        .mobile-nav a {
+            font-family: var(--font-serif);
+            font-size: 1.65rem;
+            color: var(--text);
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.85rem;
+            transition: color var(--transition-fast), padding-left var(--transition-fast);
+        }
+
+        .mobile-nav a:hover,
+        .mobile-nav a:active {
+            color: var(--primary);
+            padding-left: 0.5rem;
+        }
+
+        .mobile-drawer-footer {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .mobile-drawer-footer .btn {
+            width: 100%;
+            padding: 0.95rem 1.5rem;
+        }
+
+        /* HERO / BANNER */
+        .legal-hero {
+            padding-top: 155px;
+            padding-bottom: 60px;
+            background: linear-gradient(180deg, rgba(243, 237, 232, 0.7) 0%, var(--background) 100%);
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .legal-hero-container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 1rem;
+            border-radius: var(--radius-full);
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            background: rgba(139, 111, 92, 0.1);
+            color: var(--primary-dark);
+            margin-bottom: 1.25rem;
+            border: 1px solid rgba(196, 168, 130, 0.35);
+        }
+
+        .legal-hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(2.2rem, 4vw, 3.2rem);
+            font-weight: 400;
+            line-height: 1.2;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .legal-hero p {
+            color: var(--text-secondary);
+            font-size: 1.08rem;
+            max-width: 680px;
+            margin: 0 auto 1.5rem auto;
+        }
+
+        .meta-strip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+        }
+
+        .meta-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* MAIN CONTENT LAYOUT */
+        .legal-layout {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem 6rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        @media (min-width: 1024px) {
+            .legal-layout {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+
+            .legal-sidebar {
+                width: 320px;
+                flex-shrink: 0;
+                position: sticky;
+                top: 100px;
+            }
+
+            .legal-body {
+                flex-grow: 1;
+                min-width: 0;
+            }
+        }
+
+        /* TABLE OF CONTENTS SIDEBAR */
+        .toc-card {
+            background: var(--surface);
+            border-radius: var(--radius-xl);
+            padding: 2rem 1.75rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+        }
+
+        .toc-title {
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--primary-dark);
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toc-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .toc-list a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.4;
+            transition: color var(--transition-fast), padding-left var(--transition-fast);
+            display: block;
+        }
+
+        .toc-list a:hover {
+            color: var(--primary);
+            padding-left: 4px;
+        }
+
+        .toc-help-box {
+            margin-top: 2rem;
+            padding: 1.25rem;
+            background: var(--primary-light);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(196, 168, 130, 0.4);
+            font-size: 0.85rem;
+        }
+
+        .toc-help-box h4 {
+            font-family: var(--font-serif);
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .toc-help-box a {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        /* LEGAL BODY STYLING */
+        .legal-section {
+            background: var(--surface);
+            border-radius: var(--radius-xl);
+            padding: 2.75rem 2.25rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 2rem;
+            scroll-margin-top: 100px;
+        }
+
+        .legal-section h2 {
+            font-family: var(--font-serif);
+            font-size: 1.85rem;
+            font-weight: 500;
+            color: var(--dark);
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(196, 168, 130, 0.25);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .legal-section h2 .sec-num {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--secondary);
+            background: rgba(196, 168, 130, 0.15);
+            padding: 0.25rem 0.65rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .legal-section h3 {
+            font-family: var(--font-sans);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-top: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .legal-section p {
+            margin-bottom: 1.25rem;
+            color: var(--text);
+            font-size: 0.975rem;
+        }
+
+        .legal-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .legal-section ul,
+        .legal-section ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .legal-section li {
+            margin-bottom: 0.65rem;
+            font-size: 0.95rem;
+        }
+
+        /* CALLOUT BOXES */
+        .legal-callout {
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--primary);
+            background: var(--background);
+        }
+
+        .legal-callout.highlight-gold {
+            border-left-color: var(--secondary);
+            background: rgba(196, 168, 130, 0.08);
+            border: 1px solid rgba(196, 168, 130, 0.3);
+            border-left-width: 4px;
+        }
+
+        .legal-callout.highlight-sage {
+            border-left-color: var(--accent);
+            background: rgba(123, 143, 125, 0.08);
+            border: 1px solid rgba(123, 143, 125, 0.3);
+            border-left-width: 4px;
+        }
+
+        .legal-callout h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* RIGHTS GRID */
+        .rights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.25rem;
+            margin: 1.5rem 0;
+        }
+
+        .right-card {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            transition: transform var(--transition-fast), border-color var(--transition-fast);
+        }
+
+        .right-card:hover {
+            border-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .right-card h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .right-card p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* COMPLIANCE TABLE */
+        .compliance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .compliance-table th,
+        .compliance-table td {
+            padding: 0.85rem 1rem;
+            border: 1px solid var(--border);
+            text-align: left;
+        }
+
+        .compliance-table th {
+            background: var(--primary-light);
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .compliance-table tr:nth-child(even) {
+            background: rgba(243, 237, 232, 0.3);
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--dark);
+            color: rgba(255, 255, 255, 0.85);
+            padding: 5rem 0 2rem 0;
+            border-top: 1px solid rgba(196, 168, 130, 0.2);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            margin-bottom: 3.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 2fr 1fr 1fr;
+            }
+        }
+
+        .footer-logo {
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .footer-logo .logo-serif {
+            color: #FFFFFF;
+        }
+
+        .footer h4 {
+            font-family: var(--font-sans);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--secondary);
+            margin-bottom: 1.25rem;
+            font-weight: 700;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-links a:hover {
+            color: #FFFFFF;
+        }
+
+        .footer-contact p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9375rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.5);
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        @media (min-width: 768px) {
+            .footer-bottom {
+                flex-direction: row;
+            }
+        }
+
+        .footer-legal-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-legal-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-legal-links a:hover {
+            color: #FFFFFF;
+        }
+
+        @media (max-width: 767px) {
+            .legal-section {
+                padding: 1.75rem 1.25rem;
+            }
+        }
+    
+        /* ==========================================================================
+           UNIVERSAL DEVICE RESPONSIVENESS ENHANCEMENTS (320px - 1440px+)
+           ========================================================================== */
+        html, body {
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
+        img, svg, video, canvas, iframe {
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Narrow mobile phones (320px - 480px) */
+        @media (max-width: 480px) {
+            .container {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            .section {
+                padding: 3.5rem 0 !important;
+            }
+            h1, .hero h1 {
+                font-size: clamp(2rem, 7.5vw, 2.5rem) !important;
+                line-height: 1.18 !important;
+                letter-spacing: -0.02em !important;
+            }
+            h2, .section-header h2 {
+                font-size: clamp(1.6rem, 6vw, 2.1rem) !important;
+                line-height: 1.22 !important;
+            }
+            .page-hero {
+                padding: 5.5rem 1rem 2.25rem !important;
+            }
+            .page-hero-title {
+                font-size: clamp(1.75rem, 6.5vw, 2.25rem) !important;
+                line-height: 1.2 !important;
+            }
+            .page-hero-subtitle {
+                font-size: 1rem !important;
+                line-height: 1.6 !important;
+            }
+            .page-hero-actions {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                width: 100% !important;
+            }
+            .page-hero-actions .btn {
+                width: 100% !important;
+            }
+            .hero-actions {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                width: 100% !important;
+                gap: 0.75rem !important;
+            }
+            .hero-actions .btn {
+                width: 100% !important;
+            }
+            .banner-actions {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                width: 100% !important;
+                gap: 0.75rem !important;
+            }
+            .banner-actions .btn {
+                width: 100% !important;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr !important;
+                gap: 2.25rem !important;
+            }
+            .footer-bottom {
+                flex-direction: column !important;
+                gap: 1rem !important;
+                text-align: center !important;
+            }
+            .footer-legal-links {
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+                gap: 0.75rem !important;
+            }
+            .doula-experience-pill {
+                bottom: 1rem !important;
+                right: 0.75rem !important;
+                padding: 0.5rem 0.85rem !important;
+            }
+            .exp-num {
+                font-size: 1.15rem !important;
+            }
+            .exp-label {
+                font-size: 0.68rem !important;
+            }
+        }
+
+        /* Prevent iOS Safari unwanted auto-zoom on form inputs */
+        @media (max-width: 768px) {
+            input, select, textarea, .form-control {
+                font-size: 16px !important;
+                max-width: 100% !important;
+                box-sizing: border-box !important;
+            }
+        }
+
+        /* Header scaling on extra small mobile screens (320px - 380px) */
+        @media (max-width: 380px) {
+            .logo {
+                font-size: 1.15rem !important;
+            }
+            .sound-toggle {
+                width: 36px !important;
+                height: 36px !important;
+            }
+            .hamburger {
+                width: 38px !important;
+                height: 38px !important;
+            }
+        }
+
+        /* Breathing circle scaling on ultra-narrow screens */
+        @media (max-width: 360px) {
+            .circle-container {
+                width: 240px !important;
+                height: 240px !important;
+            }
+            .breathe-ripple-1 {
+                width: 190px !important;
+                height: 190px !important;
+            }
+            .breathe-ripple-2 {
+                width: 240px !important;
+                height: 240px !important;
+            }
+            .breathe-circle {
+                width: 100px !important;
+                height: 100px !important;
+            }
+            .breathe-circle-inner {
+                width: 88px !important;
+                height: 88px !important;
+            }
+            #breathe-text {
+                font-size: 1.1rem !important;
+            }
+        }
+
+        /* Credentials Grid styling */
+        .credentials-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.85rem;
+            margin-top: 1.5rem;
+        }
+        @media (min-width: 480px) {
+            .credentials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        .credential-item {
+            background-color: var(--surface);
+            border: 1px solid rgba(196, 168, 130, 0.35);
+            padding: 0.85rem 1.15rem;
+            border-radius: var(--radius-md);
+            box-shadow: 0 2px 8px rgba(44, 36, 32, 0.04);
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            transition: all var(--transition-fast);
+        }
+        .credential-item:hover {
+            border-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(139, 111, 92, 0.1);
+        }
+        .cred-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--primary-dark);
+            letter-spacing: 0.02em;
+        }
+        .cred-desc {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+        }
+
+    
+        /* SMART MOBILE STICKY CTA - AUTO-HIDES AT FOOTER TO PREVENT OVERLAP */
+        .mobile-sticky-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(253, 251, 249, 0.94);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid var(--border);
+            padding: 0.6rem 1.25rem;
+            padding-bottom: max(0.6rem, env(safe-area-inset-bottom));
+            z-index: 950;
+            box-shadow: 0 -4px 20px rgba(44, 36, 32, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateY(0);
+            opacity: 1;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+        }
+
+        .mobile-sticky-cta.hidden,
+        .mobile-sticky-cta.cta-hidden {
+            transform: translateY(125%) !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        @media (min-width: 769px) {
+            .mobile-sticky-cta {
+                display: none !important;
+            }
+        }
+
+        body.menu-open .mobile-sticky-cta {
+            display: none !important;
+        }
+
+        .btn-sticky {
+            width: 100%;
+            max-width: 440px;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.92rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            box-shadow: 0 4px 14px rgba(139, 111, 92, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .footer, footer {
+                padding-bottom: 5.5rem !important;
+            }
+        }
+
+        /* COOKIE BANNER */
+        .cookie-banner {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            max-width: 420px;
+            background: #FFFFFF;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 12px 36px rgba(44, 36, 32, 0.15);
+            padding: 1.25rem 1.5rem;
+            z-index: 2500;
+            display: none;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+        }
+
+        .cookie-banner.show {
+            display: block;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 480px) {
+            .cookie-banner {
+                bottom: 80px;
+                left: 15px;
+                right: 15px;
+                max-width: calc(100% - 30px);
+            }
+        }
+
+        .cookie-text {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .cookie-link {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .cookie-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .cookie-btn {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all var(--transition-fast);
+        }
+
+        .cookie-accept {
+            background: var(--primary);
+            color: #FFFFFF;
+            flex: 1;
+        }
+
+        .cookie-accept:hover {
+            background: var(--primary-dark);
+        }
+
+        .cookie-decline {
+            background: transparent;
+            border-color: var(--border);
+            color: var(--text);
+        }
+
+        .cookie-decline:hover {
+            background: var(--primary-light);
+        }
+
+        /* LOADING SPINNER & ERROR STATES */
+        .btn-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            border-top-color: #FFFFFF;
+            border-radius: 50%;
+            animation: btnSpin 0.7s linear infinite;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        @keyframes btnSpin {
+            to { transform: rotate(360deg); }
+        }
+
+        .input-error {
+            border-color: #C0392B !important;
+            background-color: #FDF4F4 !important;
+        }
+
+        .field-error-msg {
+            color: #C0392B;
+            font-size: 0.82rem;
+            font-weight: 500;
+            margin-top: 4px;
+            display: block;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- SCROLL PROGRESS BAR -->
+    
+    <!-- HEADER -->
+    <!-- SCROLL PROGRESS BAR -->
+    <div class="scroll-progress-container">
+        <div class="scroll-progress-bar" id="scroll-progress"></div>
+    </div>
+
+    <!-- STICKY HEADER -->
+    <header class="header" id="header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                <span class="logo-serif">Maternal</span><span class="logo-sans">SupportCo</span>
+            </a>
+
+            <nav class="nav-desktop">
+                <a href="index.html" class="">Home</a>
+                <a href="about.html" class="">About</a>
+                <a href="services.html" class="">Services &amp; Pricing</a>
+                <a href="portal.html" class="">Client Forms</a>
+                <a href="services.html#faq">FAQ</a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="sound-toggle" id="sound-toggle" aria-label="Toggle ambient soundscape">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                    </svg>
+                </button>
+                <a href="portal.html" class="btn btn-outline"
+                    style="padding: 0.55rem 1.15rem; font-size: 0.84rem; border-color: var(--primary); color: var(--primary);">Client
+                    Portal</a>
+                <a href="index.html#booking" class="btn btn-primary">Book a Call</a>
+            </div>
+
+            <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- DRAWER BACKDROP -->
+    <div class="drawer-backdrop" id="drawer-backdrop"></div>
+
+    <!-- MOBILE DRAWER -->
+    <div class="mobile-drawer" id="mobile-drawer" aria-label="Mobile Navigation Menu">
+        <div class="mobile-drawer-header">
+            <a href="index.html" class="logo drawer-link">
+                <span class="logo-serif">Maternal</span><span class="logo-sans">SupportCo</span>
+            </a>
+            <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Close menu">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <nav class="mobile-nav">
+            <a href="index.html" class="drawer-link ">Home</a>
+            <a href="about.html" class="drawer-link ">About Vanya</a>
+            <a href="services.html" class="drawer-link ">Services &amp; Pricing</a>
+            <a href="portal.html" class="drawer-link " style="color: var(--primary); font-weight: 600;">Client Forms &amp; Intake</a>
+            <a href="services.html#faq" class="drawer-link">FAQ</a>
+            <a href="privacy.html" class="drawer-link active">Privacy Policy</a>
+            <a href="terms.html" class="drawer-link">Terms of Care</a>
+        </nav>
+        <div class="mobile-drawer-footer">
+            <a href="portal.html" class="btn btn-outline drawer-link"
+                style="background: var(--surface); color: var(--primary); font-weight: 600; border-color: var(--primary);">Open
+                Client Portal &amp; Sign →</a>
+            <a href="index.html#booking" class="btn btn-primary drawer-link">Book a Call</a>
+        </div>
+    </div>
+
+    <!-- LEGAL HERO -->
+    <section class="legal-hero">
+        <div class="legal-hero-container">
+            <div class="badge-pill">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+                Perinatal Health Data Privacy &amp; Legal Covenant
+            </div>
+            <h1>Comprehensive Privacy Policy</h1>
+            <p>
+                Sacred birth work requires unflinching trust. We honor your personal, physiological, and perinatal health
+                data with the highest clinical and global privacy benchmarks.
+            </p>
+            <div class="meta-strip">
+                <span class="meta-item">
+                    <strong>Effective Date:</strong> September 1, 2026
+                </span>
+                <span class="meta-item">•</span>
+                <span class="meta-item">
+                    <strong>Practice Lead:</strong> Vanya, CD(DONA), CLC
+                </span>
+                <span class="meta-item">•</span>
+                <span class="meta-item">
+                    <strong>Scope:</strong> Global &amp; US Multi-State (WA MHMDA, CA CCPA/CPRA, GDPR)
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN LEGAL CONTENT & TABLE OF CONTENTS -->
+    <div class="legal-layout">
+
+        <!-- Sticky Table of Contents -->
+        <aside class="legal-sidebar">
+            <div class="toc-card">
+                <div class="toc-title">Table of Contents</div>
+                <ul class="toc-list">
+                    <li><a href="#sec-scope">1. Practice Scope &amp; Covenant</a></li>
+                    <li><a href="#sec-health-data">2. Perinatal Health Information &amp; HIPAA</a></li>
+                    <li><a href="#sec-us-state">3. US State Health Laws &amp; Non-Sale</a></li>
+                    <li><a href="#sec-gdpr">4. GDPR &amp; International Data Rights</a></li>
+                    <li><a href="#sec-collection">5. Information We Collect &amp; Use</a></li>
+                    <li><a href="#sec-media">6. Photography &amp; Digital Privacy Tiers</a></li>
+                    <li><a href="#sec-retention">7. Cryptographic Retention &amp; Disposal</a></li>
+                    <li><a href="#sec-thirdparties">8. Sub-Processors &amp; Emergency Disclosures</a></li>
+                    <li><a href="#sec-rights">9. Exercising Your Rights &amp; Contact</a></li>
+                </ul>
+
+                <div class="toc-help-box">
+                    <h4>Confidential Questions?</h4>
+                    <p style="color: var(--text-secondary); margin-bottom: 0.75rem;">
+                        If you have questions regarding your birth plan confidentiality or data deletion, reach out directly.
+                    </p>
+                    <a href="mailto:hello@maternalsupportco.com">hello@maternalsupportco.com</a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Body -->
+        <main class="legal-body">
+
+            <!-- 1. Practice Scope & Covenant -->
+            <section class="legal-section" id="sec-scope">
+                <h2><span class="sec-num">01</span> Practice Scope &amp; Privacy Covenant</h2>
+                <p>
+                    <strong>MaternalSupportCo</strong> ("the Practice", "we", "us", or "our"), operated by Head Doula Vanya, CD(DONA), CLC, is committed to safeguarding the intimate privacy, human dignity, and physiological confidentiality of every birthing person, partner, and infant in our care.
+                </p>
+                <p>
+                    Doula care encompasses continuous emotional, physical, and informational perinatal support throughout pregnancy, labor, delivery, and the fourth trimester postpartum window. Because our care necessarily involves sensitive disclosures—including past reproductive histories, pelvic sensations, psychological boundaries, and family dynamics—we hold your data to the most stringent medical and ethical confidentiality standards.
+                </p>
+                <div class="legal-callout highlight-gold">
+                    <h4>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        Professional Non-Clinical Scope Disclaimer
+                    </h4>
+                    <p style="margin: 0; font-size: 0.92rem; color: var(--text);">
+                        Doulas are certified non-clinical perinatal support specialists. A doula does not perform clinical tasks, vaginal exams, fetal heart monitoring, medical diagnoses, or deliver babies. The health information collected through our intake portal and consultation sessions serves exclusively to tailor physical comfort measures, advocate for your birth preferences, and coordinate emotional presence.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 2. Health Data Privacy & HIPAA -->
+            <section class="legal-section" id="sec-health-data">
+                <h2><span class="sec-num">02</span> Perinatal Health Information &amp; HIPAA Notice</h2>
+                <p>
+                    Under the United States <em>Health Insurance Portability and Accountability Act of 1996</em> (HIPAA) and 45 CFR § 160.103, solo birth doulas and private doula support practices that do not transmit electronic healthcare transactions to third-party insurance payers are legally designated as <strong>Non-Covered Entities</strong>.
+                </p>
+                <p>
+                    <strong>Our Voluntary Gold Standard:</strong> While exempt from statutory covered-entity classification, MaternalSupportCo <em>voluntarily adheres</em> to the foundational tenets of the <strong>HIPAA Privacy and Security Rules</strong>. We apply administrative, technical, and physical safeguards equivalent to hospital systems to protect all Protected Health Information (PHI) and Perinatal Sensitive Data (PSD).
+                </p>
+                <h3>Scope of Perinatal Health Disclosures (Document 02 Integration)</h3>
+                <p>
+                    Through our paperless onboarding portal (Document 02: HIPAA &amp; Medical Privacy Authorization), you grant explicit, revocable permission for MaternalSupportCo to communicate with designated clinical care teams:
+                </p>
+                <ul>
+                    <li>Attending Obstetricians (OB/GYN) &amp; Certified Professional Midwives (CPM/CNM)</li>
+                    <li>Hospital Labor &amp; Delivery (L&amp;D) and Triage nursing personnel</li>
+                    <li>Hospital/Private IBCLC Lactation Consultants and Neonatal Care Teams</li>
+                    <li>Community Pediatricians and Family Medicine Physicians</li>
+                </ul>
+                <p>
+                    <strong>Zero Unauthorized Clinical Transmission:</strong> We will never disclose your cervical dilation, contraction patterns, membrane status, or medical history to any family member, employer, or outside party without your express, real-time verbal or written command.
+                </p>
+            </section>
+
+            <!-- 3. US State Health Laws -->
+            <section class="legal-section" id="sec-us-state">
+                <h2><span class="sec-num">03</span> US State Health Privacy Laws &amp; Absolute Non-Sale Guarantee</h2>
+                <p>
+                    Recent state privacy statutes grant elevated, uncompromising protections to reproductive, prenatal, and perinatal healthcare records. MaternalSupportCo strictly complies with all state health-data enactments, including:
+                </p>
+                <div class="rights-grid">
+                    <div class="right-card">
+                        <h4>Washington MHMDA</h4>
+                        <p><em>Washington My Health My Data Act:</em> Prohibits collection or processing of consumer health data without opt-in consent; bans geofencing around birth centers and clinics.</p>
+                    </div>
+                    <div class="right-card">
+                        <h4>California CCPA / CPRA</h4>
+                        <p><em>California Consumer Privacy Act:</em> Treats pregnancy, reproductive health, and anatomical data as Sensitive Personal Information (SPI) with strict limitation rights.</p>
+                    </div>
+                    <div class="right-card">
+                        <h4>Nevada SB 370</h4>
+                        <p>Enforces comprehensive consumer health data rights, requiring explicit authorizations and direct rights to full data deletion.</p>
+                    </div>
+                </div>
+                <div class="legal-callout highlight-sage">
+                    <h4>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        Absolute Zero-Commercialization &amp; Non-Sale Guarantee
+                    </h4>
+                    <p style="margin: 0; font-size: 0.92rem; color: var(--text);">
+                        <strong>We will never sell, rent, lease, monetize, license, or trade your perinatal records, due dates, contact details, or birth stories to data brokers, formula manufacturers, advertising exchanges, or pharmaceutical marketers.</strong> Your family's data belongs exclusively to your family.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 4. GDPR & International Rights -->
+            <section class="legal-section" id="sec-gdpr">
+                <h2><span class="sec-num">04</span> GDPR / UK GDPR &amp; International Data Rights</h2>
+                <p>
+                    For clients residing in or protected by the European Union General Data Protection Regulation (EU GDPR) or UK GDPR, MaternalSupportCo acts as a Data Controller. We process your data exclusively under the following lawful bases:
+                </p>
+                <table class="compliance-table">
+                    <thead>
+                        <tr>
+                            <th>Data Category</th>
+                            <th>Lawful Basis (Art. 6)</th>
+                            <th>Special Category (Art. 9)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Name, Phone, Email, Address, Delivery Venue</td>
+                            <td>Contractual Necessity (Art. 6(1)(b)) for delivering doula care</td>
+                            <td>Not applicable</td>
+                        </tr>
+                        <tr>
+                            <td>Due Date, Parity, Cesarean/VBAC History, Allergies</td>
+                            <td>Explicit Informed Consent (Art. 6(1)(a))</td>
+                            <td>Explicit Consent for Health Data (Art. 9(2)(a))</td>
+                        </tr>
+                        <tr>
+                            <td>Emergency Contacts &amp; Acute Medical Liaisons</td>
+                            <td>Vital Interests (Art. 6(1)(d)) in labor emergencies</td>
+                            <td>Vital Interests of Parent &amp; Neonate (Art. 9(2)(c))</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h3>Your International Statutory Rights</h3>
+                <div class="rights-grid">
+                    <div class="right-card">
+                        <h4>Right of Access (Art. 15)</h4>
+                        <p>Request an encrypted copy of all personal intake notes, birth preference matrices, and signature records.</p>
+                    </div>
+                    <div class="right-card">
+                        <h4>Right to Rectification (Art. 16)</h4>
+                        <p>Update or correct gestational dates, pediatric provider changes, or changing labor preferences anytime.</p>
+                    </div>
+                    <div class="right-card">
+                        <h4>Right to Erasure (Art. 17)</h4>
+                        <p>Request immediate permanent deletion ("Right to Be Forgotten") of non-statutory records following care completion.</p>
+                    </div>
+                    <div class="right-card">
+                        <h4>Right to Data Portability (Art. 20)</h4>
+                        <p>Receive your complete electronic dossier in structured, standard machine-readable formats (.json or .txt).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Information We Collect -->
+            <section class="legal-section" id="sec-collection">
+                <h2><span class="sec-num">05</span> Information We Collect &amp; How It Is Utilized</h2>
+                <p>
+                    We collect personal and health information strictly through two voluntary channels: our website initial consultation wizard (<code>index.html#booking</code>) and the encrypted paperless onboarding portal (<code>portal.html</code>).
+                </p>
+                <h3>1. Initial Discovery &amp; Booking Intake</h3>
+                <ul>
+                    <li><strong>Contact &amp; Location:</strong> Full name, telephone number, email address, neighborhood/municipality.</li>
+                    <li><strong>Perinatal Timeline:</strong> Estimated Due Date (EDD), primipara/multipara status, anticipated delivery location (hospital, birth center, or home).</li>
+                    <li><strong>Family Notes &amp; Cultural Values:</strong> Personal hopes, partner involvement priorities, and custom birth visions.</li>
+                </ul>
+                <h3>2. Comprehensive Onboarding Documents (Portal)</h3>
+                <ul>
+                    <li><strong>Document 01 (Services Agreement):</strong> Financial installment schedule, on-call availability terms, scope agreement.</li>
+                    <li><strong>Document 02 (HIPAA Release):</strong> Specific authorizations for your OB/GYN, midwife, and nursing teams.</li>
+                    <li><strong>Document 03 (Medical &amp; Prenatal Intake):</strong> Obstetric history (gravida, para, cesareans, VBAC), blood type, Rh factor, GBS status, placenta location, allergies, trauma-informed physical comfort touch boundaries.</li>
+                    <li><strong>Document 04 (Birth Preferences Matrix):</strong> Non-pharmacological preferences (hydrotherapy, TENS, breathing, counter-pressure), epidural stance, Golden Hour requests.</li>
+                    <li><strong>Document 05 (Postpartum Sanctuary):</strong> Infant feeding intentions, visitor rules, daytime/overnight shift schedules.</li>
+                    <li><strong>Document 06 (Photo Release):</strong> Explicit tier selection governing whether any labor/infant photography is permitted.</li>
+                </ul>
+            </section>
+
+            <!-- 6. Media & Photography Tiers -->
+            <section class="legal-section" id="sec-media">
+                <h2><span class="sec-num">06</span> Photography &amp; Digital Privacy Tiers</h2>
+                <p>
+                    The birth space is sacred. Photographs taken during labor and immediate postpartum recovery are among the most intimate visual artifacts an individual can create. Through Document 06 in our Client Portal, we operate an enforceable <strong>4-Tier Consent Architecture</strong>:
+                </p>
+                <div class="rights-grid">
+                    <div class="right-card">
+                        <h4>Tier 1: Strictly Private</h4>
+                        <p>Zero photography. The doula's camera remains powered off throughout labor, birth, and home visits.</p>
+                    </div>
+                    <div class="right-card">
+                        <h4>Tier 2: Personal Family Use</h4>
+                        <p>Doula captures moments on the client's own phone or delivers high-res raw files exclusively to parents.</p>
+                    </div>
+                    <div class="right-card">
+                        <h4>Tier 3: Anonymized Portfolio</h4>
+                        <p>Artistic hands-on support shots only. Faces of parent and baby are strictly cropped or obscured; requires prior review.</p>
+                    </div>
+                    <div class="right-card">
+                        <h4>Tier 4: Full Release</h4>
+                        <p>Permits promotional and website storytelling with final written sign-off by the parents prior to publication.</p>
+                    </div>
+                </div>
+                <p>
+                    <strong>Revocation Anytime:</strong> You retain the unilateral right to downgrade or revoke your photographic consent tier at any moment, including mid-labor, with immediate and unconditional compliance.
+                </p>
+            </section>
+
+            <!-- 7. Retention & Disposal -->
+            <section class="legal-section" id="sec-retention">
+                <h2><span class="sec-num">07</span> Cryptographic Retention, Storage &amp; Disposal</h2>
+                <p>
+                    MaternalSupportCo enforces strict data life-cycle protocols to prevent persistent, unnecessary storage of your sensitive birth documents:
+                </p>
+                <h3>Active Support Phase (Pregnancy through 12 Weeks Postpartum)</h3>
+                <p>
+                    Your active intake forms, birth plans, and labor notes are maintained in AES-256 encrypted digital storage and password-protected, biometrically secured mobile devices accessible only to Head Doula Vanya.
+                </p>
+                <h3>Postpartum Archival &amp; Statutory Retention</h3>
+                <p>
+                    Following your final postpartum visit and closing debrief, active dossiers are archived. In accordance with professional liability insurance and financial accounting statutes:
+                </p>
+                <ul>
+                    <li><strong>Financial &amp; Contractual Records:</strong> Retained for 7 years as required by federal tax and commercial law.</li>
+                    <li><strong>Birth Notes &amp; Clinical Communication Logs:</strong> Retained for statutory periods governed by state medical liability limitations, safeguarding both family and doula.</li>
+                    <li><strong>Early Deletion Requests:</strong> Clients may request cryptographic shredding of non-statutory personal questionnaires and birth reflections at any time following the 4th trimester.</li>
+                </ul>
+            </section>
+
+            <!-- 8. Sub-Processors -->
+            <section class="legal-section" id="sec-thirdparties">
+                <h2><span class="sec-num">08</span> Sub-Processors, Backup Doulas &amp; Emergency Disclosures</h2>
+                <p>
+                    We operate with minimal digital footprint. We only engage sub-processors that guarantee enterprise-grade encryption and privacy compliance:
+                </p>
+                <ul>
+                    <li><strong>FormSubmit Backend:</strong> Serverless HTTPS transmission directly routing intake inquiries to our verified encrypted inbox (<code>rs905128@gmail.com</code>). Data is not sold or repurposed.</li>
+                    <li><strong>Calendly Integration:</strong> Optional scheduling interface for free 30-minute discovery calls. No medical or obstetrical history is ingested by the calendar.</li>
+                    <li><strong>Backup Doula Covenant:</strong> In the rare event of acute illness or simultaneous labors requiring backup doula activation, your birth preferences matrix is shared <em>solely</em> with the designated, approved backup doula who has executed an identical non-disclosure and HIPAA-aligned privacy covenant.</li>
+                    <li><strong>Emergency Clinical Disclosures:</strong> In life-threatening maternal or neonatal emergencies where the client is incapacitated, relevant physiological facts (e.g., known drug allergies, placental complications) may be conveyed directly to emergency medical response personnel under emergency health proxy doctrines.</li>
+                </ul>
+            </section>
+
+            <!-- 9. Exercising Rights & Contact -->
+            <section class="legal-section" id="sec-rights">
+                <h2><span class="sec-num">09</span> Exercising Your Privacy Rights &amp; Contact Information</h2>
+                <p>
+                    You maintain complete ownership of your personal narrative and physiological records. To request an export of your signed intake packet, correct your contact records, withdraw consent, or file a confidentiality inquiry, contact our dedicated privacy lead:
+                </p>
+                <div class="legal-callout highlight-gold">
+                    <h4>MaternalSupportCo — Data Privacy &amp; Perinatal Safeguards</h4>
+                    <p style="margin-bottom: 0.5rem;"><strong>Practice Principal:</strong> Vanya, CD(DONA), CLC</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>Direct Inquiries:</strong> <a href="mailto:hello@maternalsupportco.com" style="color: var(--primary); font-weight: 600;">hello@maternalsupportco.com</a></p>
+                    <p style="margin-bottom: 0.5rem;"><strong>Transmission Inbox:</strong> <a href="mailto:rs905128@gmail.com" style="color: var(--primary); font-weight: 600;">rs905128@gmail.com</a></p>
+                    <p style="margin-bottom: 0.5rem;"><strong>Telephone:</strong> (555) 382-7491</p>
+                    <p style="margin-bottom: 0;"><strong>Office Location:</strong> Serving Seattle &amp; Greater Eastside Metro Area, WA</p>
+                </div>
+                <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 1.5rem;">
+                    We respond to all verified privacy access, export, or deletion requests within thirty (30) calendar days in full compliance with US and international privacy standards.
+                </p>
+            </section>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="index.html" class="logo footer-logo">
+                        <span class="logo-serif">Maternal</span><span class="logo-sans">SupportCo</span>
+                    </a>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.9375rem; margin-bottom: 0;">Calm presence.
+                        Informed choices. Unwavering support. Guiding families through the profound transition of birth.
+                    </p>
+                </div>
+
+                <div>
+                    <h4>Explore</h4>
+                    <div class="footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="about.html">Meet Vanya (About)</a>
+                        <a href="services.html">Services &amp; Packages</a>
+                        <a href="services.html#faq">Common Questions</a>
+                        <a href="portal.html">Client Intake Portal</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4>Legal &amp; Privacy</h4>
+                    <div class="footer-links">
+                        <a href="privacy.html" style="font-weight: 600; color: #FFFFFF;">Privacy Policy</a>
+                        <a href="portal.html#doc2">HIPAA Privacy Notice</a>
+                        <a href="portal.html#doc1">Services Agreement</a>
+                        <a href="portal.html#doc6">Photo Consent Tiers</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4>Connect</h4>
+                    <div class="footer-contact">
+                        <p style="margin-bottom: 0.5rem;">hello@maternalsupportco.com</p>
+                        <p style="margin-bottom: 0.5rem;">(555) 382-7491</p>
+                        <p>Serving the Greater Metro Area</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p style="margin: 0;">&copy; 2026 MaternalSupportCo. All rights reserved.</p>
+                <div class="footer-legal-links">
+                    <a href="privacy.html" style="color: #FFFFFF; font-weight: 600;">Privacy Policy</a>
+                    <a href="portal.html#doc2">HIPAA Notice</a>
+                    <a href="portal.html#doc1">Services Agreement</a>
+                    <a href="portal.html">Client Portal</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INVISIBLE ZERO-ERROR YOUTUBE BACKGROUND SOUNDSCAPE CONTAINER (OlJ1vYcE06U) -->
+    <div id="youtube-audio-host" aria-hidden="true"
+        style="position: fixed; top: -9999px; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none; overflow: hidden; z-index: -1;">
+        <iframe id="yt-player-frame" src=""
+            data-src="https://www.youtube-nocookie.com/embed/OlJ1vYcE06U?enablejsapi=1&autoplay=0&loop=1&playlist=OlJ1vYcE06U&playsinline=1&rel=0&modestbranding=1&controls=0"
+            title="Sanctuary Soundscape Background Audio"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            tabindex="-1">
+        </iframe>
+    </div>
+
+    <!-- JAVASCRIPT & LENIS SMOOTH SCROLL -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Initialize Lenis Smooth Scroll
+            if (typeof Lenis !== 'undefined') {
+                const lenis = new Lenis({
+                    duration: 1.2,
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                    smoothWheel: true,
+                    smoothTouch: false
+                });
+
+                function raf(time) {
+                    lenis.raf(time);
+                    requestAnimationFrame(raf);
+                }
+                requestAnimationFrame(raf);
+
+                // Internal anchor jump links handling
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        const targetId = this.getAttribute('href');
+                        if (targetId && targetId !== '#') {
+                            const targetEl = document.querySelector(targetId);
+                            if (targetEl) {
+                                e.preventDefault();
+                                lenis.scrollTo(targetEl, { offset: -90 });
+                            }
+                        }
+                    });
+                });
+            }
+
+            // 2. Scroll Progress Bar
+            const scrollProgress = document.getElementById('scroll-progress');
+            window.addEventListener('scroll', () => {
+                const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+                if (totalHeight > 0 && scrollProgress) {
+                    const progress = (window.scrollY / totalHeight) * 100;
+                    scrollProgress.style.width = `${progress}%`;
+                }
+            }, { passive: true });
+
+            // 3. Header Scrolled Glass Effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 40) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            }, { passive: true });
+
+            // 4. Mobile Drawer & Hamburger
+            const hamburger = document.getElementById('hamburger');
+            const drawer = document.getElementById('mobile-drawer');
+            const drawerBackdrop = document.getElementById('drawer-backdrop');
+            const drawerCloseBtn = document.getElementById('drawer-close-btn');
+            const drawerLinks = document.querySelectorAll('.drawer-link');
+            let menuOpen = false;
+
+            function openMenu() {
+                if (!drawer || !hamburger || !drawerBackdrop) return;
+                menuOpen = true;
+                drawer.classList.add('open', 'active');
+                drawerBackdrop.classList.add('open', 'active');
+                hamburger.classList.add('open', 'active');
+                hamburger.setAttribute('aria-expanded', 'true');
+                document.body.classList.add('menu-open');
+                document.body.style.overflow = 'hidden';
+                document.documentElement.style.overflow = 'hidden';
+            }
+
+            function closeMenu() {
+                if (!drawer || !hamburger || !drawerBackdrop) return;
+                menuOpen = false;
+                drawer.classList.remove('open', 'active');
+                drawerBackdrop.classList.remove('open', 'active');
+                hamburger.classList.remove('open', 'active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                document.body.classList.remove('menu-open');
+                document.body.style.overflow = '';
+                document.documentElement.style.overflow = '';
+            }
+
+            function toggleMenu() {
+                if (menuOpen) closeMenu();
+                else openMenu();
+            }
+
+            if (hamburger) hamburger.addEventListener('click', toggleMenu);
+            if (drawerCloseBtn) drawerCloseBtn.addEventListener('click', closeMenu);
+            if (drawerBackdrop) drawerBackdrop.addEventListener('click', closeMenu);
+            drawerLinks.forEach(link => link.addEventListener('click', closeMenu));
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && menuOpen) closeMenu();
+            });
+
+            // 5. YouTube Background Soundscape Toggle
+            const soundToggle = document.getElementById('sound-toggle');
+            const ytPlayerFrame = document.getElementById('yt-player-frame');
+            let audioInitialized = false;
+            let audioPlaying = false;
+
+            function updateSoundToggleUI(isPlaying) {
+                if (soundToggle) {
+                    if (isPlaying) {
+                        soundToggle.classList.add('playing');
+                        soundToggle.setAttribute('aria-label', 'Mute ambient soundscape');
+                        soundToggle.setAttribute('title', 'Playing Ambient Soundscape • Tap to Pause');
+                    } else {
+                        soundToggle.classList.remove('playing');
+                        soundToggle.setAttribute('aria-label', 'Play ambient soundscape');
+                        soundToggle.setAttribute('title', 'Play Ambient Soundscape');
+                    }
+                }
+            }
+
+            function playSoundscape() {
+                if (!audioInitialized) {
+                    if (ytPlayerFrame && ytPlayerFrame.dataset.src) {
+                        ytPlayerFrame.src = ytPlayerFrame.dataset.src;
+                        audioInitialized = true;
+                    }
+                } else if (ytPlayerFrame && ytPlayerFrame.contentWindow) {
+                    ytPlayerFrame.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                }
+                audioPlaying = true;
+                updateSoundToggleUI(true);
+            }
+
+            function pauseSoundscape() {
+                if (ytPlayerFrame && ytPlayerFrame.contentWindow) {
+                    ytPlayerFrame.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+                }
+                audioPlaying = false;
+                updateSoundToggleUI(false);
+            }
+
+            if (soundToggle) {
+                soundToggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (!audioPlaying) {
+                        playSoundscape();
+                    } else {
+                        pauseSoundscape();
+                    }
+                });
+            }
+
+            // 6. Active Table of Contents Highlighting
+            const sections = document.querySelectorAll('.legal-section');
+            const tocLinks = document.querySelectorAll('.toc-list a');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 120;
+                    if (window.pageYOffset >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                tocLinks.forEach(link => {
+                    link.style.color = '';
+                    link.style.fontWeight = '';
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.style.color = 'var(--primary)';
+                        link.style.fontWeight = '700';
+                    }
+                });
+            }, { passive: true });
+        });
+    </script>
+
+    <!-- STICKY MOBILE BOTTOM CTA -->
+    <div class="mobile-sticky-cta" id="mobileStickyCta">
+        <a href="index.html#booking" class="btn btn-primary btn-sticky" onclick="if(typeof gtag==='function') gtag('event', 'click_sticky_mobile_cta');">
+            <span>Book a Free Consultation</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+        </a>
+    </div>
+
+    <!-- GDPR COOKIE CONSENT BANNER -->
+    <div class="cookie-banner" id="cookieBanner" aria-live="polite" role="dialog" aria-label="Cookie preferences">
+        <div class="cookie-content">
+            <p class="cookie-text">
+                We use privacy-respecting cookies to ensure seamless client portal navigation and analyze sanctuary visits. No perinatal health data is ever shared or sold.
+                <a href="privacy.html" class="cookie-link">Read our Privacy Covenant</a>.
+            </p>
+            <div class="cookie-actions">
+                <button class="cookie-btn cookie-accept" id="cookieAcceptBtn">Accept Preferences</button>
+                <button class="cookie-btn cookie-decline" id="cookieDeclineBtn">Essential Only</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JSON-LD LOCAL BUSINESS SCHEMA -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "MaternalSupportCo",
+      "alternateName": "Maternal Support Co Luxury Doula Care",
+      "image": "https://rs236.github.io/maternalsupportco/assets/og-image.jpg",
+      "@id": "https://rs236.github.io/maternalsupportco/#business",
+      "url": "https://rs236.github.io/maternalsupportco/",
+      "telephone": "+1-555-382-7491",
+      "email": "hello@maternalsupportco.com",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "420 Lexington Avenue, Suite 300",
+        "addressLocality": "New York",
+        "addressRegion": "NY",
+        "postalCode": "10170",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 40.7527,
+        "longitude": -73.9772
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+      },
+      "sameAs": [
+        "https://instagram.com/maternalsupportco"
+      ]
+    }
+    
+        // GDPR Cookie Banner Persistence
+        const cookieBanner = document.getElementById('cookieBanner');
+        const cookieAccept = document.getElementById('cookieAcceptBtn');
+        const cookieDecline = document.getElementById('cookieDeclineBtn');
+
+        if (!localStorage.getItem('msc_cookie_consent')) {
+            setTimeout(() => {
+                if (cookieBanner) cookieBanner.classList.add('show');
+            }, 1200);
+        }
+
+        if (cookieAccept) {
+            cookieAccept.addEventListener('click', () => {
+                localStorage.setItem('msc_cookie_consent', 'accepted');
+                if (cookieBanner) cookieBanner.classList.remove('show');
+                if (typeof gtag === 'function') gtag('event', 'cookie_consent_accepted');
+            });
+        }
+
+        if (cookieDecline) {
+            cookieDecline.addEventListener('click', () => {
+                localStorage.setItem('msc_cookie_consent', 'essential_only');
+                if (cookieBanner) cookieBanner.classList.remove('show');
+            });
+        }
+
+    
+        // SMART AUTO-HIDE STICKY CTA AT FOOTER & BOOKING FORM
+        (function() {
+            const stickyCta = document.getElementById('mobileStickyCta');
+            if (!stickyCta) return;
+
+            const footer = document.querySelector('footer, .footer');
+            const bookingSec = document.getElementById('booking');
+
+            if ('IntersectionObserver' in window) {
+                const hideObserver = new IntersectionObserver((entries) => {
+                    const shouldHide = entries.some(entry => entry.isIntersecting);
+                    if (shouldHide) {
+                        stickyCta.classList.add('hidden');
+                    } else {
+                        stickyCta.classList.remove('hidden');
+                    }
+                }, {
+                    root: null,
+                    rootMargin: '0px 0px -40px 0px',
+                    threshold: 0.04
+                });
+
+                if (footer) hideObserver.observe(footer);
+                if (bookingSec) hideObserver.observe(bookingSec);
+            } else {
+                window.addEventListener('scroll', () => {
+                    const scrollBottom = window.innerHeight + window.scrollY;
+                    const docHeight = document.documentElement.scrollHeight;
+                    if (docHeight - scrollBottom < 280) {
+                        stickyCta.classList.add('hidden');
+                    } else {
+                        stickyCta.classList.remove('hidden');
+                    }
+                }, { passive: true });
+            }
+        })();
+
+    </script>
+
+</body>
+
+</html>
