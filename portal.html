@@ -1530,16 +1530,17 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.65);
+      background: rgba(0, 0, 0, 0.7);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
-      z-index: 1000;
+      z-index: 3000;
       display: none;
       align-items: center;
       justify-content: center;
       padding: 1rem;
       opacity: 0;
-      transition: opacity 0.3s;
+      transition: opacity 0.3s ease;
+      overscroll-behavior: contain;
     }
 
     .modal-overlay.active {
@@ -1553,16 +1554,27 @@
       border: 1px solid rgba(196, 168, 130, 0.4);
       width: 100%;
       max-width: 620px;
-      max-height: 90vh;
+      max-height: 88vh;
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-y;
+      overscroll-behavior: contain;
       padding: 2.25rem;
       box-shadow: 0 30px 80px -10px rgba(0, 0, 0, 0.35);
       transform: translateY(20px);
-      transition: transform 0.3s;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .modal-overlay.active .modal-content {
       transform: translateY(0);
+    }
+
+    body.modal-open {
+      overflow: hidden !important;
+    }
+
+    body.modal-open .mobile-sticky-cta {
+      display: none !important;
     }
 
     .modal-header {
@@ -1580,11 +1592,26 @@
     }
 
     .modal-close {
-      background: none;
+      background: rgba(0, 0, 0, 0.05);
       border: none;
       font-size: 1.5rem;
+      line-height: 1;
       cursor: pointer;
       color: var(--text-secondary);
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      min-height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+    .modal-close:hover {
+      background: rgba(0, 0, 0, 0.1);
+      color: var(--dark);
+      transform: scale(1.05);
     }
 
     .summary-box {
@@ -4463,6 +4490,7 @@
         style="display: none; margin-bottom: 1.25rem; padding: 0.9rem 1.15rem; border-radius: var(--radius-md); font-size: 0.88rem; line-height: 1.5;">
       </div>
       <div class="modal-actions">
+        <button type="button" class="btn btn-outline" onclick="closeModal()" style="border-color: var(--border);">✕ Close Window</button>
         <button class="btn btn-outline" onclick="copySummary()">Copy to Clipboard</button>
         <button class="btn btn-outline" onclick="downloadTxt()">Download .TXT</button>
         <button type="button" class="btn btn-primary" id="btn-submit-packet" onclick="submitPacketToDoula()">
@@ -4984,6 +5012,20 @@
 
       // Intake & Clinical Summary
       const edd = document.getElementById('inputEddDate')?.value || 'November 14, 2026';
+      let ga = 'Third Trimester';
+      try {
+        if (edd) {
+          const due = new Date(edd);
+          const today = new Date();
+          const diffWeeks = Math.round((due - today) / (1000 * 60 * 60 * 24 * 7));
+          const currentWeek = 40 - diffWeeks;
+          if (currentWeek > 0 && currentWeek <= 45) {
+            ga = currentWeek + ' Weeks';
+          }
+        }
+      } catch(e) {
+        ga = 'Third Trimester';
+      }
       const btype = document.getElementById('inputBloodTypeSelect')?.value || 'O+ (Positive)';
       const grav = document.querySelector('input[name="gravida"]:checked')?.value || '1';
       const para = document.querySelector('input[name="para"]:checked')?.value || '0';
@@ -5056,26 +5098,41 @@
     }
 
     function openModal() {
-      if (typeof lenis !== 'undefined' && lenis) lenis.stop();
-      generatedSummary = generateSummaryText();
-      document.getElementById('summaryBox').textContent = generatedSummary;
-      const statusBox = document.getElementById('portal-submit-status');
-      if (statusBox) statusBox.style.display = 'none';
-      const btn = document.getElementById('btn-submit-packet');
-      if (btn) {
-        btn.disabled = false;
-        btn.style.background = 'var(--primary)';
-        btn.style.borderColor = 'var(--primary)';
-        btn.innerHTML = `
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px; vertical-align: -2px;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-          Send Packet via Email`;
+      try {
+        if (typeof lenis !== 'undefined' && lenis) {
+          try { lenis.stop(); } catch(e) {}
+        }
+        document.body.classList.add('modal-open');
+        generatedSummary = generateSummaryText();
+        const summaryBox = document.getElementById('summaryBox');
+        if (summaryBox) summaryBox.textContent = generatedSummary;
+        const statusBox = document.getElementById('portal-submit-status');
+        if (statusBox) statusBox.style.display = 'none';
+        const btn = document.getElementById('btn-submit-packet');
+        if (btn) {
+          btn.disabled = false;
+          btn.style.background = 'var(--primary)';
+          btn.style.borderColor = 'var(--primary)';
+          btn.innerHTML = `
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px; vertical-align: -2px;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            Send Packet via Email`;
+        }
+        const modal = document.getElementById('emailModal');
+        if (modal) modal.classList.add('active');
+      } catch (err) {
+        console.error('openModal error:', err);
+        const modal = document.getElementById('emailModal');
+        if (modal) modal.classList.add('active');
       }
-      modal.classList.add('active');
     }
 
     function closeModal() {
-      modal.classList.remove('active');
-      if (typeof lenis !== 'undefined' && lenis) lenis.start();
+      const modal = document.getElementById('emailModal');
+      if (modal) modal.classList.remove('active');
+      document.body.classList.remove('modal-open');
+      try {
+        if (typeof lenis !== 'undefined' && lenis) lenis.start();
+      } catch (e) {}
     }
 
     function copySummary() {
@@ -5261,74 +5318,169 @@
     });
 
     // Close modal on outside click
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
     modal.addEventListener('click', (e) => {
       if (e.target === modal) closeModal();
     });
 
-    /* ==========================================================================
-       CLEAN BACKGROUND SOUNDSCAPE ENGINE (OlJ1vYcE06U)
+        /* ==========================================================================
+       PERSISTENT CROSS-PAGE SOUNDSCAPE ENGINE (OlJ1vYcE06U)
+       Continuous playback across page transitions & timestamp persistence
        ========================================================================== */
-    const soundToggle = document.getElementById('sound-toggle');
-    const ytPlayerFrame = document.getElementById('yt-player-frame');
+    (function initPersistentSoundscape() {
+      const soundToggle = document.getElementById('sound-toggle');
+      const ytPlayerFrame = document.getElementById('yt-player-frame');
+      if (!soundToggle && !ytPlayerFrame) return;
 
-    let isAudioPlaying = false;
-    const YT_EMBED_URL = "https://www.youtube-nocookie.com/embed/OlJ1vYcE06U?enablejsapi=1&autoplay=0&loop=1&playlist=OlJ1vYcE06U&playsinline=1&rel=0&modestbranding=1&controls=0";
+      let isAudioPlaying = false;
+      let playbackTicker = null;
+      let soundPlaybackTime = 0;
 
-    function updateAudioUI(playing) {
-      isAudioPlaying = playing;
-      if (soundToggle) {
-        if (playing) {
-          soundToggle.classList.add('playing');
-          soundToggle.setAttribute('aria-label', 'Mute ambient soundscape');
-          soundToggle.setAttribute('title', 'Playing Ambient Soundscape • Tap to Pause');
-        } else {
-          soundToggle.classList.remove('playing');
-          soundToggle.setAttribute('aria-label', 'Play ambient soundscape');
-          soundToggle.setAttribute('title', 'Play Ambient Soundscape');
-        }
-      }
-    }
-
-    function sendYtCommand(func, args) {
-      if (ytPlayerFrame && ytPlayerFrame.contentWindow) {
+      function getCurrentSavedTime() {
         try {
-          ytPlayerFrame.contentWindow.postMessage(JSON.stringify({
-            event: 'command',
-            func: func,
-            args: args || []
-          }), '*');
+          const lastActive = parseInt(localStorage.getItem('msc_soundscape_last_active') || '0', 10);
+          let savedTime = parseInt(localStorage.getItem('msc_soundscape_time') || '0', 10);
+          const now = Date.now();
+          if (lastActive > 0 && (now - lastActive) < 7200000) {
+            const elapsed = Math.floor((now - lastActive) / 1000);
+            savedTime = (savedTime + elapsed) % 3600;
+          } else if (now - lastActive >= 7200000) {
+            savedTime = 0;
+          }
+          return Math.max(0, savedTime);
         } catch (e) {
-          console.warn('postMessage to YouTube failed:', e);
+          return 0;
         }
       }
-    }
 
-    function toggleAudio(forceState) {
-      const targetState = (typeof forceState === 'boolean') ? forceState : !isAudioPlaying;
+      function startTicker() {
+        if (playbackTicker) clearInterval(playbackTicker);
+        playbackTicker = setInterval(() => {
+          soundPlaybackTime = (soundPlaybackTime + 1) % 3600;
+          try {
+            localStorage.setItem('msc_soundscape_time', soundPlaybackTime.toString());
+            localStorage.setItem('msc_soundscape_last_active', Date.now().toString());
+          } catch (e) {}
+        }, 1000);
+      }
 
-      if (targetState) {
+      function stopTicker() {
+        if (playbackTicker) {
+          clearInterval(playbackTicker);
+          playbackTicker = null;
+        }
+      }
+
+      function updateAudioUI(playing) {
+        isAudioPlaying = playing;
+        if (soundToggle) {
+          if (playing) {
+            soundToggle.classList.add('playing');
+            soundToggle.setAttribute('aria-label', 'Mute ambient soundscape');
+            soundToggle.setAttribute('title', 'Playing Ambient Soundscape • Tap to Pause');
+          } else {
+            soundToggle.classList.remove('playing');
+            soundToggle.setAttribute('aria-label', 'Play ambient soundscape');
+            soundToggle.setAttribute('title', 'Play Ambient Soundscape');
+          }
+        }
+      }
+
+      function sendYtCommand(func, args) {
+        if (ytPlayerFrame && ytPlayerFrame.contentWindow) {
+          try {
+            ytPlayerFrame.contentWindow.postMessage(JSON.stringify({
+              event: 'command',
+              func: func,
+              args: args || []
+            }), '*');
+          } catch (e) {
+            console.warn('postMessage to YouTube:', e);
+          }
+        }
+      }
+
+      function playAtTime(startTime) {
+        soundPlaybackTime = startTime;
+        const url = 'https://www.youtube-nocookie.com/embed/OlJ1vYcE06U?enablejsapi=1&autoplay=1&loop=1&playlist=OlJ1vYcE06U&playsinline=1&rel=0&modestbranding=1&controls=0&start=' + startTime;
         if (ytPlayerFrame) {
           const currentSrc = ytPlayerFrame.getAttribute('src');
-          if (!currentSrc || currentSrc === '' || currentSrc === 'about:blank') {
-            const playUrl = YT_EMBED_URL.replace('autoplay=0', 'autoplay=1');
-            ytPlayerFrame.setAttribute('src', playUrl);
+          if (!currentSrc || currentSrc === '' || currentSrc === 'about:blank' || !currentSrc.includes('start=' + startTime)) {
+            ytPlayerFrame.setAttribute('src', url);
           } else {
             sendYtCommand('playVideo');
           }
         }
+        startTicker();
         updateAudioUI(true);
-      } else {
+        try {
+          localStorage.setItem('msc_soundscape_playing', 'true');
+          localStorage.setItem('msc_soundscape_time', startTime.toString());
+          localStorage.setItem('msc_soundscape_last_active', Date.now().toString());
+        } catch (e) {}
+      }
+
+      function pauseAudio() {
+        stopTicker();
         sendYtCommand('pauseVideo');
         updateAudioUI(false);
+        try {
+          localStorage.setItem('msc_soundscape_playing', 'false');
+          localStorage.setItem('msc_soundscape_time', soundPlaybackTime.toString());
+          localStorage.setItem('msc_soundscape_last_active', Date.now().toString());
+        } catch (e) {}
       }
-    }
 
-    if (soundToggle) {
-      soundToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleAudio();
+      function toggleAudio(forceState) {
+        const targetState = (typeof forceState === 'boolean') ? forceState : !isAudioPlaying;
+        if (targetState) {
+          playAtTime(getCurrentSavedTime());
+        } else {
+          pauseAudio();
+        }
+      }
+
+      if (soundToggle) {
+        soundToggle.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleAudio();
+        });
+      }
+
+      // Automatically resume continuous playback across page changes
+      try {
+        const savedPlaying = localStorage.getItem('msc_soundscape_playing') === 'true';
+        if (savedPlaying) {
+          const resumeTime = getCurrentSavedTime();
+          playAtTime(resumeTime);
+
+          // User-activation safety net
+          const resumeOnGesture = () => {
+            if (localStorage.getItem('msc_soundscape_playing') === 'true') {
+              sendYtCommand('playVideo');
+            }
+          };
+          window.addEventListener('pointerdown', resumeOnGesture, { once: true, passive: true });
+          window.addEventListener('touchstart', resumeOnGesture, { once: true, passive: true });
+          window.addEventListener('keydown', resumeOnGesture, { once: true, passive: true });
+        }
+      } catch (e) {
+        console.warn('Soundscape storage restore error:', e);
+      }
+
+      // Save precise timestamp on navigation away
+      window.addEventListener('pagehide', () => {
+        if (isAudioPlaying) {
+          try {
+            localStorage.setItem('msc_soundscape_time', soundPlaybackTime.toString());
+            localStorage.setItem('msc_soundscape_last_active', Date.now().toString());
+          } catch (e) {}
+        }
       });
-    }
+    })();
     // ==========================================
     // 1. LENIS SMOOTH SCROLL (v1.1.18)
     // ==========================================
