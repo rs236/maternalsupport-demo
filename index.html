@@ -468,7 +468,12 @@
             background: rgba(139, 111, 92, 0.16);
         }
 
+        .hamburger {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
         .hamburger span {
+            pointer-events: none;
             width: 22px;
             height: 2px;
             background: var(--text);
@@ -478,25 +483,30 @@
             display: block;
         }
 
-        .hamburger.open {
+        .hamburger.open,
+        .hamburger.active {
             background: var(--primary);
             border-color: var(--primary);
         }
 
-        .hamburger.open span {
+        .hamburger.open span,
+        .hamburger.active span {
             background: #FFFFFF;
         }
 
-        .hamburger.open span:nth-child(1) {
+        .hamburger.open span:nth-child(1),
+        .hamburger.active span:nth-child(1) {
             transform: translateY(7px) rotate(45deg);
         }
 
-        .hamburger.open span:nth-child(2) {
+        .hamburger.open span:nth-child(2),
+        .hamburger.active span:nth-child(2) {
             opacity: 0;
             transform: scaleX(0);
         }
 
-        .hamburger.open span:nth-child(3) {
+        .hamburger.open span:nth-child(3),
+        .hamburger.active span:nth-child(3) {
             transform: translateY(-7px) rotate(-45deg);
         }
 
@@ -516,7 +526,8 @@
             transition: opacity 0.35s ease;
         }
 
-        .drawer-backdrop.open {
+        .drawer-backdrop.open,
+        .drawer-backdrop.active {
             opacity: 1;
             pointer-events: auto;
         }
@@ -538,7 +549,8 @@
             box-shadow: -8px 0 32px rgba(44, 36, 32, 0.15);
         }
 
-        .mobile-drawer.open {
+        .mobile-drawer.open,
+        .mobile-drawer.active {
             right: 0;
         }
 
@@ -2862,6 +2874,192 @@
             }
         }
 
+    
+        /* ==========================================================================
+           UNIVERSAL DEVICE RESPONSIVENESS ENHANCEMENTS (320px - 1440px+)
+           ========================================================================== */
+        html, body {
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
+        img, svg, video, canvas, iframe {
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Narrow mobile phones (320px - 480px) */
+        @media (max-width: 480px) {
+            .container {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            .section {
+                padding: 3.5rem 0 !important;
+            }
+            h1, .hero h1 {
+                font-size: clamp(2rem, 7.5vw, 2.5rem) !important;
+                line-height: 1.18 !important;
+                letter-spacing: -0.02em !important;
+            }
+            h2, .section-header h2 {
+                font-size: clamp(1.6rem, 6vw, 2.1rem) !important;
+                line-height: 1.22 !important;
+            }
+            .page-hero {
+                padding: 5.5rem 1rem 2.25rem !important;
+            }
+            .page-hero-title {
+                font-size: clamp(1.75rem, 6.5vw, 2.25rem) !important;
+                line-height: 1.2 !important;
+            }
+            .page-hero-subtitle {
+                font-size: 1rem !important;
+                line-height: 1.6 !important;
+            }
+            .page-hero-actions {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                width: 100% !important;
+            }
+            .page-hero-actions .btn {
+                width: 100% !important;
+            }
+            .hero-actions {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                width: 100% !important;
+                gap: 0.75rem !important;
+            }
+            .hero-actions .btn {
+                width: 100% !important;
+            }
+            .banner-actions {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                width: 100% !important;
+                gap: 0.75rem !important;
+            }
+            .banner-actions .btn {
+                width: 100% !important;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr !important;
+                gap: 2.25rem !important;
+            }
+            .footer-bottom {
+                flex-direction: column !important;
+                gap: 1rem !important;
+                text-align: center !important;
+            }
+            .footer-legal-links {
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+                gap: 0.75rem !important;
+            }
+            .doula-experience-pill {
+                bottom: 1rem !important;
+                right: 0.75rem !important;
+                padding: 0.5rem 0.85rem !important;
+            }
+            .exp-num {
+                font-size: 1.15rem !important;
+            }
+            .exp-label {
+                font-size: 0.68rem !important;
+            }
+        }
+
+        /* Prevent iOS Safari unwanted auto-zoom on form inputs */
+        @media (max-width: 768px) {
+            input, select, textarea, .form-control {
+                font-size: 16px !important;
+                max-width: 100% !important;
+                box-sizing: border-box !important;
+            }
+        }
+
+        /* Header scaling on extra small mobile screens (320px - 380px) */
+        @media (max-width: 380px) {
+            .logo {
+                font-size: 1.15rem !important;
+            }
+            .sound-toggle {
+                width: 36px !important;
+                height: 36px !important;
+            }
+            .hamburger {
+                width: 38px !important;
+                height: 38px !important;
+            }
+        }
+
+        /* Breathing circle scaling on ultra-narrow screens */
+        @media (max-width: 360px) {
+            .circle-container {
+                width: 240px !important;
+                height: 240px !important;
+            }
+            .breathe-ripple-1 {
+                width: 190px !important;
+                height: 190px !important;
+            }
+            .breathe-ripple-2 {
+                width: 240px !important;
+                height: 240px !important;
+            }
+            .breathe-circle {
+                width: 100px !important;
+                height: 100px !important;
+            }
+            .breathe-circle-inner {
+                width: 88px !important;
+                height: 88px !important;
+            }
+            #breathe-text {
+                font-size: 1.1rem !important;
+            }
+        }
+
+        /* Credentials Grid styling */
+        .credentials-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.85rem;
+            margin-top: 1.5rem;
+        }
+        @media (min-width: 480px) {
+            .credentials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        .credential-item {
+            background-color: var(--surface);
+            border: 1px solid rgba(196, 168, 130, 0.35);
+            padding: 0.85rem 1.15rem;
+            border-radius: var(--radius-md);
+            box-shadow: 0 2px 8px rgba(44, 36, 32, 0.04);
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            transition: all var(--transition-fast);
+        }
+        .credential-item:hover {
+            border-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(139, 111, 92, 0.1);
+        }
+        .cred-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--primary-dark);
+            letter-spacing: 0.02em;
+        }
+        .cred-desc {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+        }
+
     </style>
 </head>
 
@@ -3812,18 +4010,19 @@
 
             function openMenu() {
                 if (!drawer || !hamburger || !drawerBackdrop) return;
-                drawer.classList.add('active');
-                drawerBackdrop.classList.add('active');
-                hamburger.classList.add('active');
+                drawer.classList.add('open', 'active');
+                drawerBackdrop.classList.add('open', 'active');
+                hamburger.classList.add('open', 'active');
                 hamburger.setAttribute('aria-expanded', 'true');
                 document.body.style.overflow = 'hidden';
+                document.documentElement.style.overflow = 'hidden';
             }
 
             function closeMenu() {
                 if (!drawer || !hamburger || !drawerBackdrop) return;
-                drawer.classList.remove('active');
-                drawerBackdrop.classList.remove('active');
-                hamburger.classList.remove('active');
+                drawer.classList.remove('open', 'active');
+                drawerBackdrop.classList.remove('open', 'active');
+                hamburger.classList.remove('open', 'active');
                 hamburger.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
                 document.documentElement.style.overflow = '';
@@ -3831,17 +4030,20 @@
 
             function toggleMenu() {
                 if (!drawer) return;
-                if (drawer.classList.contains('active')) {
+                if (drawer.classList.contains('open') || drawer.classList.contains('active')) {
                     closeMenu();
                 } else {
                     openMenu();
                 }
             }
 
-            if (hamburger) hamburger.addEventListener('click', (e) => {
-                e.stopPropagation();
-                toggleMenu();
-            });
+            if (hamburger) {
+                hamburger.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleMenu();
+                });
+            }
 
             if (drawerCloseBtn) drawerCloseBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
