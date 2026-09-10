@@ -966,22 +966,26 @@
 <body>
 
     <!-- SCROLL PROGRESS BAR -->
-    <div class="scroll-progress" id="scroll-progress"></div>
-
+    
     <!-- HEADER -->
+    <!-- SCROLL PROGRESS BAR -->
+    <div class="scroll-progress-container">
+        <div class="scroll-progress-bar" id="scroll-progress"></div>
+    </div>
+
+    <!-- STICKY HEADER -->
     <header class="header" id="header">
         <div class="container header-content">
-            <a href="index.html" class="logo" aria-label="MaternalSupportCo Home">
+            <a href="index.html" class="logo">
                 <span class="logo-serif">Maternal</span><span class="logo-sans">SupportCo</span>
             </a>
 
             <nav class="nav-desktop">
-                <a href="index.html#about">About</a>
-                <a href="index.html#services">Services</a>
-                <a href="index.html#journey">The Journey</a>
-                <a href="index.html#client-forms">Client Forms</a>
-                <a href="index.html#testimonials">Testimonials</a>
-                <a href="index.html#faq">FAQ</a>
+                <a href="index.html" class="">Home</a>
+                <a href="about.html" class="">About</a>
+                <a href="services.html" class="">Services &amp; Pricing</a>
+                <a href="portal.html" class="">Client Forms</a>
+                <a href="services.html#faq">FAQ</a>
             </nav>
 
             <div class="header-actions">
@@ -1025,13 +1029,12 @@
             </button>
         </div>
         <nav class="mobile-nav">
-            <a href="index.html#about" class="drawer-link">About Vanya</a>
-            <a href="index.html#services" class="drawer-link">Our Services</a>
-            <a href="index.html#journey" class="drawer-link">The Journey</a>
-            <a href="index.html#client-forms" class="drawer-link" style="color: var(--primary); font-weight: 600;">Client Forms &amp; Intake</a>
-            <a href="index.html#testimonials" class="drawer-link">Testimonials</a>
-            <a href="index.html#faq" class="drawer-link">FAQ</a>
-            <a href="privacy.html" class="drawer-link" style="font-size: 1.3rem; color: var(--primary); font-weight: 600;">Privacy Policy</a>
+            <a href="index.html" class="drawer-link ">Home</a>
+            <a href="about.html" class="drawer-link ">About Vanya</a>
+            <a href="services.html" class="drawer-link ">Services &amp; Pricing</a>
+            <a href="portal.html" class="drawer-link " style="color: var(--primary); font-weight: 600;">Client Forms &amp; Intake</a>
+            <a href="services.html#faq" class="drawer-link">FAQ</a>
+            <a href="privacy.html" class="drawer-link active">Privacy Policy</a>
         </nav>
         <div class="mobile-drawer-footer">
             <a href="portal.html" class="btn btn-outline drawer-link"
@@ -1353,13 +1356,23 @@
                 </div>
 
                 <div>
-                    <h4>Quick Links</h4>
+                    <h4>Explore</h4>
                     <div class="footer-links">
-                        <a href="index.html#about">Meet Vanya</a>
-                        <a href="index.html#services">Our Services</a>
-                        <a href="index.html#journey">Pricing &amp; Packages</a>
-                        <a href="index.html#faq">FAQ</a>
-                        <a href="portal.html">Client Portal</a>
+                        <a href="index.html">Home</a>
+                        <a href="about.html">Meet Vanya (About)</a>
+                        <a href="services.html">Services &amp; Packages</a>
+                        <a href="services.html#faq">Common Questions</a>
+                        <a href="portal.html">Client Intake Portal</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4>Legal &amp; Privacy</h4>
+                    <div class="footer-links">
+                        <a href="privacy.html" style="font-weight: 600; color: #FFFFFF;">Privacy Policy</a>
+                        <a href="portal.html#doc2">HIPAA Privacy Notice</a>
+                        <a href="portal.html#doc1">Services Agreement</a>
+                        <a href="portal.html#doc6">Photo Consent Tiers</a>
                     </div>
                 </div>
 
@@ -1464,6 +1477,7 @@
                 if (drawerBackdrop) drawerBackdrop.classList.add('open');
                 if (hamburger) hamburger.setAttribute('aria-expanded', 'true');
                 document.body.style.overflow = 'hidden';
+                document.documentElement.style.overflow = 'hidden';
             }
 
             function closeMenu() {
@@ -1473,6 +1487,7 @@
                 if (drawerBackdrop) drawerBackdrop.classList.remove('open');
                 if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
+                document.documentElement.style.overflow = '';
             }
 
             function toggleMenu() {

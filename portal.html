@@ -3779,9 +3779,8 @@
       summary += `\n`;
 
       // Intake & Clinical Summary
-      const edd = document.getElementById('medDueDate')?.value || 'November 14, 2026';
-      const ga = document.getElementById('medGA')?.value || '28 Weeks 3 Days';
-      const btype = document.getElementById('medBlood')?.value || 'O+ (Positive)';
+      const edd = document.getElementById('inputEddDate')?.value || 'November 14, 2026';
+      const btype = document.getElementById('inputBloodTypeSelect')?.value || 'O+ (Positive)';
       const grav = document.querySelector('input[name="gravida"]:checked')?.value || '1';
       const para = document.querySelector('input[name="para"]:checked')?.value || '0';
       const pkg = document.querySelector('input[name="pkgTier"]:checked')?.id || 'pkgComprehensive';
@@ -4134,7 +4133,8 @@
         duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         smoothWheel: true,
-        touchMultiplier: 1.5,
+        smoothTouch: false,
+        touchMultiplier: 1.0,
       });
 
       function raf(time) {
