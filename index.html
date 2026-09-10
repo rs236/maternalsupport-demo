@@ -4,9 +4,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MaternalSupportCo — Luxury Birth &amp; Postpartum Doula Support</title>
-    <meta name="description"
-        content="Calm presence, informed choices, and unwavering birth and postpartum doula care by Vanya. Serving modern families with continuous, evidence-based support.">
+
+    <title>Maternal Support Co | Luxury Birth & Postpartum Doula</title>
+    <meta name="description" content="Calm presence, informed choices, and unwavering birth and postpartum doula care by Vanya. Supporting modern families with evidence-based guidance.">
+    <link rel="canonical" href="https://rs236.github.io/maternalsupportco/index.html">
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rs236.github.io/maternalsupportco/index.html">
+    <meta property="og:title" content="Maternal Support Co | Luxury Birth & Postpartum Doula">
+    <meta property="og:description" content="Calm presence, informed choices, and unwavering birth and postpartum doula care by Vanya. Supporting modern families with evidence-based guidance.">
+    <meta property="og:image" content="https://rs236.github.io/maternalsupportco/assets/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Maternal Support Co | Luxury Birth & Postpartum Doula">
+    <meta name="twitter:description" content="Calm presence, informed choices, and unwavering birth and postpartum doula care by Vanya. Supporting modern families with evidence-based guidance.">
+    <meta name="twitter:image" content="https://rs236.github.io/maternalsupportco/assets/og-image.jpg">
+
+    <!-- Favicon Suite -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="theme-color" content="#8B6F5C">
+
+    <!-- Google Analytics 4 Placeholder -->
+    <!-- REPLACE G-XXXXXXXXXX WITH YOUR GOOGLE ANALYTICS 4 MEASUREMENT ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -333,7 +369,7 @@
             height: 3px;
             background: linear-gradient(to right, var(--primary), var(--secondary));
             width: 0%;
-            z-index: 1000;
+            z-index: 1005;
             transition: width 0.1s ease-out;
         }
 
@@ -343,7 +379,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 1200;
+            z-index: 1000;
             padding: 1.5rem 0;
             transition: all var(--transition-base);
         }
@@ -452,7 +488,7 @@
             border-radius: var(--radius-md);
             cursor: pointer;
             padding: 0;
-            z-index: 1201;
+            z-index: 1001;
             position: relative;
             transition: all var(--transition-fast);
         }
@@ -520,7 +556,7 @@
             background: rgba(28, 24, 22, 0.5);
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
-            z-index: 1100;
+            z-index: 2000;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.35s ease;
@@ -540,7 +576,7 @@
             max-width: 380px;
             height: 100vh;
             background-color: var(--surface);
-            z-index: 1150;
+            z-index: 2050;
             padding: 1.5rem 1.75rem 2rem;
             display: flex;
             flex-direction: column;
@@ -553,6 +589,23 @@
         .mobile-drawer.active {
             right: 0;
         }
+
+        /* HIDE STICKY HEADER WHEN MOBILE DRAWER IS ACTIVE TO PREVENT OVERLAP */
+        body.menu-open .header,
+        body.menu-open #header {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+        }
+
+        @media (max-width: 480px) {
+            .mobile-drawer {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+        }
+    
 
         .mobile-drawer-header {
             display: flex;
@@ -576,6 +629,7 @@
             cursor: pointer;
             transition: all var(--transition-fast);
         }
+        .drawer-close-btn svg { pointer-events: none; }
 
         .drawer-close-btn:hover,
         .drawer-close-btn:active {
@@ -3060,6 +3114,150 @@
             color: var(--text-secondary);
         }
 
+    
+        /* STICKY MOBILE BOTTOM CTA */
+        .mobile-sticky-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(253, 251, 249, 0.96);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border);
+            padding: 0.75rem 1.25rem;
+            z-index: 950;
+            box-shadow: 0 -4px 16px rgba(44, 36, 32, 0.08);
+            display: block;
+        }
+
+        @media (min-width: 769px) {
+            .mobile-sticky-cta {
+                display: none !important;
+            }
+        }
+
+        body.menu-open .mobile-sticky-cta {
+            display: none !important;
+        }
+
+        .btn-sticky {
+            width: 100%;
+            padding: 0.85rem 1.25rem;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 14px rgba(139, 111, 92, 0.35);
+        }
+
+        /* COOKIE BANNER */
+        .cookie-banner {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            max-width: 420px;
+            background: #FFFFFF;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 12px 36px rgba(44, 36, 32, 0.15);
+            padding: 1.25rem 1.5rem;
+            z-index: 2500;
+            display: none;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+        }
+
+        .cookie-banner.show {
+            display: block;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 480px) {
+            .cookie-banner {
+                bottom: 80px;
+                left: 15px;
+                right: 15px;
+                max-width: calc(100% - 30px);
+            }
+        }
+
+        .cookie-text {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .cookie-link {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .cookie-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .cookie-btn {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all var(--transition-fast);
+        }
+
+        .cookie-accept {
+            background: var(--primary);
+            color: #FFFFFF;
+            flex: 1;
+        }
+
+        .cookie-accept:hover {
+            background: var(--primary-dark);
+        }
+
+        .cookie-decline {
+            background: transparent;
+            border-color: var(--border);
+            color: var(--text);
+        }
+
+        .cookie-decline:hover {
+            background: var(--primary-light);
+        }
+
+        /* LOADING SPINNER & ERROR STATES */
+        .btn-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            border-top-color: #FFFFFF;
+            border-radius: 50%;
+            animation: btnSpin 0.7s linear infinite;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        @keyframes btnSpin {
+            to { transform: rotate(360deg); }
+        }
+
+        .input-error {
+            border-color: #C0392B !important;
+            background-color: #FDF4F4 !important;
+        }
+
+        .field-error-msg {
+            color: #C0392B;
+            font-size: 0.82rem;
+            font-weight: 500;
+            margin-top: 4px;
+            display: block;
+        }
+
     </style>
 </head>
 
@@ -3132,6 +3330,7 @@
             <a href="portal.html" class="drawer-link " style="color: var(--primary); font-weight: 600;">Client Forms &amp; Intake</a>
             <a href="services.html#faq" class="drawer-link">FAQ</a>
             <a href="privacy.html" class="drawer-link ">Privacy Policy</a>
+            <a href="terms.html" class="drawer-link">Terms of Care</a>
         </nav>
         <div class="mobile-drawer-footer">
             <a href="portal.html" class="btn btn-outline drawer-link"
@@ -3147,7 +3346,7 @@
         <div class="container hero-grid">
             <div class="hero-image-wrapper reveal-on-scroll">
                 <img src="https://images.unsplash.com/photo-1544126592-807ade215a0b?auto=format&fit=crop&w=1200&q=85"
-                    alt="Mother holding newborn baby tenderly" class="hero-image">
+                    alt="Mother and newborn resting skin-to-skin in peaceful postpartum sanctuary supported by MaternalSupportCo doula care" class="hero-image">
                 <div class="testimonial-float">
                     <p>"Vanya brought a sense of peace to our birthing room that I didn't know was possible."</p>
                     <span>— Sarah & James T.</span>
@@ -3222,7 +3421,7 @@
                 <div class="about-image-backdrop-glow"></div>
                 <div class="about-frame">
                     <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=85"
-                        alt="Vanya, Head Doula" class="about-image">
+                        alt="Vanya, CD(DONA) Head Doula and Certified Lactation Counselor at MaternalSupportCo" class="about-image">
                 </div>
                 <div class="doula-floating-badge tilt-card">
                     
@@ -3720,6 +3919,7 @@
                 </div>
 
                 <form id="booking-form" action="https://formsubmit.co/rs905128@gmail.com" method="POST">
+                    <input type="hidden" name="_next" value="https://rs236.github.io/maternalsupportco/thank-you.html">
                     <!-- FormSubmit Serverless Helper Fields -->
                     <input type="hidden" name="_subject" id="booking-subject" value="New Doula Consultation Request">
                     <input type="hidden" name="_captcha" value="false">
@@ -4014,6 +4214,7 @@
                 drawerBackdrop.classList.add('open', 'active');
                 hamburger.classList.add('open', 'active');
                 hamburger.setAttribute('aria-expanded', 'true');
+                document.body.classList.add('menu-open');
                 document.body.style.overflow = 'hidden';
                 document.documentElement.style.overflow = 'hidden';
             }
@@ -4024,6 +4225,7 @@
                 drawerBackdrop.classList.remove('open', 'active');
                 hamburger.classList.remove('open', 'active');
                 hamburger.setAttribute('aria-expanded', 'false');
+                document.body.classList.remove('menu-open');
                 document.body.style.overflow = '';
                 document.documentElement.style.overflow = '';
             }
@@ -4045,10 +4247,13 @@
                 });
             }
 
-            if (drawerCloseBtn) drawerCloseBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                closeMenu();
-            });
+            if (drawerCloseBtn) {
+                drawerCloseBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    closeMenu();
+                });
+            }
 
             if (drawerBackdrop) drawerBackdrop.addEventListener('click', closeMenu);
 
@@ -4212,25 +4417,36 @@
             
             /* 8. BOOKING WIZARD */
             window.nextStep = function (currentStep) {
-                // Basic Validation
                 const currentPanel = document.getElementById(`step${currentStep}`);
                 const inputs = currentPanel.querySelectorAll('input[required], select[required]');
                 let valid = true;
 
+                // Remove existing error messages
+                currentPanel.querySelectorAll('.field-error-msg').forEach(el => el.remove());
+
                 inputs.forEach(input => {
-                    if (!input.value) {
+                    input.classList.remove('input-error');
+                    if (!input.value.trim()) {
                         valid = false;
-                        input.style.borderColor = 'red';
-                    } else {
-                        input.style.borderColor = 'var(--border)';
+                        input.classList.add('input-error');
+                        const err = document.createElement('span');
+                        err.className = 'field-error-msg';
+                        err.textContent = 'This field is required for your intake record.';
+                        input.parentNode.appendChild(err);
+
+                        input.addEventListener('input', () => {
+                            input.classList.remove('input-error');
+                            err.remove();
+                        }, { once: true });
                     }
                 });
 
-                if (!valid) return; // Stop if invalid
+                if (!valid) return;
 
                 document.getElementById(`step${currentStep}`).classList.remove('active');
                 document.getElementById(`step${currentStep + 1}`).classList.add('active');
                 updateWizardDots(currentStep + 1);
+                if (typeof gtag === 'function') gtag('event', `wizard_step_${currentStep + 1}`);
             }
 
             window.prevStep = function (currentStep) {
@@ -4529,6 +4745,99 @@
                 });
             });
         })();
+    </script>
+
+
+    <!-- STICKY MOBILE BOTTOM CTA -->
+    <div class="mobile-sticky-cta" id="mobileStickyCta">
+        <a href="index.html#booking" class="btn btn-primary btn-sticky" onclick="if(typeof gtag==='function') gtag('event', 'click_sticky_mobile_cta');">
+            <span>Book a Free Consultation</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+        </a>
+    </div>
+
+    <!-- GDPR COOKIE CONSENT BANNER -->
+    <div class="cookie-banner" id="cookieBanner" aria-live="polite" role="dialog" aria-label="Cookie preferences">
+        <div class="cookie-content">
+            <p class="cookie-text">
+                We use privacy-respecting cookies to ensure seamless client portal navigation and analyze sanctuary visits. No perinatal health data is ever shared or sold.
+                <a href="privacy.html" class="cookie-link">Read our Privacy Covenant</a>.
+            </p>
+            <div class="cookie-actions">
+                <button class="cookie-btn cookie-accept" id="cookieAcceptBtn">Accept Preferences</button>
+                <button class="cookie-btn cookie-decline" id="cookieDeclineBtn">Essential Only</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JSON-LD LOCAL BUSINESS SCHEMA -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "MaternalSupportCo",
+      "alternateName": "Maternal Support Co Luxury Doula Care",
+      "image": "https://rs236.github.io/maternalsupportco/assets/og-image.jpg",
+      "@id": "https://rs236.github.io/maternalsupportco/#business",
+      "url": "https://rs236.github.io/maternalsupportco/",
+      "telephone": "+1-555-382-7491",
+      "email": "hello@maternalsupportco.com",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "420 Lexington Avenue, Suite 300",
+        "addressLocality": "New York",
+        "addressRegion": "NY",
+        "postalCode": "10170",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 40.7527,
+        "longitude": -73.9772
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+      },
+      "sameAs": [
+        "https://instagram.com/maternalsupportco"
+      ]
+    }
+    
+        // GDPR Cookie Banner Persistence
+        const cookieBanner = document.getElementById('cookieBanner');
+        const cookieAccept = document.getElementById('cookieAcceptBtn');
+        const cookieDecline = document.getElementById('cookieDeclineBtn');
+
+        if (!localStorage.getItem('msc_cookie_consent')) {
+            setTimeout(() => {
+                if (cookieBanner) cookieBanner.classList.add('show');
+            }, 1200);
+        }
+
+        if (cookieAccept) {
+            cookieAccept.addEventListener('click', () => {
+                localStorage.setItem('msc_cookie_consent', 'accepted');
+                if (cookieBanner) cookieBanner.classList.remove('show');
+                if (typeof gtag === 'function') gtag('event', 'cookie_consent_accepted');
+            });
+        }
+
+        if (cookieDecline) {
+            cookieDecline.addEventListener('click', () => {
+                localStorage.setItem('msc_cookie_consent', 'essential_only');
+                if (cookieBanner) cookieBanner.classList.remove('show');
+            });
+        }
+
     </script>
 
 </body>
