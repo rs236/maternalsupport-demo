@@ -2450,12 +2450,13 @@
             color: var(--text-secondary);
         }
 
-        /* FOOTER */
+                /* FOOTER */
         .footer {
             background-color: var(--dark);
-            color: white;
-            padding: 5rem 0 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #FDFBF9;
+            padding: 4.5rem 0 2rem;
+            border-top: 1px solid rgba(237, 231, 225, 0.1);
+            margin-top: 5rem;
         }
 
         .footer-grid {
@@ -2465,85 +2466,98 @@
             margin-bottom: 3.5rem;
         }
 
-        @media (min-width: 640px) and (max-width: 1023px) {
+        @media (min-width: 768px) {
             .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 2fr 1fr 1fr 1.5fr;
+                gap: 2rem;
             }
         }
 
-        @media (min-width: 1024px) {
-            .footer-grid {
-                grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
-            }
-        }
-
-        .footer-logo {
-            color: white;
+        .footer .logo {
+            color: #FFFFFF;
             margin-bottom: 1rem;
-            display: inline-block;
         }
 
-        .footer h4 {
-            color: var(--secondary);
-            font-family: var(--font-sans);
-            font-size: 0.875rem;
-            font-weight: 700;
+        .footer-tagline {
+            color: #A0948C;
+            font-size: 0.925rem;
+            max-width: 320px;
+        }
+
+        .footer-heading {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
             margin-bottom: 1.25rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
+            color: #FFFFFF;
         }
 
-        .footer-links {
+        .footer-links ul {
+            list-style: none;
             display: flex;
             flex-direction: column;
             gap: 0.75rem;
         }
 
-        .footer-links a,
-        .footer-contact p {
-            color: rgba(255, 255, 255, 0.7);
-            transition: color var(--transition-fast);
-            font-size: 0.9375rem;
+        .footer-links a {
+            color: #A0948C;
             text-decoration: none;
+            font-size: 0.9rem;
+            transition: color var(--transition-fast);
         }
 
         .footer-links a:hover {
-            color: white;
+            color: var(--secondary);
+        }
+
+        .footer-contact p {
+            color: #A0948C;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-phone, .footer-email {
+            display: block;
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+        }
+
+        .footer-phone:hover, .footer-email:hover {
+            color: var(--secondary);
         }
 
         .footer-bottom {
             padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.875rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
             gap: 1rem;
+            font-size: 0.85rem;
+            color: #7A6E66;
         }
 
         @media (min-width: 768px) {
             .footer-bottom {
                 flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
             }
         }
 
-        .footer-legal-links {
+        .footer-legal {
             display: flex;
             gap: 1.5rem;
-            flex-wrap: wrap;
-            justify-content: center;
         }
 
-        .footer-legal-links a {
-            color: rgba(255, 255, 255, 0.6);
+        .footer-legal a {
+            color: #7A6E66;
             text-decoration: none;
-            transition: color var(--transition-fast);
         }
 
-        .footer-legal-links a:hover {
-            color: #FFFFFF;
+        .footer-legal a:hover {
+            color: #A0948C;
         }
 
         /* ACETERNITY UI 3D DEPTH-TILT & DIRECTIONAL SLIDE-OVER CARDS */
@@ -3557,56 +3571,57 @@
     </section>
 
 
-    <!-- FOOTER -->
+        <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
-                <div>
-                    <a href="index.html" class="logo footer-logo">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
                         <span class="logo-serif">Maternal</span><span class="logo-sans">SupportCo</span>
                     </a>
-                    <p style="color: rgba(255,255,255,0.7); font-size: 0.9375rem; margin-bottom: 0;">Calm presence.
-                        Informed choices. Unwavering support. Guiding families through the profound transition of birth.
+                    <p class="footer-tagline">Calm presence. Informed choices. Unwavering support through labor, birth, and the tender fourth trimester.</p>
+                    <div class="footer-location" style="margin-top: 1.25rem; font-size: 0.9rem; color: #EDE7E1; line-height: 1.6;">
+                        <strong>Sanctuary Studio &amp; Practice</strong><br>
+                        420 Lexington Avenue, Suite 300<br>
+                        New York, NY 10170<br>
+                        <em>Serving Greater Metropolitan Area • Home, Birth Center &amp; Hospital Births</em>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4 class="footer-heading">Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Vanya</a></li>
+                        <li><a href="services.html">Services &amp; Pricing</a></li>
+                        <li><a href="portal.html">Client Forms &amp; Intake</a></li>
+                        <li><a href="services.html#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4 class="footer-heading">Client Sanctuary</h4>
+                    <ul>
+                        <li><a href="portal.html">Paperless Signing Suite</a></li>
+                        <li><a href="index.html#booking">Schedule Consultation</a></li>
+                        <li><a href="privacy.html">Privacy Covenant &amp; HIPAA</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="thank-you.html">Consultation Confirmation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4 class="footer-heading">Get in Touch</h4>
+                    <p>On-Call &amp; Inquiries:</p>
+                    <a href="tel:5553827491" class="footer-phone">(555) 382-7491</a>
+                    <a href="mailto:hello@maternalsupportco.com" class="footer-email">hello@maternalsupportco.com</a>
+                    <p style="margin-top: 0.85rem; font-size: 0.85rem; color: #A0948C;">
+                        Instagram: <a href="https://instagram.com/maternalsupportco" target="_blank" rel="noopener" style="color: var(--secondary);">@maternalsupportco</a>
                     </p>
                 </div>
-
-                <div>
-                    <h4>Explore</h4>
-                    <div class="footer-links">
-                        <a href="index.html">Home</a>
-                        <a href="about.html">Meet Vanya (About)</a>
-                        <a href="services.html">Services &amp; Packages</a>
-                        <a href="services.html#faq">Common Questions</a>
-                        <a href="portal.html">Client Intake Portal</a>
-                    </div>
-                </div>
-
-                <div>
-                    <h4>Legal &amp; Privacy</h4>
-                    <div class="footer-links">
-                        <a href="privacy.html" style="font-weight: 600; color: #FFFFFF;">Privacy Policy</a>
-                        <a href="portal.html#doc2">HIPAA Privacy Notice</a>
-                        <a href="portal.html#doc1">Services Agreement</a>
-                        <a href="portal.html#doc6">Photo Consent Tiers</a>
-                    </div>
-                </div>
-
-                <div>
-                    <h4>Connect</h4>
-                    <div class="footer-contact">
-                        <p style="margin-bottom: 0.5rem;">hello@maternalsupportco.com</p>
-                        <p style="margin-bottom: 0.5rem;">(555) 382-7491</p>
-                        <p>Serving the Greater Metro Area</p>
-                    </div>
-                </div>
             </div>
-
             <div class="footer-bottom">
-                <p style="margin: 0;">&copy; 2026 MaternalSupportCo. All rights reserved.</p>
-                <div class="footer-legal-links">
-                    <a href="privacy.html" style="color: #FFFFFF; font-weight: 600;">Privacy Policy</a>
-                    <a href="portal.html#doc2">HIPAA Notice</a>
-                    <a href="portal.html#doc1">Services Agreement</a>
+                <p>&copy; 2026 MaternalSupportCo. Certified Doula &amp; Perinatal Companion Services. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
                     <a href="portal.html">Client Portal</a>
                 </div>
             </div>
@@ -4044,7 +4059,9 @@
         "https://instagram.com/maternalsupportco"
       ]
     }
-    
+    </script>
+
+    <script>
         // GDPR Cookie Banner Persistence
         const cookieBanner = document.getElementById('cookieBanner');
         const cookieAccept = document.getElementById('cookieAcceptBtn');
