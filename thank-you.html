@@ -1108,6 +1108,44 @@
             });
         }
 
+    
+        // SMART AUTO-HIDE STICKY CTA AT FOOTER & BOOKING FORM
+        (function() {
+            const stickyCta = document.getElementById('mobileStickyCta');
+            if (!stickyCta) return;
+
+            const footer = document.querySelector('footer, .footer');
+            const bookingSec = document.getElementById('booking');
+
+            if ('IntersectionObserver' in window) {
+                const hideObserver = new IntersectionObserver((entries) => {
+                    const shouldHide = entries.some(entry => entry.isIntersecting);
+                    if (shouldHide) {
+                        stickyCta.classList.add('hidden');
+                    } else {
+                        stickyCta.classList.remove('hidden');
+                    }
+                }, {
+                    root: null,
+                    rootMargin: '0px 0px -40px 0px',
+                    threshold: 0.04
+                });
+
+                if (footer) hideObserver.observe(footer);
+                if (bookingSec) hideObserver.observe(bookingSec);
+            } else {
+                window.addEventListener('scroll', () => {
+                    const scrollBottom = window.innerHeight + window.scrollY;
+                    const docHeight = document.documentElement.scrollHeight;
+                    if (docHeight - scrollBottom < 280) {
+                        stickyCta.classList.add('hidden');
+                    } else {
+                        stickyCta.classList.remove('hidden');
+                    }
+                }, { passive: true });
+            }
+        })();
+
     </script>
 </body>
 </html>
