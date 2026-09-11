@@ -98,13 +98,41 @@
             }
         }
 
+                /* CONTAINER UTILITIES */
         .container {
             width: 100%;
-            max-width: 1140px;
-            margin-left: auto;
-            margin-right: auto;
-            padding-left: 1.5rem;
             padding-right: 1.5rem;
+            padding-left: 1.5rem;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        @media (min-width: 640px) {
+            .container {
+                max-width: 640px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 768px;
+                padding-right: 2.25rem;
+                padding-left: 2.25rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 1024px;
+                padding-right: 3.5rem;
+                padding-left: 3.5rem;
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .container {
+                max-width: 1280px;
+            }
         }
 
         /* HEADER */
@@ -200,16 +228,29 @@
             border: 1px solid transparent;
         }
 
-        .btn-primary {
-            background-color: var(--primary);
-            color: #FFFFFF;
-            border-color: var(--primary);
+                .btn-primary {
+            background: linear-gradient(145deg, #9C7E6A, var(--primary));
+            color: #FFFFFF !important;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 4px 14px rgba(139, 111, 92, 0.28), 0 1px 3px rgba(0, 0, 0, 0.08);
         }
 
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+        .btn-primary:hover,
+        a.btn-primary:hover,
+        button.btn-primary:hover {
+            background: linear-gradient(145deg, var(--primary), var(--primary-dark));
+            transform: translateY(-3px) scale(1.015);
+            box-shadow: 0 12px 28px rgba(139, 111, 92, 0.38), 0 2px 6px rgba(0, 0, 0, 0.12);
+            color: #FFFFFF !important;
+            text-decoration: none;
+        }
+
+        .btn-primary:active,
+        a.btn-primary:active,
+        button.btn-primary:active {
+            transform: translateY(-1px) scale(0.99);
+            box-shadow: 0 6px 16px rgba(139, 111, 92, 0.3);
+            color: #FFFFFF !important;
         }
 
         .btn-outline {
@@ -799,23 +840,24 @@
 <body>
 
     <!-- HEADER -->
+        <!-- HEADER -->
     <header class="header" id="header">
         <audio id="ambientAudio" src="audio/ambient-432hz.mp3" preload="auto" loop></audio>
-        <div class="container">
-            <div class="header-content">
-                <a href="index.html" class="logo">
-                    <span class="logo-serif">Maternal</span><span class="logo-sans">SupportCo</span>
-                </a>
-                <nav class="nav-desktop">
-                    <a href="index.html" >Home</a>
-                    <a href="about.html" >About Vanya</a>
-                    <a href="services.html" >Services &amp; Pricing</a>
-                    <a href="portal.html"  style="color: var(--primary); font-weight: 600;">Client Forms &amp; Intake</a>
-                    <a href="services.html#faq">FAQ</a>
-                    <a href="privacy.html" >Privacy Policy</a>
-                </nav>
-                <div class="header-actions">
-                <button class="sound-toggle" id="sound-toggle" aria-label="Toggle ambient soundscape" title="Play Ambient Soundscape">
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                <span class="logo-serif">Maternal</span><span class="logo-sans">SupportCo</span>
+            </a>
+
+            <nav class="nav-desktop">
+                <a href="index.html" class="">Home</a>
+                <a href="about.html" class="">About</a>
+                <a href="services.html" class="">Services &amp; Pricing</a>
+                <a href="portal.html" class="">Client Forms</a>
+                <a href="services.html#faq">FAQ</a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="sound-toggle" id="sound-toggle" aria-label="Toggle ambient soundscape">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
@@ -823,13 +865,17 @@
                         <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
                     </svg>
                 </button>
-
-                    <a href="index.html#booking" class="btn btn-primary" onclick="if(typeof gtag==='function') gtag('event', 'click_book_call_header');">Book a Call</a>
-                    <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
-                        <span></span><span></span><span></span>
-                    </button>
-                </div>
+                <a href="portal.html" class="btn btn-outline"
+                    style="padding: 0.55rem 1.15rem; font-size: 0.84rem; border-color: var(--primary); color: var(--primary);">Client
+                    Portal</a>
+                <a href="index.html#booking" class="btn btn-primary">Book a Call</a>
             </div>
+
+            <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </header>
 
