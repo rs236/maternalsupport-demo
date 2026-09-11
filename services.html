@@ -3302,6 +3302,153 @@
             display: block;
         }
 
+    
+        /* ==========================================================================
+           LUXURY MOBILE BOTTOM NAVIGATION DOCK (App-Style Tab Bar)
+           Replaces finicky hamburger drawer with 100% reliable 1-tap thumb navigation
+           ========================================================================== */
+        .mobile-bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            min-height: 62px;
+            z-index: 9999;
+            background: rgba(253, 251, 249, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(196, 168, 130, 0.35);
+            box-shadow: 0 -4px 24px rgba(44, 36, 32, 0.08);
+            padding: 0.45rem 0.5rem max(0.45rem, env(safe-area-inset-bottom, 0.45rem));
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            box-sizing: border-box;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            padding: 0.35rem 0.65rem;
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+            position: relative;
+            flex: 1;
+            max-width: 72px;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .mobile-nav-item svg {
+            width: 20px;
+            height: 20px;
+            transition: transform var(--transition-fast), stroke var(--transition-fast);
+            stroke: var(--text-secondary);
+            pointer-events: none;
+        }
+
+        .mobile-nav-item span {
+            font-family: var(--font-sans);
+            font-size: 0.6875rem;
+            font-weight: 500;
+            line-height: 1;
+            letter-spacing: 0.02em;
+            transition: color var(--transition-fast);
+            pointer-events: none;
+        }
+
+        .mobile-nav-item:hover,
+        .mobile-nav-item:active {
+            color: var(--primary);
+        }
+
+        .mobile-nav-item:hover svg,
+        .mobile-nav-item:active svg {
+            stroke: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .mobile-nav-item.active {
+            color: var(--primary) !important;
+            font-weight: 600 !important;
+        }
+
+        .mobile-nav-item.active svg {
+            stroke: var(--primary) !important;
+            transform: scale(1.08);
+        }
+
+        .mobile-nav-item.active span {
+            color: var(--primary) !important;
+            font-weight: 600 !important;
+        }
+
+        .mobile-nav-item.active::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            width: 5px;
+            height: 5px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 6px var(--primary);
+        }
+
+        /* Distinctive CTA pill for Book Call */
+        .mobile-nav-item.nav-item-cta {
+            background: linear-gradient(145deg, #9C7E6A, var(--primary));
+            border-radius: var(--radius-full);
+            color: #FFFFFF !important;
+            padding: 0.45rem 0.75rem;
+            box-shadow: 0 3px 12px rgba(139, 111, 92, 0.35);
+            max-width: 82px;
+        }
+
+        .mobile-nav-item.nav-item-cta svg {
+            stroke: #FFFFFF !important;
+            width: 18px;
+            height: 18px;
+        }
+
+        .mobile-nav-item.nav-item-cta span {
+            color: #FFFFFF !important;
+            font-weight: 600;
+        }
+
+        .mobile-nav-item.nav-item-cta:hover,
+        .mobile-nav-item.nav-item-cta:active {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 6px 16px rgba(139, 111, 92, 0.45);
+        }
+
+        .mobile-nav-item.nav-item-cta.active::after {
+            display: none;
+        }
+
+        /* Hide bottom dock on desktop (1024px+) where top header handles all navigation */
+        @media (min-width: 1024px) {
+            .mobile-bottom-nav {
+                display: none !important;
+            }
+        }
+
+        /* Ensure page bottom content has clearance on mobile/tablets */
+        @media (max-width: 1023px) {
+            body {
+                padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px)) !important;
+            }
+            .footer {
+                padding-bottom: calc(3.5rem + 68px + env(safe-area-inset-bottom, 0px)) !important;
+            }
+        }
+
     </style>
 </head>
 
@@ -3343,47 +3490,51 @@
                 <a href="index.html#booking" class="btn btn-primary">Book a Call</a>
             </div>
 
-            <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+            
         </div>
     </header>
 
-    <!-- DRAWER BACKDROP -->
-    <div class="drawer-backdrop" id="drawer-backdrop"></div>
-
-    <!-- MOBILE DRAWER -->
-    <div class="mobile-drawer" id="mobile-drawer" aria-label="Mobile Navigation Menu">
-        <div class="mobile-drawer-header">
-            <a href="index.html" class="logo drawer-link">
-                <span class="logo-serif">Maternal</span><span class="logo-sans">SupportCo</span>
-            </a>
-            <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Close menu">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
-        </div>
-        <nav class="mobile-nav">
-            <a href="index.html" class="drawer-link ">Home</a>
-            <a href="about.html" class="drawer-link ">About Vanya</a>
-            <a href="services.html" class="drawer-link active">Services &amp; Pricing</a>
-            <a href="portal.html" class="drawer-link " style="color: var(--primary); font-weight: 600;">Client Forms &amp; Intake</a>
-            <a href="services.html#faq" class="drawer-link">FAQ</a>
-            <a href="privacy.html" class="drawer-link ">Privacy Policy</a>
-            <a href="terms.html" class="drawer-link">Terms of Care</a>
-        </nav>
-        <div class="mobile-drawer-footer">
-            <a href="portal.html" class="btn btn-outline drawer-link"
-                style="background: var(--surface); color: var(--primary); font-weight: 600; border-color: var(--primary);">Open
-                Client Portal &amp; Sign →</a>
-            <a href="index.html#booking" class="btn btn-primary drawer-link">Book a Call</a>
-        </div>
-    </div>
+        <!-- MOBILE LUXURY GLASS BOTTOM NAVIGATION DOCK -->
+    <nav class="mobile-bottom-nav" id="mobile-bottom-nav" aria-label="Mobile Navigation">
+        <a href="index.html" class="mobile-nav-item" data-path="index.html" aria-label="Home">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span>Home</span>
+        </a>
+        <a href="about.html" class="mobile-nav-item" data-path="about.html" aria-label="About">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>About</span>
+        </a>
+        <a href="services.html" class="mobile-nav-item" data-path="services.html" aria-label="Services">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            <span>Services</span>
+        </a>
+        <a href="portal.html" class="mobile-nav-item" data-path="portal.html" aria-label="Client Forms">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+            <span>Portal</span>
+        </a>
+        <a href="booking.html" class="mobile-nav-item nav-item-cta" data-path="booking.html" aria-label="Book Call">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span>Book</span>
+        </a>
+    </nav>
 
     <!-- MAIN CONTENT (SEAMLESS PJAX CONTAINER) -->
     <main id="pjax-container">
