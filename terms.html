@@ -790,6 +790,7 @@
 
     <!-- HEADER -->
     <header class="header" id="header">
+        <audio id="ambientAudio" src="audio/ambient-432hz.mp3" preload="auto" loop></audio>
         <div class="container">
             <div class="header-content">
                 <a href="index.html" class="logo">
@@ -854,7 +855,7 @@
     </div>
 
 
-    <main class="terms-hero">
+    <main id="pjax-container" class="terms-hero">
         <div class="container terms-container">
             <div class="terms-header">
                 <div class="terms-badge">Practice Standards &amp; Covenant</div>
@@ -1178,172 +1179,10 @@
 
     </script>
 
-    <!-- INVISIBLE ZERO-ERROR YOUTUBE BACKGROUND SOUNDSCAPE CONTAINER (OlJ1vYcE06U) -->
-    <div id="yt-player-container"
-        style="position: fixed; top: -9999px; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none; overflow: hidden; z-index: -1;">
-        <iframe id="yt-player-frame" width="100" height="100" title="Ambient Soundscape"
-            data-src="https://www.youtube-nocookie.com/embed/OlJ1vYcE06U?enablejsapi=1&autoplay=0&loop=1&playlist=OlJ1vYcE06U&playsinline=1&rel=0&modestbranding=1&controls=0"
-            src="" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            loading="lazy"></iframe>
-    </div>
+    
 
-<script>
-    /* ==========================================================================
-       PERSISTENT CROSS-PAGE SOUNDSCAPE ENGINE (OlJ1vYcE06U)
-       Continuous playback across page transitions & timestamp persistence
-       ========================================================================== */
-    (function initPersistentSoundscape() {
-      const soundToggle = document.getElementById('sound-toggle');
-      const ytPlayerFrame = document.getElementById('yt-player-frame');
-      if (!soundToggle && !ytPlayerFrame) return;
 
-      let isAudioPlaying = false;
-      let playbackTicker = null;
-      let soundPlaybackTime = 0;
-
-      function getCurrentSavedTime() {
-        try {
-          const lastActive = parseInt(localStorage.getItem('msc_soundscape_last_active') || '0', 10);
-          let savedTime = parseInt(localStorage.getItem('msc_soundscape_time') || '0', 10);
-          const now = Date.now();
-          if (lastActive > 0 && (now - lastActive) < 7200000) {
-            const elapsed = Math.floor((now - lastActive) / 1000);
-            savedTime = (savedTime + elapsed) % 3600;
-          } else if (now - lastActive >= 7200000) {
-            savedTime = 0;
-          }
-          return Math.max(0, savedTime);
-        } catch (e) {
-          return 0;
-        }
-      }
-
-      function startTicker() {
-        if (playbackTicker) clearInterval(playbackTicker);
-        playbackTicker = setInterval(() => {
-          soundPlaybackTime = (soundPlaybackTime + 1) % 3600;
-          try {
-            localStorage.setItem('msc_soundscape_time', soundPlaybackTime.toString());
-            localStorage.setItem('msc_soundscape_last_active', Date.now().toString());
-          } catch (e) {}
-        }, 1000);
-      }
-
-      function stopTicker() {
-        if (playbackTicker) {
-          clearInterval(playbackTicker);
-          playbackTicker = null;
-        }
-      }
-
-      function updateAudioUI(playing) {
-        isAudioPlaying = playing;
-        if (soundToggle) {
-          if (playing) {
-            soundToggle.classList.add('playing');
-            soundToggle.setAttribute('aria-label', 'Mute ambient soundscape');
-            soundToggle.setAttribute('title', 'Playing Ambient Soundscape • Tap to Pause');
-          } else {
-            soundToggle.classList.remove('playing');
-            soundToggle.setAttribute('aria-label', 'Play ambient soundscape');
-            soundToggle.setAttribute('title', 'Play Ambient Soundscape');
-          }
-        }
-      }
-
-      function sendYtCommand(func, args) {
-        if (ytPlayerFrame && ytPlayerFrame.contentWindow) {
-          try {
-            ytPlayerFrame.contentWindow.postMessage(JSON.stringify({
-              event: 'command',
-              func: func,
-              args: args || []
-            }), '*');
-          } catch (e) {
-            console.warn('postMessage to YouTube:', e);
-          }
-        }
-      }
-
-      function playAtTime(startTime) {
-        soundPlaybackTime = startTime;
-        const url = 'https://www.youtube-nocookie.com/embed/OlJ1vYcE06U?enablejsapi=1&autoplay=1&loop=1&playlist=OlJ1vYcE06U&playsinline=1&rel=0&modestbranding=1&controls=0&start=' + startTime;
-        if (ytPlayerFrame) {
-          const currentSrc = ytPlayerFrame.getAttribute('src');
-          if (!currentSrc || currentSrc === '' || currentSrc === 'about:blank' || !currentSrc.includes('start=' + startTime)) {
-            ytPlayerFrame.setAttribute('src', url);
-          } else {
-            sendYtCommand('playVideo');
-          }
-        }
-        startTicker();
-        updateAudioUI(true);
-        try {
-          localStorage.setItem('msc_soundscape_playing', 'true');
-          localStorage.setItem('msc_soundscape_time', startTime.toString());
-          localStorage.setItem('msc_soundscape_last_active', Date.now().toString());
-        } catch (e) {}
-      }
-
-      function pauseAudio() {
-        stopTicker();
-        sendYtCommand('pauseVideo');
-        updateAudioUI(false);
-        try {
-          localStorage.setItem('msc_soundscape_playing', 'false');
-          localStorage.setItem('msc_soundscape_time', soundPlaybackTime.toString());
-          localStorage.setItem('msc_soundscape_last_active', Date.now().toString());
-        } catch (e) {}
-      }
-
-      function toggleAudio(forceState) {
-        const targetState = (typeof forceState === 'boolean') ? forceState : !isAudioPlaying;
-        if (targetState) {
-          playAtTime(getCurrentSavedTime());
-        } else {
-          pauseAudio();
-        }
-      }
-
-      if (soundToggle) {
-        soundToggle.addEventListener('click', (e) => {
-          e.stopPropagation();
-          toggleAudio();
-        });
-      }
-
-      // Automatically resume continuous playback across page changes
-      try {
-        const savedPlaying = localStorage.getItem('msc_soundscape_playing') === 'true';
-        if (savedPlaying) {
-          const resumeTime = getCurrentSavedTime();
-          playAtTime(resumeTime);
-
-          // User-activation safety net
-          const resumeOnGesture = () => {
-            if (localStorage.getItem('msc_soundscape_playing') === 'true') {
-              sendYtCommand('playVideo');
-            }
-          };
-          window.addEventListener('pointerdown', resumeOnGesture, { once: true, passive: true });
-          window.addEventListener('touchstart', resumeOnGesture, { once: true, passive: true });
-          window.addEventListener('keydown', resumeOnGesture, { once: true, passive: true });
-        }
-      } catch (e) {
-        console.warn('Soundscape storage restore error:', e);
-      }
-
-      // Save precise timestamp on navigation away
-      window.addEventListener('pagehide', () => {
-        if (isAudioPlaying) {
-          try {
-            localStorage.setItem('msc_soundscape_time', soundPlaybackTime.toString());
-            localStorage.setItem('msc_soundscape_last_active', Date.now().toString());
-          } catch (e) {}
-        }
-      });
-    })();
-</script>
+    <!-- SEAMLESS NATIVE AUDIO & PJAX ENGINE -->
+    <script src="assets/js/audio-pjax.js"></script>
 </body>
 </html>
